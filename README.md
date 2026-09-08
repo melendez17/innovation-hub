@@ -31,9 +31,12 @@ Abrir `avance1/index.html` en el navegador. No requiere instalación.
  
 _(se completa durante las semanas 2 a 4)_
  
-## Resumen de commits| # | Fecha | Hash | Mensaje |
+## Resumen de commits|| # |
+
+<!-- INICIO TABLA COMMITS -->
+| # | Fecha | Hash | Mensaje |
 |---|-------|------|---------|
 | 1 | 2026-09-08 | 76adcc0 | Crear estructura del avance 1 y documentacion inicial |
 | 2 | 2026-09-08 | 4a755e6 | Creación de tabla de commits en el README |
-ntacion inicial | Global | Carpetas |
+| 3 | 2026-09-08 | d168472 | "Probar automatización de tabla con git hook" |
 <!-- FIN TABLA COMMITS -->

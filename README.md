@@ -40,3 +40,7 @@ _(se completa durante las semanas 2 a 4)_
 | 2 | 2026-09-08 | 4a755e6 | Creación de tabla de commits en el README |
 | 3 | 2026-09-08 | d168472 | "Probar automatización de tabla con git hook" |
 <!-- FIN TABLA COMMITS -->
+
+Para activar la actualización automática de la tabla de commits antes de cada commit, ejecuta:
+```bash
+cp herramientas/tabla-commits.sh .git/hooks/pre-commit

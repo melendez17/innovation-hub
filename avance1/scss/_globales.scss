@@ -1,0 +1,12 @@
+// Variables globales para el proyecto, pero tambien esta sujeto a cambios conforme vayamos avanzando en el proyecto
+body {
+  background-color: #f1f5f9;
+  color: $dark;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}

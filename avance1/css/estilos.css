@@ -1,0 +1,11 @@
+body {
+  background-color: #f1f5f9;
+  color: #1e293b;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}/*# sourceMappingURL=estilos.css.map */

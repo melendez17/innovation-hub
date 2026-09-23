@@ -2,7 +2,7 @@
  
 Proyecto del curso SOFT-12 — Desarrollo Web Full Stack.
  
-**Estudiante:** Andrés Meléndez
+**Estudiante:** Andrés Meléndez y Roberto Gonzalez 
 **Sección:** SCV2    **Periodo:** III cuatrimestre 2026
 **Docente:** Alvaro Cordero
  
@@ -16,6 +16,7 @@ equipos interdisciplinarios dentro de la comunidad universitaria.
  
 - `avance1/` — prototipo con HTML, CSS, JavaScript, Bootstrap y Sass
   - `paginas/` — pantallas del prototipo
+  - `css/`     — estilos de los archivos
   - `datos/`   — archivos JSON con datos simulados
   - `js/`      — módulos de JavaScript
   - `scss/`    — variables y parciales de Sass
@@ -43,4 +44,4 @@ _(se completa durante las semanas 2 a 4)_
 
 Para activar la actualización automática de la tabla de commits antes de cada commit, ejecuta:
 ```bash
-cp herramientas/tabla-commits.sh .git/hooks/pre-commit
+cp herramientas/tabla-commit.sh .git/hooks/pre-commit

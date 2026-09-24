@@ -1,0 +1,32 @@
+.tarjeta-iniciativa {
+    border: $dark 1px solid;
+    border-radius: 5px;
+
+    h3 {
+        font-family: $font-family-sans-serif;
+        font-size: 1.1rem;
+        color: $primary;
+    }
+
+
+    .encabezado-tarjeta {
+        border-bottom: $dark 1px solid;
+
+        p {
+            color: $secondary-light;
+        }
+    }
+
+    .etiqueta {
+        font-weight: 500;
+        color: $secondary-dark;
+    }
+
+    .resumen {
+        font-size: 0.9rem;
+    }
+
+    .estado {
+        border: none;
+    }
+}

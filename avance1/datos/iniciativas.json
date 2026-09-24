@@ -7,7 +7,7 @@
         "problema": "La información de los equipos tecnológicos se encuentra dispersa en hojas de cálculo o documentos independientes, lo que dificulta conocer la cantidad real de dispositivos, su ubicación, su estado y la persona responsable.",
         "beneficiados": "Personal de soporte técnico",
         "categoría": "Tecnología",
-        "competencias requeridas": [
+        "competencias": [
             "Programación web",
             "Diseño de bases de datos",
             "Desarrollo de APIs",
@@ -16,9 +16,11 @@
             "Control de versiones",
             "Pruebas de software"
         ],
-        "cantidad estimada de integrantes": 4,
-        "nivel de visibilidad": "Público",
-        "etiquetas": []
+        "cantidad_integrantes": 4,
+        "visibilidad": "Público",
+        "etiquetas": [],
+        "estado": "Pendiente",
+        "propietario": "User 01"
     },
     {
        "titulo": "Sistema web para la gestión de inventario tecnológico",
@@ -27,8 +29,8 @@
         "detalles": "El sistema permitirá registrar computadoras, impresoras, cámaras, switches, routers y otros dispositivos tecnológicos. Cada elemento tendrá información como número de serie, marca, modelo, ubicación, responsable, fecha de adquisición y estado. Además, los usuarios podrán realizar búsquedas, actualizar registros y generar reportes del inventario.",
         "problema": "La información de los equipos tecnológicos se encuentra dispersa en hojas de cálculo o documentos independientes, lo que dificulta conocer la cantidad real de dispositivos, su ubicación, su estado y la persona responsable.",
         "beneficiados": "Personal de soporte técnico",
-        "categoría": "Tecnología",
-        "competencias requeridas": [
+        "categoria": "Tecnología",
+        "competencias": [
             "Programación web",
             "Diseño de bases de datos",
             "Desarrollo de APIs",
@@ -37,8 +39,10 @@
             "Control de versiones",
             "Pruebas de software"
         ],
-        "cantidad estimada de integrantes": 4,
-        "nivel de visibilidad": "Público",
-        "etiquetas": [] 
+        "cantidad_integrantes": 4,
+        "visibilidad": "Público",
+        "etiquetas": [],
+        "estado": "Pendiente",
+        "propietario": "User 02"
     }
 ]

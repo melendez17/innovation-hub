@@ -1,3 +1,21 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 100%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 body {
   background-color: #f8fafc;
   color: #1e293b;
@@ -8,4 +26,30 @@ body {
 
 main {
   flex: 1;
+}
+
+.tarjeta-iniciativa {
+  border: #1e293b 1px solid;
+  border-radius: 5px;
+}
+.tarjeta-iniciativa h3 {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 1.1rem;
+  color: #004b87;
+}
+.tarjeta-iniciativa .encabezado-tarjeta {
+  border-bottom: #1e293b 1px solid;
+}
+.tarjeta-iniciativa .encabezado-tarjeta p {
+  color: #00a896;
+}
+.tarjeta-iniciativa .etiqueta {
+  font-weight: 500;
+  color: #032057;
+}
+.tarjeta-iniciativa .resumen {
+  font-size: 0.9rem;
+}
+.tarjeta-iniciativa .estado {
+  border: none;
 }/*# sourceMappingURL=catalogo.css.map */

@@ -8,6 +8,8 @@
 
     <!-- CSS de Bootstrap CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- CSS propio compilado desde Sass -->
     <link rel="stylesheet" href="../css/catalogo.css">
 </head>
@@ -37,7 +39,31 @@
     </header>
 
     <main class="container-fluid">
-        <h2>Iniciativas</h2>
+        <div class="row d-flex flex-column align-items-center gap-2 my-3 pb-1 position-relative">
+            <h2 class="col-11 text-center">Iniciativas</h2>
+            <form class="col-11 d-flex filtros-iniciativas p-0" role="search">
+                <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Buscar" id="buscar">
+                <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#categorias"><i class="fa-solid fa-filter" aria-hidden="true"
+                        aria-label="Filtrar Categoría"></i></button>
+            </form>
+            <div id="categorias" class="collapse col-11 p-0 position-absolute top-100">
+                <ul class="list-group filtro-categorias z-1 position-absolute top-100 end-0">
+                    <li class="list-group-item encabezado-lista">Filtrar por categoría</li>
+                    <li class="list-group-item">Tecnología</li>
+                    <li class="list-group-item">Educación</li>
+                    <li class="list-group-item">Sostenibilidad</li>
+                    <li class="list-group-item">Impacto Social</li>
+                    <li class="list-group-item">Negocios y Emprendimiento</li>
+                    <li class="list-group-item">Salud y Bienestar</li>
+                    <li class="list-group-item">Cultura y Creatividad</li>
+                    <li class="list-group-item">Otros</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Tarjetas Generadas -->
         <section class="contenerdor-tarjetas row d-flex justify-content-around gap-3"></section>
     </main>
 

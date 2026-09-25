@@ -18,7 +18,7 @@ img {
 
 body {
   background-color: #f8fafc;
-  color: #1e293b;
+  color: #080b0f;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -28,8 +28,21 @@ main {
   flex: 1;
 }
 
+.filtro-categorias .encabezado-lista {
+  background-color: #f8fafc;
+  color: #004b87;
+  border-color: #080b0f;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+.filtro-categorias li {
+  background-color: #004b87;
+  color: #f8fafc;
+  border-color: #080b0f;
+}
+
 .tarjeta-iniciativa {
-  border: #1e293b 1px solid;
+  border: #080b0f 1px solid;
   border-radius: 5px;
 }
 .tarjeta-iniciativa h3 {
@@ -38,7 +51,7 @@ main {
   color: #004b87;
 }
 .tarjeta-iniciativa .encabezado-tarjeta {
-  border-bottom: #1e293b 1px solid;
+  border-bottom: #080b0f 1px solid;
 }
 .tarjeta-iniciativa .encabezado-tarjeta p {
   color: #00a896;

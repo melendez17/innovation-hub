@@ -42,7 +42,7 @@ function mostrarTarjetas(iniciativas) {
             .map(competencia => `<p>${competencia}</p>`)
             .join("");
 
-        tarjeta.className = "col-11 tarjeta-iniciativa d-flex flex-column gap-1"
+        tarjeta.className = "col-11 col-sm-5 col-lg-3 tarjeta-iniciativa d-flex flex-column gap-1"
         tarjeta.innerHTML = `
                 <div class="d-flex justify-content-between gap-3 encabezado-tarjeta">
                     <h3>${iniciativa.titulo}</h3>
@@ -96,9 +96,9 @@ categorias.forEach(categoria => {
             categoria.classList.add("activo");
 
             const filtroActivo = document.createElement("div");
-            filtroActivo.className = "alert alert-primary alert-dismissible fade show col-5 p-1 m-0 d-flex gap-1 justify-content-between align-items-center categoriaActiva"
+            filtroActivo.className = "alert alert-primary alert-dismissible fade show col-5 col-sm-3 col-md-2 p-1 m-1 d-flex gap-1 justify-content-between align-items-center categoriaActiva"
             filtroActivo.innerHTML = `
-                <p class="lh-1 m-0">${categoria.textContent}</p>
+                <p class="lh-1 m-0 pe-3">${categoria.textContent}</p>
                 <button type="button" class="btn-close p-0 top-50 translate-middle" data-bs-dismiss="alert" aria-label="Close"></button>
             `
             contenedorCategoriasActivas.appendChild(filtroActivo);

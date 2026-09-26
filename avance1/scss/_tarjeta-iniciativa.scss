@@ -12,11 +12,16 @@
         font-size: 1.1rem;
     }
 
-    li {
-        background-color: $primary;
-        color: $light;
+    button {
+        background-color: $gray;
+        color: $primary;
         border-color: $dark;
     }
+}
+
+.contenedor-filtros-activos .alert{
+    max-height: 4rem;
+    font-size: 0.5rem;
 }
 
 .tarjeta-iniciativa {

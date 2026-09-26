@@ -35,10 +35,15 @@ main {
   font-weight: bold;
   font-size: 1.1rem;
 }
-.filtro-categorias li {
-  background-color: #004b87;
-  color: #f8fafc;
+.filtro-categorias button {
+  background-color: #ddd9d9;
+  color: #004b87;
   border-color: #080b0f;
+}
+
+.contenedor-filtros-activos .alert {
+  height: 2.5rem;
+  font-size: 0.9rem;
 }
 
 .tarjeta-iniciativa {

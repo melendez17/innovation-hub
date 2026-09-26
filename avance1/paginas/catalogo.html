@@ -39,32 +39,39 @@
     </header>
 
     <main class="container-fluid">
-        <div class="row d-flex flex-column align-items-center gap-2 my-3 pb-1 position-relative">
-            <h2 class="col-11 text-center">Iniciativas</h2>
-            <form class="col-11 d-flex filtros-iniciativas p-0" role="search">
-                <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Buscar" id="buscar">
-                <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#categorias"><i class="fa-solid fa-filter" aria-hidden="true"
-                        aria-label="Filtrar Categoría"></i></button>
-            </form>
-            <div id="categorias" class="collapse col-11 p-0 position-absolute top-100">
-                <ul class="list-group filtro-categorias z-1 position-absolute top-100 end-0">
-                    <li class="list-group-item encabezado-lista">Filtrar por categoría</li>
-                    <li class="list-group-item">Tecnología</li>
-                    <li class="list-group-item">Educación</li>
-                    <li class="list-group-item">Sostenibilidad</li>
-                    <li class="list-group-item">Impacto Social</li>
-                    <li class="list-group-item">Negocios y Emprendimiento</li>
-                    <li class="list-group-item">Salud y Bienestar</li>
-                    <li class="list-group-item">Cultura y Creatividad</li>
-                    <li class="list-group-item">Otros</li>
-                </ul>
+        <section class="my-3">
+            <div class="row d-flex flex-column align-items-center gap-2 pb-1 position-relative">
+                <h2 class="col-11 text-center">Iniciativas</h2>
+                <form class="col-11 d-flex filtros-iniciativas p-0" role="search">
+                    <input id="buscar" class="form-control me-2" type="search" placeholder="Buscar..."
+                        aria-label="Buscar">
+                    <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#categorias"><i class="fa-solid fa-filter" aria-hidden="true"
+                            aria-label="Filtrar Categoría"></i></button>
+                </form>
+                <div id="categorias" class="collapse col-11 p-0 position-absolute top-100">
+                    <div class="list-group filtro-categorias z-3 position-absolute top-100 end-0">
+                        <button class="list-group-item encabezado-lista">Filtrar por categoría</button>
+                        <button class="list-group-item categoria" type="button" data-bs-toggle="collapse" data-bs-target="#categorias" id="tecnologia">Tecnología</button>
+                        <button class="list-group-item categoria" type="button" data-bs-toggle="collapse" data-bs-target="#categorias" id="educacion">Educación</button>
+                        <button class="list-group-item categoria" type="button" data-bs-toggle="collapse" data-bs-target="#categorias" id="sostenibilidad">Sostenibilidad</button>
+                        <button class="list-group-item categoria" type="button" data-bs-toggle="collapse" data-bs-target="#categorias" id="social">Impacto Social</button>
+                        <button class="list-group-item categoria" type="button" data-bs-toggle="collapse" data-bs-target="#categorias" id="negocios">Negocios y Emprendimiento</button>
+                        <button class="list-group-item categoria" type="button" data-bs-toggle="collapse" data-bs-target="#categorias" id="salud">Salud y Bienestar</button>
+                        <button class="list-group-item categoria" type="button" data-bs-toggle="collapse" data-bs-target="#categorias" id="cultura">Cultura y Creatividad</button>
+                        <button class="list-group-item categoria" type="button" data-bs-toggle="collapse" data-bs-target="#categorias" id="otros">Otros</button>
+                    </div>
+                </div>
             </div>
-
-        </div>
-
+            <div id="contenedor-filtros-activos" class="row p-0 gap-1 d-flex justify-content-center contenedor-filtros-activos">
+                <!-- <div class="alert alert-primary alert-dismissible fade show col-5 fs-6 p-0 m-0 d-flex justify-content-between align-items-center">
+                    <p class="m-0">Negocios y Emprendimiento</p>
+                    <button type="button" class="btn-close p-1" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div> -->
+            </div>
+        </section>
         <!-- Tarjetas Generadas -->
-        <section class="contenerdor-tarjetas row d-flex justify-content-around gap-3"></section>
+        <section class="contenedor-tarjetas row d-flex justify-content-around gap-3"></section>
     </main>
 
     <!-- Pie de Página -->

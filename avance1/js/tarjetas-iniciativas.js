@@ -103,7 +103,7 @@ categorias.forEach(categoria => {
             `
             contenedorCategoriasActivas.appendChild(filtroActivo);
 
-            filtroActivo.addEventListener("click", () => {
+            filtroActivo.querySelector(".btn-close").addEventListener("click", () => {
             console.log("corre evento");
             const indexCat = categoriasSeleccionadas.indexOf(categoria.textContent);
             categoriasSeleccionadas.splice(indexCat, 1);

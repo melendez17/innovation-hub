@@ -23,35 +23,66 @@
         "propietario": "User 01"
     },
     {
-        "titulo": "Sistema web para la gestión de inventario tecnológico",
-        "tipo": "Idea",
-        "resumen": "Desarrollo de una aplicación web para administrar el inventario tecnológico de una organización, incluyendo equipos, responsables, ubicaciones y estados.",
-        "detalles": "El sistema permitirá registrar computadoras, impresoras, cámaras, switches, routers y otros dispositivos tecnológicos. Cada elemento tendrá información como número de serie, marca, modelo, ubicación, responsable, fecha de adquisición y estado. Además, los usuarios podrán realizar búsquedas, actualizar registros y generar reportes del inventario.",
-        "problema": "La información de los equipos tecnológicos se encuentra dispersa en hojas de cálculo o documentos independientes, lo que dificulta conocer la cantidad real de dispositivos, su ubicación, su estado y la persona responsable.",
-        "beneficiados": "Personal de soporte técnico",
-        "categoria": "Tecnología",
+        "titulo": "Plataforma de reservas para laboratorios tecnológicos",
+        "tipo": "Necesidad",
+        "resumen": "Desarrollo de una aplicación web para gestionar la reserva y disponibilidad de laboratorios, salas y equipos tecnológicos.",
+        "detalles": "El sistema permitirá consultar los espacios disponibles, realizar reservas, establecer horarios, controlar conflictos y visualizar el calendario de uso. También incluirá información sobre la capacidad de cada laboratorio, los equipos disponibles y los responsables de cada espacio.",
+        "problema": "La reserva de laboratorios y equipos se realiza mediante mensajes, hojas de cálculo o solicitudes informales, lo que provoca conflictos de horarios y dificulta conocer la disponibilidad real.",
+        "beneficiados": "Estudiantes, docentes y personal administrativo",
+        "categoria": "Educación",
         "competencias": [
             "Programación web",
             "Diseño de bases de datos",
             "Desarrollo de APIs",
             "Análisis de requisitos",
             "Diseño de interfaces de usuario",
-            "Control de versiones",
+            "Gestión de usuarios",
             "Pruebas de software"
         ],
         "cantidad_integrantes": 4,
         "visibilidad": "Público",
-        "etiquetas": [],
+        "etiquetas": [
+            "reservas",
+            "laboratorios",
+            "calendario"
+        ],
         "estado": "Pendiente",
         "propietario": "User 02"
     },
     {
-        "titulo": "Sistema web para la gestión de inventario tecnológico",
-        "tipo": "Idea",
-        "resumen": "Desarrollo de una aplicación web para administrar el inventario tecnológico de una organización, incluyendo equipos, responsables, ubicaciones y estados.",
-        "detalles": "El sistema permitirá registrar computadoras, impresoras, cámaras, switches, routers y otros dispositivos tecnológicos. Cada elemento tendrá información como número de serie, marca, modelo, ubicación, responsable, fecha de adquisición y estado. Además, los usuarios podrán realizar búsquedas, actualizar registros y generar reportes del inventario.",
-        "problema": "La información de los equipos tecnológicos se encuentra dispersa en hojas de cálculo o documentos independientes, lo que dificulta conocer la cantidad real de dispositivos, su ubicación, su estado y la persona responsable.",
-        "beneficiados": "Personal de soporte técnico",
+        "titulo": "Sistema de monitoreo del consumo energético",
+        "tipo": "Reto",
+        "resumen": "Creación de una solución tecnológica para registrar, analizar y reducir el consumo de energía eléctrica en una organización.",
+        "detalles": "La plataforma permitirá ingresar lecturas de consumo, consultar estadísticas por edificio o departamento, identificar períodos de mayor gasto y generar recomendaciones para mejorar el uso de la energía. También podrá mostrar indicadores y gráficos históricos.",
+        "problema": "La organización no cuenta con información centralizada sobre su consumo energético, por lo que resulta difícil detectar desperdicios y tomar medidas de ahorro.",
+        "beneficiados": "Personal administrativo, encargados de mantenimiento y comunidad institucional",
+        "categoria": "Sostenibilidad",
+        "competencias": [
+            "Análisis de datos",
+            "Programación web",
+            "Diseño de bases de datos",
+            "Visualización de información",
+            "Desarrollo de APIs",
+            "Diseño de interfaces de usuario",
+            "Pruebas de software"
+        ],
+        "cantidad_integrantes": 5,
+        "visibilidad": "Público",
+        "etiquetas": [
+            "energía",
+            "sostenibilidad",
+            "eficiencia"
+        ],
+        "estado": "Aceptada",
+        "propietario": "User 03"
+    },
+    {
+        "titulo": "Aplicación de seguimiento para solicitudes de soporte técnico",
+        "tipo": "Necesidad",
+        "resumen": "Implementación de una plataforma para registrar, asignar y dar seguimiento a las solicitudes de soporte tecnológico.",
+        "detalles": "Los usuarios podrán crear tickets indicando el problema, la prioridad y la ubicación. El personal de soporte podrá asignar responsables, actualizar el estado, agregar comentarios, adjuntar evidencias y consultar el historial de atención.",
+        "problema": "Las solicitudes de soporte se reciben por diferentes medios y no existe un mecanismo uniforme para controlar su prioridad, seguimiento y tiempo de resolución.",
+        "beneficiados": "Personal de soporte técnico y usuarios de la organización",
         "categoria": "Tecnología",
         "competencias": [
             "Programación web",
@@ -64,8 +95,147 @@
         ],
         "cantidad_integrantes": 4,
         "visibilidad": "Público",
-        "etiquetas": [],
+        "etiquetas": [
+            "soporte",
+            "tickets",
+            "incidencias"
+        ],
         "estado": "Pendiente",
-        "propietario": "User 02"
+        "propietario": "User 04"
+    },
+    {
+        "titulo": "Red comunitaria para el intercambio de productos y servicios",
+        "tipo": "Idea",
+        "resumen": "Desarrollo de una plataforma digital para conectar personas interesadas en intercambiar productos, conocimientos o servicios.",
+        "detalles": "Los usuarios podrán publicar artículos o servicios disponibles para intercambio, indicar lo que buscan, comunicarse con otras personas y valorar las transacciones realizadas. La plataforma incluirá categorías, filtros de búsqueda y perfiles de usuario.",
+        "problema": "Muchas personas poseen productos o habilidades que no utilizan, pero no cuentan con un medio confiable y organizado para encontrar interesados en realizar intercambios.",
+        "beneficiados": "Personas de la comunidad, estudiantes y pequeños emprendedores",
+        "categoria": "Impacto Social",
+        "competencias": [
+            "Programación web",
+            "Diseño de bases de datos",
+            "Desarrollo de APIs",
+            "Diseño de interfaces de usuario",
+            "Diseño de experiencia de usuario",
+            "Seguridad informática",
+            "Pruebas de software"
+        ],
+        "cantidad_integrantes": 5,
+        "visibilidad": "Público",
+        "etiquetas": [
+            "comunidad",
+            "intercambio",
+            "colaboración"
+        ],
+        "estado": "Pendiente",
+        "propietario": "User 05"
+    },
+    {
+        "titulo": "Agenda digital para el seguimiento de hábitos saludables",
+        "tipo": "Idea",
+        "resumen": "Creación de una aplicación para ayudar a las personas a registrar y dar seguimiento a sus hábitos de salud y bienestar.",
+        "detalles": "La aplicación permitirá registrar actividades físicas, consumo de agua, horas de sueño, alimentación y metas personales. Además, mostrará avances mediante gráficos, recordatorios y recomendaciones generales para mantener hábitos constantes.",
+        "problema": "Las personas suelen tener dificultades para mantener un seguimiento constante de sus hábitos saludables y medir su progreso a lo largo del tiempo.",
+        "beneficiados": "Personas interesadas en mejorar su salud y bienestar",
+        "categoria": "Salud y Bienestar",
+        "competencias": [
+            "Programación web",
+            "Diseño de bases de datos",
+            "Diseño de interfaces de usuario",
+            "Desarrollo de APIs",
+            "Análisis de datos",
+            "Diseño centrado en el usuario",
+            "Pruebas de software"
+        ],
+        "cantidad_integrantes": 3,
+        "visibilidad": "Público",
+        "etiquetas": [
+            "salud",
+            "hábitos",
+            "bienestar"
+        ],
+        "estado": "Pendiente",
+        "propietario": "User 06"
+    },
+    {
+        "titulo": "Catálogo digital para emprendimientos locales",
+        "tipo": "Necesidad",
+        "resumen": "Diseño de una plataforma para que pequeños emprendimientos puedan publicar y promocionar sus productos y servicios.",
+        "detalles": "Cada emprendimiento podrá crear un perfil, registrar productos, agregar fotografías, indicar precios y horarios de atención, y recibir solicitudes de contacto. Los visitantes podrán buscar negocios por categoría, ubicación y tipo de producto.",
+        "problema": "Muchos emprendimientos locales dependen únicamente de redes sociales o recomendaciones informales, lo que limita su visibilidad y dificulta que nuevos clientes encuentren sus productos.",
+        "beneficiados": "Pequeños negocios, emprendedores y consumidores locales",
+        "categoria": "Negocios y Emprendimiento",
+        "competencias": [
+            "Programación web",
+            "Diseño de bases de datos",
+            "Desarrollo de APIs",
+            "Comercio electrónico",
+            "Diseño de interfaces de usuario",
+            "Marketing digital",
+            "Pruebas de software"
+        ],
+        "cantidad_integrantes": 4,
+        "visibilidad": "Público",
+        "etiquetas": [
+            "emprendimiento",
+            "comercio local",
+            "catálogo"
+        ],
+        "estado": "Aceptada",
+        "propietario": "User 07"
+    },
+    {
+        "titulo": "Archivo digital para preservar actividades culturales",
+        "tipo": "Reto",
+        "resumen": "Desarrollo de un repositorio digital para almacenar y difundir fotografías, videos, documentos y testimonios relacionados con la cultura local.",
+        "detalles": "El sistema permitirá registrar actividades culturales, categorizar materiales, agregar descripciones, consultar información histórica y visualizar contenido multimedia. También incluirá funciones para que usuarios autorizados puedan contribuir con nuevos archivos.",
+        "problema": "La información sobre actividades, tradiciones y expresiones culturales se encuentra dispersa o almacenada en formatos físicos que pueden deteriorarse o perderse.",
+        "beneficiados": "Organizaciones culturales, estudiantes, investigadores y comunidad en general",
+        "categoria": "Cultura y Creatividad",
+        "competencias": [
+            "Programación web",
+            "Gestión de archivos",
+            "Diseño de bases de datos",
+            "Diseño de interfaces de usuario",
+            "Desarrollo de APIs",
+            "Accesibilidad web",
+            "Pruebas de software"
+        ],
+        "cantidad_integrantes": 4,
+        "visibilidad": "Público",
+        "etiquetas": [
+            "cultura",
+            "patrimonio",
+            "archivo digital"
+        ],
+        "estado": "Pendiente",
+        "propietario": "User 08"
+    },
+    {
+        "titulo": "Asistente virtual para orientación académica",
+        "tipo": "Reto",
+        "resumen": "Construcción de un asistente virtual que facilite el acceso a información académica y administrativa para estudiantes.",
+        "detalles": "El asistente podrá responder preguntas frecuentes sobre horarios, requisitos, procesos de matrícula, fechas importantes, servicios disponibles y contactos institucionales. La información será administrada desde un panel para mantener las respuestas actualizadas.",
+        "problema": "Los estudiantes invierten mucho tiempo buscando información académica en diferentes sitios, documentos y canales de comunicación.",
+        "beneficiados": "Estudiantes, personal docente y oficinas administrativas",
+        "categoria": "Educación",
+        "competencias": [
+            "Programación web",
+            "Desarrollo de APIs",
+            "Procesamiento de lenguaje natural",
+            "Diseño de bases de datos",
+            "Análisis de requisitos",
+            "Diseño de interfaces de usuario",
+            "Pruebas de software"
+        ],
+        "cantidad_integrantes": 5,
+        "visibilidad": "Público",
+        "etiquetas": [
+            "asistente virtual",
+            "orientación",
+            "educación"
+        ],
+        "estado": "Rechazada",
+        "propietario": "User 09"
     }
 ]

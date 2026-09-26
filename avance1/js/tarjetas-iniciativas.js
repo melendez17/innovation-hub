@@ -85,6 +85,7 @@ function filtarIniciativas() {
         return resultadoBusqueda && coincideCategoria;
     })
 
+    console.log(categoriasSeleccionadas)
     mostrarTarjetas(iniciativasFiltradas);
 }
 
@@ -102,8 +103,14 @@ categorias.forEach(categoria => {
             `
             contenedorCategoriasActivas.appendChild(filtroActivo);
 
-            categoriasActivas = document.querySelectorAll(".categoriaActiva");
-            botonEventListener();
+            filtroActivo.addEventListener("click", () => {
+            console.log("corre evento");
+            const indexCat = categoriasSeleccionadas.indexOf(categoria.textContent);
+            categoriasSeleccionadas.splice(indexCat, 1);
+            const idCat = idCategorias.get(categoria.textContent.trim());
+            document.getElementById(idCat).classList.remove("activo");
+            filtarIniciativas();
+        })
 
 
             filtarIniciativas();
@@ -114,18 +121,5 @@ categorias.forEach(categoria => {
 buscador.addEventListener("input", () => {
     filtarIniciativas();
 })
-
-function botonEventListener() {
-    categoriasActivas.forEach(categoria => {
-        categoria.querySelector(".btn-close").addEventListener("click", () => {
-            console.log("corre evento");
-            const indexCat = categoriasSeleccionadas.indexOf(categoria.textContent);
-            categoriasSeleccionadas.splice(indexCat, 1);
-            const idCat = idCategorias.get(categoria.textContent.trim());
-            document.getElementById(idCat).classList.remove("activo");
-            filtarIniciativas();
-        })
-    })
-}
 
 cargarTarjetas();

@@ -1,14 +1,16 @@
 //querySelectors
 const contenedorTarjetas = document.querySelector(".contenedor-tarjetas");
 const buscador = document.getElementById("buscar");
-const contenedorCategoriasActivas = document.getElementById("contenedor-filtros-activos");
+const contenedorFiltrosActivos = document.getElementById("contenedor-filtros-activos");
 const categorias = document.querySelectorAll(".categoria");
-const listaCategorias = document.querySelector(".filtro-categorias");
+const tipos = document.querySelectorAll(".tipo");
+const competencias = document.querySelectorAll(".competencia");
 
 //iniciativas
 let iniciativas;
-let categoriasActivas = [];
 let categoriasSeleccionadas = [];
+let tiposSeleccionados = [];
+let competenciasSeleccionadas = [];
 
 //mapa para ids
 const idCategorias = new Map();
@@ -21,10 +23,22 @@ idCategorias.set("Salud y Bienestar", "salud");
 idCategorias.set("Cultura y Creatividad", "cultura");
 idCategorias.set("Otros", "otros");
 
+const idCompetencias = new Map();
+idCompetencias.set("Programación web", "web");
+idCompetencias.set("Diseño de base de datos", "base-datos");
+idCompetencias.set("Desarrollo de APIs", "api");
+idCompetencias.set("Análisis de requisitos", "requisitos");
+idCompetencias.set("Diseño de UI", "ui");
+idCompetencias.set("Control de versiones", "versiones");
+idCompetencias.set("Pruebas de software", "pruebas");
+
+
+
 //Bootstrap tooltip
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
+//funciones
 async function cargarTarjetas() {
     try {
         const response = await fetch("../datos/iniciativas.json");
@@ -44,12 +58,12 @@ async function cargarTarjetas() {
 function mostrarTarjetas(iniciativas) {
     contenedorTarjetas.innerHTML = "";
 
-    
+
     if (iniciativas.length === 0) {
         const mensajeSinResultados = document.createElement("p");
         mensajeSinResultados.className = "col-11 text-center fs-1 mensaje-sin-resultados";
         mensajeSinResultados.innerHTML = `No se han encontrado iniciativas`;
-        
+
         contenedorTarjetas.appendChild(mensajeSinResultados);
         return;
     }
@@ -104,7 +118,13 @@ function filtarIniciativas() {
         const coincideCategoria =
             categoriasSeleccionadas.length === 0 || categoriasSeleccionadas.includes(iniciativa.categoria);
 
-        return resultadoBusqueda && coincideCategoria;
+        const coincideTipo =
+            tiposSeleccionados.length === 0 || tiposSeleccionados.includes(iniciativa.tipo);
+
+        const coincideCompetencia =
+            competenciasSeleccionadas.length === 0 || iniciativa.competencias.some(competencia => competenciasSeleccionadas.includes(competencia));
+
+        return resultadoBusqueda && coincideCategoria && coincideTipo && coincideCompetencia;
     })
 
     console.log(categoriasSeleccionadas)
@@ -123,7 +143,7 @@ categorias.forEach(categoria => {
                 <p class="lh-1 m-0 pe-3">${categoria.textContent}</p>
                 <button type="button" class="btn-close p-0 top-50 translate-middle" data-bs-dismiss="alert" aria-label="Close"></button>
             `
-            contenedorCategoriasActivas.appendChild(filtroActivo);
+            contenedorFiltrosActivos.appendChild(filtroActivo);
 
             filtroActivo.querySelector(".btn-close").addEventListener("click", () => {
                 console.log("corre evento");
@@ -140,9 +160,102 @@ categorias.forEach(categoria => {
     })
 })
 
+tipos.forEach(tipo => {
+    tipo.addEventListener("click", () => {
+        if (!tipo.classList.contains("activo")) {
+            tiposSeleccionados.push(tipo.textContent);
+            tipo.classList.add("activo");
+
+            const filtroActivo = document.createElement("div");
+            filtroActivo.className = "alert alert-warning alert-dismissible fade show col-5 col-sm-3 col-md-2 p-1 m-1 d-flex gap-1 justify-content-between justify-content-md-evenly align-items-center categoriaActiva"
+            filtroActivo.innerHTML = `
+                <p class="lh-1 m-0 pe-3">${tipo.textContent}</p>
+                <button type="button" class="btn-close p-0 top-50 translate-middle" data-bs-dismiss="alert" aria-label="Close"></button>
+            `
+            contenedorFiltrosActivos.appendChild(filtroActivo);
+
+            filtroActivo.querySelector(".btn-close").addEventListener("click", () => {
+                console.log("corre evento");
+                const indexTipo = tiposSeleccionados.indexOf(tipo.textContent);
+                tiposSeleccionados.splice(indexTipo, 1);
+                const idTipo = tipo.textContent.toLocaleLowerCase().trim();
+                document.getElementById(idTipo).classList.remove("activo");
+                filtarIniciativas();
+            })
+
+
+            filtarIniciativas();
+        }
+    })
+})
+
+competencias.forEach(competencia => {
+    competencia.addEventListener("click", () => {
+        if (!competencia.classList.contains("activo")) {
+            competenciasSeleccionadas.push(competencia.textContent);
+            competencia.classList.add("activo");
+
+            const filtroActivo = document.createElement("div");
+            filtroActivo.className = "alert alert-success alert-dismissible fade show col-5 col-sm-3 col-md-2 p-1 m-1 d-flex gap-1 justify-content-between justify-content-md-evenly align-items-center categoriaActiva"
+            filtroActivo.innerHTML = `
+                <p class="lh-1 m-0 pe-3">${competencia.textContent}</p>
+                <button type="button" class="btn-close p-0 top-50 translate-middle" data-bs-dismiss="alert" aria-label="Close"></button>
+            `
+            contenedorFiltrosActivos.appendChild(filtroActivo);
+
+            filtroActivo.querySelector(".btn-close").addEventListener("click", () => {
+                console.log("corre evento");
+                const indexComp = competenciasSeleccionadas.indexOf(competencia.textContent);
+                competenciasSeleccionadas.splice(indexComp, 1);
+                const idComp = idCompetencias.get(competencia.textContent.trim());
+                document.getElementById(idComp).classList.remove("activo");
+                filtarIniciativas();
+            })
+
+
+            filtarIniciativas();
+        }
+    })
+})
+
 buscador.addEventListener("input", () => {
     filtarIniciativas();
 })
+
+document.addEventListener('click', function (event) {
+    const listaFiltros = document.getElementById('filtros');
+    const listaCategorias = document.getElementById('categorias');
+    const listaTipos = document.getElementById('tipos');
+    const listaCompetencias = document.getElementById('competencias');
+    const triggerFiltros = document.querySelector('[data-bs-target="#filtros"]');
+    const triggerCategorias = document.querySelector('[data-bs-target="#categorias"]');
+    const triggerTipos = document.querySelector('[data-bs-target="#tipos"]');
+    const triggerCompetencias = document.querySelector('[data-bs-target="#competencias"]');
+    
+    // Check if the collapse is currently open
+    const estaFiltrosAbierto = listaFiltros.classList.contains('show');
+    const estaCategoriasAbierto = listaCategorias.classList.contains('show');
+    const estaTiposAbierto = listaTipos.classList.contains('show');
+    const estaCompetenciasAbierto = listaCompetencias.classList.contains('show');
+    
+    // If open, and the click was outside both the menu and the toggle button, close it
+    if (estaFiltrosAbierto && !listaFiltros.contains(event.target) && !triggerFiltros.contains(event.target)) {
+        const bsCollapse = bootstrap.Collapse.getOrCreateInstance(listaFiltros);
+        bsCollapse.hide();
+    }
+    if (estaCategoriasAbierto && !listaCategorias.contains(event.target) && !triggerCategorias.contains(event.target)) {
+        const bsCollapse = bootstrap.Collapse.getOrCreateInstance(listaTipos);
+        bsCollapse.hide();
+    }
+    if (estaTiposAbierto && !listaTipos.contains(event.target) && !triggerTipos.contains(event.target)) {
+        const bsCollapse = bootstrap.Collapse.getOrCreateInstance(listaTipos);
+        bsCollapse.hide();
+    }
+    if (estaCompetenciasAbierto && !listaCompetencias.contains(event.target) && !triggerCompetencias.contains(event.target)) {
+        const bsCollapse = bootstrap.Collapse.getOrCreateInstance(listaCompetencias);
+        bsCollapse.hide();
+    }
+});
 
 
 

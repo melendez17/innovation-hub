@@ -28,17 +28,16 @@ main {
   flex: 1;
 }
 
-.filtro-categorias .encabezado-lista {
+.filtros button {
   background-color: #f8fafc;
   color: #004b87;
-  border-color: #080b0f;
-  font-weight: bold;
-  font-size: 1.1rem;
+  border-color: #032057;
 }
-.filtro-categorias button {
-  background-color: #ddd9d9;
+
+.filtro-lista button {
+  background-color: #f8fafc;
   color: #004b87;
-  border-color: #080b0f;
+  border-color: #00a896;
 }
 
 .tooltip-personalizado {

@@ -2,20 +2,19 @@
 //     padding: 0;
 // }
 
-.filtro-categorias {
 
-    .encabezado-lista {
+.filtros {
+    button {
         background-color: $light;
         color: $primary;
-        border-color: $dark;
-        font-weight: bold;
-        font-size: 1.1rem;
+        border-color: $secondary-dark;
     }
-
+}
+.filtro-lista {
     button {
-        background-color: $gray;
+        background-color: $light;
         color: $primary;
-        border-color: $dark;
+        border-color: $secondary-light;
     }
 }
 

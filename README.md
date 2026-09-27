@@ -39,6 +39,20 @@ _(se completa durante las semanas 2 a 4)_
 | 1 | 2026-09-08 | 76adcc0 | Crear estructura del avance 1 y documentacion inicial |
 | 2 | 2026-09-08 | 4a755e6 | Creación de tabla de commits en el README |
 | 3 | 2026-09-08 | d168472 | "Probar automatización de tabla con git hook" |
+| 4 | 2026-09-08 | f14b6f2 | Segunda prueba de automatización con git hook |
+| 5 | 2026-09-08 | 4a6e3f8 | Tercer prueba de automatización de tabla con git hook |
+| 6 | 2026-09-22 | 383e65e | Inicializacion de toda la parte de estilos del proyecto Sass y compilaci[on de CSS |
+| 7 | 2026-09-22 | d0697f9 | Estructura inicial del html con el bootstrap incorporado |
+| 8 | 2026-09-23 | 6338984 | Reorganizacion de los estilos sass, como ejemplo para diseñar a futuro |
+| 9 | 2026-09-23 | 499003f | Creacion de la pagina de catalogos y la funcionalidad basica de cargar informacion de datos json |
+| 10 | 2026-09-24 | e8b42a1 | Completar creacion automatica de tarjetas de iniciativas para el catalogo |
+| 11 | 2026-09-24 | 2a10ce4 | Crear barra de busqueda y boron de filtro para el catalogo Solo Mobile. Aun sin funcionalidad |
+| 12 | 2026-09-25 | 1fa3f1a | Agregar funcionalidad de filtros de busqueda y categoria en el catalogo |
+| 13 | 2026-09-26 | 7f8644a | Corregir bug al eliminar los filtros de categoria |
+| 14 | 2026-09-26 | d3ae011 | Cambiar el EventListener al boton de cerrado en lugar de toda la alerta de filtro de categoria |
+| 15 | 2026-09-26 | e961ac2 | Configurar responsibidad a los elementos del catalogo |
+| 16 | 2026-09-26 | 9b0ed36 | Agregar Iniciativas al iniciativas.json |
+| 17 | 2026-09-26 | daa6924 | Funcionalidad de cargar informacion en la pagina de detalles de Iniciativa |
 <!-- FIN TABLA COMMITS -->
 
 Para activar la actualización automática de la tabla de commits antes de cada commit, ejecuta:

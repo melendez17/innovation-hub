@@ -1,11 +1,16 @@
-const contenedor = document.querySelector(".contenedor-tarjetas");
-let iniciativas;
+//querySelectors
+const contenedorTarjetas = document.querySelector(".contenedor-tarjetas");
 const buscador = document.getElementById("buscar");
 const contenedorCategoriasActivas = document.getElementById("contenedor-filtros-activos");
 const categorias = document.querySelectorAll(".categoria");
 const listaCategorias = document.querySelector(".filtro-categorias");
+
+//iniciativas
+let iniciativas;
 let categoriasActivas = [];
 let categoriasSeleccionadas = [];
+
+//mapa para ids
 const idCategorias = new Map();
 idCategorias.set("Tecnología", "tecnologia");
 idCategorias.set("Educación", "educacion");
@@ -15,6 +20,10 @@ idCategorias.set("Negocios y Emprendimiento", "negocios");
 idCategorias.set("Salud y Bienestar", "salud");
 idCategorias.set("Cultura y Creatividad", "cultura");
 idCategorias.set("Otros", "otros");
+
+//Bootstrap tooltip
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
 async function cargarTarjetas() {
     try {
@@ -33,7 +42,17 @@ async function cargarTarjetas() {
 }
 
 function mostrarTarjetas(iniciativas) {
-    contenedor.innerHTML = "";
+    contenedorTarjetas.innerHTML = "";
+
+    
+    if (iniciativas.length === 0) {
+        const mensajeSinResultados = document.createElement("p");
+        mensajeSinResultados.className = "col-11 text-center fs-1 mensaje-sin-resultados";
+        mensajeSinResultados.innerHTML = `No se han encontrado iniciativas`;
+        
+        contenedorTarjetas.appendChild(mensajeSinResultados);
+        return;
+    }
 
     iniciativas.forEach(iniciativa => {
         const tarjeta = document.createElement("article");
@@ -42,7 +61,7 @@ function mostrarTarjetas(iniciativas) {
             .map(competencia => `<p>${competencia}</p>`)
             .join("");
 
-        tarjeta.className = "col-11 col-sm-5 col-lg-3 tarjeta-iniciativa d-flex flex-column gap-1"
+        tarjeta.className = "col-11 col-sm-5 col-lg-3 p-2 tarjeta-iniciativa d-flex flex-column gap-1 justify-content-between"
         tarjeta.innerHTML = `
                 <div class="d-flex justify-content-between gap-3 encabezado-tarjeta">
                     <h3>${iniciativa.titulo}</h3>
@@ -67,9 +86,12 @@ function mostrarTarjetas(iniciativas) {
                     <p class="etiqueta">Competencias Requeridas: </p>
                     ${competenciasHTML}
                 </div>
+                <a role="button" class="btn btn-primary btn-detalles-iniciativa" href="./detalles-iniciativa.html">Detalles</a>
         `
-
-        contenedor.appendChild(tarjeta);
+        contenedorTarjetas.appendChild(tarjeta);
+        tarjeta.querySelector(".btn-detalles-iniciativa").addEventListener("click", () => {
+            localStorage.setItem("idIniciativa", iniciativa.id);
+        })
     });
 }
 
@@ -96,7 +118,7 @@ categorias.forEach(categoria => {
             categoria.classList.add("activo");
 
             const filtroActivo = document.createElement("div");
-            filtroActivo.className = "alert alert-primary alert-dismissible fade show col-5 col-sm-3 col-md-2 p-1 m-1 d-flex gap-1 justify-content-between align-items-center categoriaActiva"
+            filtroActivo.className = "alert alert-primary alert-dismissible fade show col-5 col-sm-3 col-md-2 p-1 m-1 d-flex gap-1 justify-content-between justify-content-md-evenly align-items-center categoriaActiva"
             filtroActivo.innerHTML = `
                 <p class="lh-1 m-0 pe-3">${categoria.textContent}</p>
                 <button type="button" class="btn-close p-0 top-50 translate-middle" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -104,13 +126,13 @@ categorias.forEach(categoria => {
             contenedorCategoriasActivas.appendChild(filtroActivo);
 
             filtroActivo.querySelector(".btn-close").addEventListener("click", () => {
-            console.log("corre evento");
-            const indexCat = categoriasSeleccionadas.indexOf(categoria.textContent);
-            categoriasSeleccionadas.splice(indexCat, 1);
-            const idCat = idCategorias.get(categoria.textContent.trim());
-            document.getElementById(idCat).classList.remove("activo");
-            filtarIniciativas();
-        })
+                console.log("corre evento");
+                const indexCat = categoriasSeleccionadas.indexOf(categoria.textContent);
+                categoriasSeleccionadas.splice(indexCat, 1);
+                const idCat = idCategorias.get(categoria.textContent.trim());
+                document.getElementById(idCat).classList.remove("activo");
+                filtarIniciativas();
+            })
 
 
             filtarIniciativas();
@@ -121,5 +143,7 @@ categorias.forEach(categoria => {
 buscador.addEventListener("input", () => {
     filtarIniciativas();
 })
+
+
 
 cargarTarjetas();

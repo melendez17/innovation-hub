@@ -19,9 +19,21 @@
     }
 }
 
-.contenedor-filtros-activos .alert{
-    max-height: 4rem;
-    font-size: 0.5rem;
+.tooltip-personalizado {
+    --bs-tooltip-bg: #{$secondary-light};
+}
+
+.contenedor-filtros-activos .alert {
+    height: 2rem;
+    font-size: 0.8rem;
+
+    @media (min-width: 992px){
+        font-size: 0.9rem;
+    }
+}
+
+.mensaje-sin-resultados {
+    color: $gray;
 }
 
 .tarjeta-iniciativa {

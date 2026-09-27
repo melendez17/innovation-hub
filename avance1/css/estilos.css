@@ -41,9 +41,22 @@ main {
   border-color: #080b0f;
 }
 
+.tooltip-personalizado {
+  --bs-tooltip-bg: #00a896;
+}
+
 .contenedor-filtros-activos .alert {
-  height: 2.5rem;
-  font-size: 0.9rem;
+  height: 2rem;
+  font-size: 0.8rem;
+}
+@media (min-width: 992px) {
+  .contenedor-filtros-activos .alert {
+    font-size: 0.9rem;
+  }
+}
+
+.mensaje-sin-resultados {
+  color: #ddd9d9;
 }
 
 .tarjeta-iniciativa {
@@ -70,4 +83,8 @@ main {
 }
 .tarjeta-iniciativa .estado {
   border: none;
-}/*# sourceMappingURL=catalogo.css.map */
+}
+
+.caracteristicas-iniciativa p {
+  margin: 0;
+}/*# sourceMappingURL=estilos.css.map */

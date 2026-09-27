@@ -11,7 +11,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- CSS propio compilado desde Sass -->
-    <link rel="stylesheet" href="../css/catalogo.css">
+    <link rel="stylesheet" href="../css/estilos.css">
 </head>
 
 <body>
@@ -20,17 +20,18 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href="index.html">Innovation Hub</a>
+                <a class="navbar-brand" href="/innovation-hub/avance1/index.html">Innovation Hub</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Navegación de palanca">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="../index.html">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="paginas/catalogo.html">Iniciativas</a></li>
-                        <li class="nav-item"><a class="nav-link" href="paginas/nueva-iniciativa.html">Publicar</a></li>
-                        <li class="nav-item"><a class="nav-link" href="paginas/perfil.html">Mi Perfil</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page"
+                                href="/innovation-hub/avance1/index.html">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/innovation-hub/avance1/paginas/catalogo.html">Iniciativas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/innovation-hub/avance1/paginas/">Publicar</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/innovation-hub/avance1/paginas/perfil.html">Mi Perfil</a></li>
                     </ul>
                 </div>
             </div>
@@ -41,28 +42,48 @@
         <section class="my-3 row p-0 d-flex flex-column align-items-center">
             <div class="row p-0 d-flex flex-column align-items-center gap-2 pb-1 position-relative">
                 <h2 class="col-11 text-center">Iniciativas</h2>
-                <form class="col-11 d-flex filtros-iniciativas p-0" role="search">
+                <form class="col-11 d-flex filtros-iniciativas p-0 gap-1" role="search">
                     <input id="buscar" class="form-control me-2" type="search" placeholder="Buscar..."
                         aria-label="Buscar">
-                    <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#categorias"><i class="fa-solid fa-filter" aria-hidden="true"
-                            aria-label="Filtrar Categoría"></i></button>
+                    <div data-bs-custom-class="tooltip-personalizado" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Filtrar por categoría" data-bs-trigger="hover">
+                        <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#categorias">
+                            <i class="fa-solid fa-filter" aria-hidden="true" aria-label="Filtrar Categoría"></i>
+                        </button>
+                    </div>
+                    <div data-bs-custom-class="tooltip-personalizado" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Crear nueva iniciativa" data-bs-trigger="hover">
+                        <button class="btn btn-outline-primary position-relative" type="button">
+                            <i class="fa-regular fa-lightbulb fa-xl" aria-hidden="true"
+                                aria-label="Crear nueva iniciativa"></i>
+                            <i class="fa-solid fa-plus fa-md position-absolute top-50 end-0" aria-hidden="true"></i>
+                        </button>
+                    </div>
+
                 </form>
                 <div id="categorias" class="collapse col-11 p-0 position-absolute top-100">
                     <div class="list-group filtro-categorias z-3 position-absolute top-100 end-0">
                         <button class="list-group-item encabezado-lista">Filtrar por categoría</button>
-                        <button class="list-group-item categoria" type="button" data-bs-toggle="collapse" data-bs-target="#categorias" id="tecnologia">Tecnología</button>
-                        <button class="list-group-item categoria" type="button" data-bs-toggle="collapse" data-bs-target="#categorias" id="educacion">Educación</button>
-                        <button class="list-group-item categoria" type="button" data-bs-toggle="collapse" data-bs-target="#categorias" id="sostenibilidad">Sostenibilidad</button>
-                        <button class="list-group-item categoria" type="button" data-bs-toggle="collapse" data-bs-target="#categorias" id="social">Impacto Social</button>
-                        <button class="list-group-item categoria" type="button" data-bs-toggle="collapse" data-bs-target="#categorias" id="negocios">Negocios y Emprendimiento</button>
-                        <button class="list-group-item categoria" type="button" data-bs-toggle="collapse" data-bs-target="#categorias" id="salud">Salud y Bienestar</button>
-                        <button class="list-group-item categoria" type="button" data-bs-toggle="collapse" data-bs-target="#categorias" id="cultura">Cultura y Creatividad</button>
-                        <button class="list-group-item categoria" type="button" data-bs-toggle="collapse" data-bs-target="#categorias" id="otros">Otros</button>
+                        <button class="list-group-item categoria" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#categorias" id="tecnologia">Tecnología</button>
+                        <button class="list-group-item categoria" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#categorias" id="educacion">Educación</button>
+                        <button class="list-group-item categoria" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#categorias" id="sostenibilidad">Sostenibilidad</button>
+                        <button class="list-group-item categoria" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#categorias" id="social">Impacto Social</button>
+                        <button class="list-group-item categoria" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#categorias" id="negocios">Negocios y Emprendimiento</button>
+                        <button class="list-group-item categoria" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#categorias" id="salud">Salud y Bienestar</button>
+                        <button class="list-group-item categoria" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#categorias" id="cultura">Cultura y Creatividad</button>
+                        <button class="list-group-item categoria" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#categorias" id="otros">Otros</button>
                     </div>
                 </div>
             </div>
-            <div id="contenedor-filtros-activos" class="row col-12 col-md-11 p-0 d-flex justify-content-evenly justify-content-md-start contenedor-filtros-activos">
+            <div id="contenedor-filtros-activos"
+                class="row col-12 col-md-11 p-0 d-flex justify-content-evenly justify-content-md-start contenedor-filtros-activos">
                 <!-- <div class="alert alert-primary alert-dismissible fade show col-5 fs-6 p-0 m-0 d-flex justify-content-between align-items-center">
                     <p class="m-0">Negocios y Emprendimiento</p>
                     <button type="button" class="btn-close p-1" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -84,7 +105,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 
-    <script type="module" src="../js/tarjetas-iniciativas.js"></script>
+    <script src="../js/tarjetas-iniciativas.js"></script>
 </body>
 
 </html>

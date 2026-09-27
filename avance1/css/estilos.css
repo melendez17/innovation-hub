@@ -85,6 +85,67 @@ main {
   border: none;
 }
 
-.caracteristicas-iniciativa p {
+.detalle-iniciativa h2 {
+  color: #004b87;
+  font-size: 1.5rem;
+}
+@media (min-width: 576px) {
+  .detalle-iniciativa h2 {
+    font-size: 2.2rem;
+  }
+}
+.detalle-iniciativa p,
+.detalle-iniciativa h3 {
   margin: 0;
+}
+.detalle-iniciativa .encabezado-iniciativa {
+  border-bottom: #00a896 1px solid;
+  max-height: -moz-max-content;
+  max-height: max-content;
+}
+.detalle-iniciativa .encabezado-iniciativa .btn-outline-primary {
+  --bs-btn-color: #00a896;
+  --bs-btn-border-color: #f8fafc;
+  --bs-btn-hover-color: #00a896;
+  --bs-btn-hover-bg: #f8fafc;
+  --bs-btn-hover-border-color: #00a896;
+}
+.detalle-iniciativa .encabezado-iniciativa .btn-editar i {
+  color: #00a896;
+}
+.detalle-iniciativa .encabezado-iniciativa .btn-eliminar i {
+  color: #ce0000;
+}
+.detalle-iniciativa .propietario-iniciativa {
+  font-weight: 500;
+}
+.detalle-iniciativa .descripcion-iniciativa {
+  font-size: 1.2rem;
+}
+@media (min-width: 576px) {
+  .detalle-iniciativa .descripcion-iniciativa {
+    font-size: 1.4rem;
+  }
+}
+.detalle-iniciativa .etiqueta {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #032057;
+}
+.detalle-iniciativa .tarjeta-competencia {
+  font-size: 0.8rem;
+  background-color: #f8fafc;
+  color: #032057;
+  border-color: #032057;
+}
+.detalle-iniciativa .tarjeta-competencia i {
+  color: #00a896;
+}
+.detalle-iniciativa .tarjeta-miembro {
+  background-color: #f8fafc;
+  color: #032057;
+  border-color: #032057;
+}
+.detalle-iniciativa .tarjeta-miembro i {
+  color: #00a896;
 }/*# sourceMappingURL=estilos.css.map */

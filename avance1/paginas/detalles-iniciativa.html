@@ -41,38 +41,56 @@
         </nav>
     </header>
 
-    <main class="container-fluid d-flex flex-column">
-        <div class="row flex-grow-1">
-            <section class="col-12 col-md-9 mt-2 d-flex flex-column justify-content-evenly justify-content-md-start gap-1">
-                <h2 class="titulo-iniciativa" id="titulo"></h2>
-                <p class="autor-iniciativa">Por <span id="propietario"></span></p>
+    <main class="container-fluid d-flex flex-column detalle-iniciativa">
+
+        <div class="row">
+            <header class="col-12 encabezado-iniciativa position-relative">
+                <div class="pe-4">
+                    <h2 class="titulo-iniciativa m-0" id="titulo"></h2>
+                    <p>Por <span class="propietario-iniciativa" id="propietario"></span></p>
+                </div>
+                <div class="position-absolute top-0 end-0">
+                    <button class="btn btn-outline-primary position-relative px-2 m-1" type="button"
+                        aria-label="Opciones" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#opciones">
+                        <i class="fa-solid fa-ellipsis-vertical fa-xl" aria-hidden="true"></i>
+                    </button>
+                    <div id="opciones" class="collapse list-group position-absolute top-100 end-0">
+                    <button class="list-group-item d-flex gap-3 align-items-center btn-editar"><i class="fa-solid fa-pen-to-square" aria-hidden="true"></i><span>Editar</span></button>
+                    <button class="list-group-item d-flex gap-3 align-items-center btn-eliminar"><i class="fa-regular fa-trash-can" aria-hidden="true"></i><span>Eliminar</span></button>
+                </div>
+                </div>
+            </header>
+            <section
+                class="col-12 col-md-9 d-flex flex-column justify-content-evenly justify-content-md-between gap-3 p-3">
                 <p class="descripcion-iniciativa" id="descripcion"></p>
-                <div class="contenedor-competencias">
-                    <p class="etiqueta">Competencias Requeridas</p>
-                    <div class="d-flex gap-3 flex-wrap" id="competencias"></div>
-                </div>              
+                <div class="contenedor-competencias mt-md-5">
+                    <h3 class="etiqueta">Competencias Requeridas</h3>
+                    <div class="d-flex gap-2 flex-wrap mt-1" id="competencias"></div>
+                </div>
+                <div class="contenerdor-miembros">
+                    <h3 class="etiqueta">Miembros</h3>
+                    <div class="d-flex gap-2 flex-wrap mt-1" id="miembros"></div>
+                </div>
             </section>
 
-            <aside class="col-12 col-md-3 caracteristicas-iniciativa d-flex flex-column justify-content-evenly">
+            <aside
+                class="col-12 col-md-3 caracteristicas-iniciativa d-flex flex-column justify-content-between gap-2 p-3">
                 <div class="contenedor-tipo">
-                    <p class="etiqueta">Tipo</p>
+                    <h3 class="etiqueta">Tipo</h3>
                     <p id="tipo"></p>
                 </div>
                 <div class="contenedor-categoria">
-                    <p class="etiqueta">Categoría</p>
+                    <h3 class="etiqueta">Categoría</h3>
                     <p id="categoria"></p>
                 </div>
                 <div class="contenedor-estado">
-                    <p class="etiqueta">Estado</p>
+                    <h3 class="etiqueta">Estado</h3>
                     <p id="estado"></p>
                 </div>
                 <div class="contenedor-visibilidad">
-                    <p class="etiqueta">Nivel de Visibilidad</p>
+                    <h3 class="etiqueta">Nivel de Visibilidad</h3>
                     <p id="visibilidad"></p>
-                </div>
-                <div class="contenerdor-miembros">
-                    <p class="etiqueta">Miembros</p>
-                    <div class="d-flex gap-3 flex-wrap" id="miembros"></div>
                 </div>
             </aside>
         </div>

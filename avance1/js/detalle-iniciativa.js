@@ -12,6 +12,10 @@ const competencias = document.getElementById("competencias");
 //iniciativa
 let iniciativa;
 
+//Bootstrap tooltip
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
 async function cargarIniciativa(id) {
     try {
         const response = await fetch("../datos/iniciativas.json");
@@ -31,14 +35,14 @@ async function cargarIniciativa(id) {
             titulo.textContent = iniciativa.titulo;
             propietario.textContent = iniciativa.propietario;
             descripcion.textContent = iniciativa.descripcion;
-            const miembrosHTML = (iniciativa.miembros || []).map(miembro => `<p>${miembro}</p>`).join("");
-            miembros.innerHTML = `${miembrosHTML}`;
+            const competenciasHTML = (iniciativa.competencias || []).map(competencia => `<p class="card m-0 p-1 d-flex flex-row align-items-center gap-1 tarjeta-competencia"><i class="fa-solid fa-check fa-sm"></i><span>${competencia}<span></p>`).join("");
+            competencias.innerHTML = `${competenciasHTML}`;            
             tipo.textContent = iniciativa.tipo;
             categoria.textContent = iniciativa.categoria;
             estado.textContent = iniciativa.estado;
             visibilidad.textContent = iniciativa.visibilidad;
-            const competenciasHTML = (iniciativa.competencias || []).map(competencia => `<p>${competencia}</p>`).join("");
-            competencias.innerHTML = `${competenciasHTML}`;
+            const miembrosHTML = (iniciativa.miembros || []).map(miembro => `<p class="card m-0 p-1 d-flex flex-row align-items-center gap-1 tarjeta-miembro"><i class="fa-regular fa-user fa-xs" aria-hidden=true></i><span>${miembro}</></p>`).join("");
+            miembros.innerHTML = `${miembrosHTML}`;
         }
     } catch(error){
         console.error(error);

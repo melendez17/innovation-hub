@@ -27,26 +27,76 @@ async function cargarIniciativa(id) {
         console.log("iniciativas " + iniciativas);
         console.log("id local storage: " + localStorage.getItem("idIniciativa"))
         iniciativa = iniciativas.find(iniciativa => iniciativa.id == id);
-        console.log("iniciativa cargada "+ iniciativa);
+        console.log("iniciativa cargada " + iniciativa);
 
         if (!iniciativa) {
             throw new Error("No se encontró ninguna iniciativa con el id", id);
         } else {
-            titulo.textContent = iniciativa.titulo;
-            propietario.textContent = iniciativa.propietario;
-            descripcion.textContent = iniciativa.descripcion;
-            const competenciasHTML = (iniciativa.competencias || []).map(competencia => `<p class="card m-0 p-1 d-flex flex-row align-items-center gap-1 tarjeta-competencia"><i class="fa-solid fa-check fa-sm"></i><span>${competencia}<span></p>`).join("");
-            competencias.innerHTML = `${competenciasHTML}`;            
-            tipo.textContent = iniciativa.tipo;
-            categoria.textContent = iniciativa.categoria;
-            estado.textContent = iniciativa.estado;
-            visibilidad.textContent = iniciativa.visibilidad;
-            const miembrosHTML = (iniciativa.miembros || []).map(miembro => `<p class="card m-0 p-1 d-flex flex-row align-items-center gap-1 tarjeta-miembro"><i class="fa-regular fa-user fa-xs" aria-hidden=true></i><span>${miembro}</></p>`).join("");
-            miembros.innerHTML = `${miembrosHTML}`;
+            switch(iniciativa.visibilidad){
+                case "Pública":
+                    mostrarPublica(iniciativa);
+                    break;
+                
+                case "Institucional":
+                    mostrarInstitucional(iniciativa);
+                    break;
+
+                case "Restringida":
+                    mostrarRestringida(iniciativa);
+                    break;
+
+                case "Privada":
+                    mostrarPrivada(iniciativa);
+                    break;
+            }
         }
-    } catch(error){
+    } catch (error) {
         console.error(error);
     }
 }
 
+function mostrarPublica(iniciativa){
+    titulo.textContent = iniciativa.titulo;
+    propietario.textContent = iniciativa.propietario;
+    descripcion.textContent = iniciativa.descripcion;
+    const competenciasHTML = (iniciativa.competencias || []).map(competencia => `<p class="card m-0 p-1 d-flex flex-row align-items-center gap-1 tarjeta-competencia"><i class="fa-solid fa-check fa-sm"></i><span>${competencia}<span></p>`).join("");
+    competencias.innerHTML = `${competenciasHTML}`;
+    tipo.textContent = iniciativa.tipo;
+    categoria.textContent = iniciativa.categoria;
+    estado.textContent = iniciativa.estado;
+    visibilidad.textContent = iniciativa.visibilidad;
+    const miembrosHTML = (iniciativa.miembros || []).map(miembro => `<p class="card m-0 p-1 d-flex flex-row align-items-center gap-1 tarjeta-miembro"><i class="fa-regular fa-user fa-xs" aria-hidden=true></i><span>${miembro}</></p>`).join("");
+    miembros.innerHTML = `${miembrosHTML}`;
+}
+
+function mostrarInstitucional(iniciativa){
+    titulo.textContent = iniciativa.titulo;
+    propietario.textContent = iniciativa.propietario;
+    descripcion.textContent = iniciativa.descripcion;
+    const competenciasHTML = (iniciativa.competencias || []).map(competencia => `<p class="card m-0 p-1 d-flex flex-row align-items-center gap-1 tarjeta-competencia"><i class="fa-solid fa-check fa-sm"></i><span>${competencia}<span></p>`).join("");
+    competencias.innerHTML = `${competenciasHTML}`;
+    tipo.textContent = iniciativa.tipo;
+    categoria.textContent = iniciativa.categoria;
+    estado.textContent = iniciativa.estado;
+    visibilidad.textContent = iniciativa.visibilidad;
+    const miembrosHTML = (iniciativa.miembros || []).map(miembro => `<p class="card m-0 p-1 d-flex flex-row align-items-center gap-1 tarjeta-miembro"><i class="fa-regular fa-user fa-xs" aria-hidden=true></i><span>${miembro}</></p>`).join("");
+    miembros.innerHTML = `${miembrosHTML}`;
+}
+
+function mostrarRestringida(iniciativa) {
+    titulo.textContent = iniciativa.titulo;
+    propietario.textContent = iniciativa.propietario;
+    descripcion.textContent = iniciativa.resumen;
+    const competenciasHTML = (iniciativa.competencias || []).map(competencia => `<p class="card m-0 p-1 d-flex flex-row align-items-center gap-1 tarjeta-competencia"><i class="fa-solid fa-check fa-sm"></i><span>${competencia}<span></p>`).join("");
+    competencias.innerHTML = `${competenciasHTML}`;
+    tipo.textContent = iniciativa.tipo;
+    categoria.textContent = iniciativa.categoria;
+    estado.textContent = iniciativa.estado;
+    visibilidad.textContent = iniciativa.visibilidad;
+    miembros.parentElement.classList.add("d-none");
+}
+
+function mostrarPrivada(iniciativa){
+
+}
 cargarIniciativa(localStorage.getItem("idIniciativa"));

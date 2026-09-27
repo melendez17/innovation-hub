@@ -14,7 +14,7 @@
       "Desarrollo de APIs"
     ],
     "cantidad_integrantes": 4,
-    "visibilidad": "Público",
+    "visibilidad": "Pública",
     "etiquetas": [],
     "estado": "Pendiente",
     "propietario": "User 01",
@@ -39,7 +39,7 @@
       "Diseño de UI"
     ],
     "cantidad_integrantes": 4,
-    "visibilidad": "Público",
+    "visibilidad": "Institucional",
     "etiquetas": [
       "reservas",
       "laboratorios",
@@ -68,7 +68,7 @@
       "Pruebas de software"
     ],
     "cantidad_integrantes": 5,
-    "visibilidad": "Público",
+    "visibilidad": "Restringida",
     "etiquetas": [
       "energía",
       "sostenibilidad",
@@ -97,7 +97,7 @@
       "Pruebas de software"
     ],
     "cantidad_integrantes": 4,
-    "visibilidad": "Público",
+    "visibilidad": "Privada",
     "etiquetas": [
       "soporte",
       "tickets",
@@ -126,7 +126,7 @@
       "Control de versiones"
     ],
     "cantidad_integrantes": 5,
-    "visibilidad": "Público",
+    "visibilidad": "Pública",
     "etiquetas": [
       "comunidad",
       "intercambio",
@@ -155,7 +155,7 @@
       "Análisis de requisitos"
     ],
     "cantidad_integrantes": 3,
-    "visibilidad": "Público",
+    "visibilidad": "Pública",
     "etiquetas": [
       "salud",
       "hábitos",
@@ -184,7 +184,7 @@
       "Diseño de UI"
     ],
     "cantidad_integrantes": 4,
-    "visibilidad": "Público",
+    "visibilidad": "Pública",
     "etiquetas": [
       "emprendimiento",
       "comercio local",
@@ -213,7 +213,7 @@
       "Control de versiones"
     ],
     "cantidad_integrantes": 4,
-    "visibilidad": "Público",
+    "visibilidad": "Pública",
     "etiquetas": [
       "cultura",
       "patrimonio",
@@ -242,7 +242,7 @@
       "Desarrollo de APIs"
     ],
     "cantidad_integrantes": 5,
-    "visibilidad": "Público",
+    "visibilidad": "Pública",
     "etiquetas": [
       "asistente virtual",
       "orientación",

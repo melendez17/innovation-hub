@@ -147,4 +147,25 @@ main {
 }
 .detalle-iniciativa .tarjeta-miembro i {
   color: #00a896;
+}
+
+.perfil-usuario {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.perfil-usuario .nombre {
+  color: #004b87;
+}
+.perfil-usuario p {
+  margin: 0;
+  padding: 0 0.3rem;
+}
+.perfil-usuario .etiqueta {
+  margin: 0;
+  padding: 0.3rem 0.3rem 0 0.3rem;
+  font-size: 1rem;
+  color: #032057;
+}
+.perfil-usuario .tarjeta-perfil i {
+  color: #00a896;
 }/*# sourceMappingURL=estilos.css.map */

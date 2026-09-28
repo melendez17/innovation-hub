@@ -66,4 +66,12 @@
     .estado {
         border: none;
     }
+
+    .btn-detalles-iniciativa{
+        --bs-btn-color: #{$secondary-light};
+        --bs-btn-bg: #{$light};
+        --bs-btn-border-color: #{$secondary-light};
+        --bs-btn-hover-bg: #{$secondary-light};
+        --bs-btn-hover-border-color: #{$secondary-light}; 
+    }
 }

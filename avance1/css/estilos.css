@@ -101,6 +101,13 @@ main {
 .tarjeta-iniciativa .estado {
   border: none;
 }
+.tarjeta-iniciativa .btn-detalles-iniciativa {
+  --bs-btn-color: #00a896;
+  --bs-btn-bg: #f8fafc;
+  --bs-btn-border-color: #00a896;
+  --bs-btn-hover-bg: #00a896;
+  --bs-btn-hover-border-color: #00a896;
+}
 
 @media (min-width: 768px) {
   .detalle-iniciativa section, .detalle-iniciativa aside {

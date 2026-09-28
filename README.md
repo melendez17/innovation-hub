@@ -56,6 +56,7 @@ _(se completa durante las semanas 2 a 4)_
 | 18 | 2026-09-26 | 772fda5 | Agregar estilos a la pagina de detalle de iniciativa |
 | 19 | 2026-09-27 | 2358036 | Agregar friltros de tipo y competencia al Catalogo |
 | 20 | 2026-09-27 | f7716ff | Diseño y responsividad del perfil de usuario |
+| 21 | 2026-09-27 | e567c0d | Funcion de eliminar con confirmacion en detalle de Iniciativa |
 <!-- FIN TABLA COMMITS -->
 
 Para activar la actualización automática de la tabla de commits antes de cada commit, ejecuta:

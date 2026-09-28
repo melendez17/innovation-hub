@@ -41,7 +41,6 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 //funciones
 async function cargarTarjetas() {
     const iniciativasLocalStorage = localStorage.getItem("iniciativas");
-    console.log(iniciativasLocalStorage);
 
     if (iniciativasLocalStorage) {
         iniciativas = JSON.parse(iniciativasLocalStorage);

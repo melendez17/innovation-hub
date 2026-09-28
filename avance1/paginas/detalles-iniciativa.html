@@ -18,9 +18,11 @@
 
     <!-- Barra de Navegación -->
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <nav class="navbar navbar-expand-lg navbar-dark encabezado-principal">
             <div class="container">
-                <a class="navbar-brand" href="/innovation-hub/avance1/index.html">Innovation Hub</a>
+                <a class="navbar-brand fs-3" href="/innovation-hub/avance1/index.html"><i
+                        class="fa-regular fa-lightbulb fa-xl logo-icon"></i> Innovation Hub</a>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Navegación de palanca">
                     <span class="navbar-toggler-icon"></span>
@@ -33,8 +35,15 @@
                                 href="/innovation-hub/avance1/paginas/catalogo.html">Iniciativas</a></li>
                         <li class="nav-item"><a class="nav-link" href="/innovation-hub/avance1/paginas/">Publicar</a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="/innovation-hub/avance1/paginas/perfil.html">Mi
-                                Perfil</a></li>
+                        <li class="nav-item position-relative btn-user">
+                            <a class="d-lg-none nav-link" href="/innovation-hub/avance1/paginas/perfil.html">Mi
+                                Perfil</a>
+                            <a href="/innovation-hub/avance1/paginas/perfil.html"><button type="button"
+                                    class="btn btn-outline-primary btn-user  d-none d-lg-inline"
+                                    aria-label="Opciones de usuario" data-bs-toggle="collapse"
+                                    data-bs-target="#login-opciones"><i class="fa-solid fa-circle-user fa-2xl"
+                                        aria-hidden="true"></i></button></a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -94,7 +103,9 @@
                     <p id="visibilidad"></p>
                 </div>
 
-                <a href="./formulario-inscripcion.html" class="btn btn-outline-primary btn-inscribirse d-flex gap-3 align-items-center" id="inscribirse"><i class="fa-solid fa-clipboard-check fa-sm" aria-hidden="true"></i>Inscribirse</a>
+                <a href="./formulario-inscripcion.html"
+                    class="btn btn-outline-primary btn-inscribirse d-flex gap-3 align-items-center" id="inscribirse"><i
+                        class="fa-solid fa-clipboard-check fa-sm" aria-hidden="true"></i>Inscribirse</a>
             </aside>
         </div>
     </main>

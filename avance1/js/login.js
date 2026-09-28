@@ -1,0 +1,1 @@
+localStorage.setItem("usuarioActual", "Roberto González");

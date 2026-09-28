@@ -18,28 +18,33 @@
 
     <!-- Barra de Navegación -->
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <div class="container">
-                <a class="navbar-brand" href="/innovation-hub/avance1/index.html">Innovation Hub</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Navegación de palanca">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page"
-                                href="/innovation-hub/avance1/index.html">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link"
-                                href="/innovation-hub/avance1/paginas/catalogo.html">Iniciativas</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/innovation-hub/avance1/paginas/">Publicar</a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="/innovation-hub/avance1/paginas/perfil.html">Mi
-                                Perfil</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <nav class="navbar navbar-expand-lg navbar-dark encabezado-principal">
+      <div class="container">
+        <a class="navbar-brand fs-3" href="/innovation-hub/avance1/index.html"><i
+            class="fa-regular fa-lightbulb fa-xl logo-icon"></i> Innovation Hub</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Navegación de palanca">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link active" aria-current="page"
+                href="/innovation-hub/avance1/index.html">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link"
+                href="/innovation-hub/avance1/paginas/catalogo.html">Iniciativas</a></li>
+            <li class="nav-item"><a class="nav-link" href="/innovation-hub/avance1/paginas/">Publicar</a></li>
+            <li class="nav-item position-relative btn-user">
+              <a class="d-lg-none nav-link" href="/innovation-hub/avance1/paginas/perfil.html">Mi Perfil</a>
+              <a href="/innovation-hub/avance1/paginas/perfil.html"><button type="button" class="btn btn-outline-primary btn-user  d-none d-lg-inline"
+                aria-label="Opciones de usuario" data-bs-toggle="collapse" data-bs-target="#login-opciones"><i
+                  class="fa-solid fa-circle-user fa-2xl" aria-hidden="true"></i></button></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
 
     <main class="container-fluid my-3">
         <section class="row d-flex justify-content-start align-items-top perfil-usuario">

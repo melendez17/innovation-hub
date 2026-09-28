@@ -41,7 +41,6 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 //funciones
 async function cargarTarjetas() {
     const iniciativasLocalStorage = localStorage.getItem("iniciativas");
-    console.log(iniciativasLocalStorage);
 
     if (iniciativasLocalStorage) {
         iniciativas = JSON.parse(iniciativasLocalStorage);
@@ -77,6 +76,10 @@ function mostrarTarjetas(iniciativas) {
     }
 
     iniciativas.forEach(iniciativa => {
+        if (iniciativa.visibilidad == "Privada"){
+            return;
+        }
+
         const tarjeta = document.createElement("article");
         const competenciasHTML = (iniciativa.competencias || [])
             .slice(0, 3)

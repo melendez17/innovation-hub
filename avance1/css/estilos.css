@@ -101,10 +101,17 @@ main {
 .tarjeta-iniciativa .estado {
   border: none;
 }
+.tarjeta-iniciativa .btn-detalles-iniciativa {
+  --bs-btn-color: #00a896;
+  --bs-btn-bg: #f8fafc;
+  --bs-btn-border-color: #00a896;
+  --bs-btn-hover-bg: #00a896;
+  --bs-btn-hover-border-color: #00a896;
+}
 
 @media (min-width: 768px) {
   .detalle-iniciativa section, .detalle-iniciativa aside {
-    min-height: 50vh;
+    min-height: 75vh;
   }
 }
 .detalle-iniciativa h2 {
@@ -171,6 +178,16 @@ main {
 .detalle-iniciativa .tarjeta-miembro i {
   color: #00a896;
 }
+.detalle-iniciativa .btn-inscribirse {
+  max-width: 10rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  --bs-btn-color: #00a896;
+  --bs-btn-bg: #f8fafc;
+  --bs-btn-border-color: #00a896;
+  --bs-btn-hover-bg: #00a896;
+  --bs-btn-hover-border-color: #00a896;
+}
 
 .perfil-usuario {
   max-width: 1000px;
@@ -191,4 +208,39 @@ main {
 }
 .perfil-usuario .tarjeta-perfil i {
   color: #00a896;
+}
+
+.formulario-inscripcion {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.formulario-inscripcion h2 {
+  color: #004b87;
+}
+.formulario-inscripcion h3 {
+  color: #00a896;
+}
+.formulario-inscripcion label {
+  color: #032057;
+  font-size: 1.1rem;
+}
+.formulario-inscripcion textarea {
+  color: #032057;
+  border: #032057 1px solid;
+  border-radius: 5px;
+}
+.formulario-inscripcion input {
+  color: #032057;
+  border: #032057 1px solid;
+  border-radius: 5px;
+}
+.formulario-inscripcion button {
+  background-color: #f8fafc;
+  color: #00a896;
+  border: #00a896 1px solid;
+  border-radius: 5px;
+}
+.formulario-inscripcion button:hover {
+  background-color: #00a896;
+  color: #f8fafc;
 }/*# sourceMappingURL=estilos.css.map */

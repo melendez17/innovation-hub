@@ -10,6 +10,7 @@ const visibilidad = document.getElementById("visibilidad");
 const competencias = document.getElementById("competencias");
 const btnEliminar = document.getElementById("eliminar");
 const btnEditar = document.getElementById("editar");
+const opciones = document.getElementById("opciones");
 
 //iniciativa
 let iniciativas;
@@ -49,12 +50,15 @@ async function cargarIniciativa(id) {
                     break;
 
                 case "Restringida":
+                    if(iniciativa.propietario != localStorage.getItem("usuarioActual")){
                     mostrarRestringida(iniciativa);
+                    } else {
+                        mostrarPublica(iniciativa);
+                    }
                     break;
 
-                case "Privada":
-                    mostrarPrivada(iniciativa);
-                    break;
+                default:
+                    window.location.href = "./catalogo.html";
             }
         }
     } catch (error) {
@@ -103,10 +107,6 @@ function mostrarRestringida(iniciativa) {
     miembros.parentElement.classList.add("d-none");
 }
 
-function mostrarPrivada(iniciativa){
-
-}
-
 document.addEventListener('click', function (event) {
     const opciones = document.getElementById('opciones');
     const triggerOpciones = document.querySelector('[data-bs-target="#opciones"]');
@@ -149,4 +149,11 @@ if (btnEditar) {
     });
 }
 
+function esPropietario(iniciativa){
+    if(iniciativa.propietario != localStorage.getItem("usuarioActual")){
+        opciones.parentElement.classList.add("d-none");
+    }
+}
+
 cargarIniciativa(localStorage.getItem("idIniciativa"));
+esPropietario(iniciativa);

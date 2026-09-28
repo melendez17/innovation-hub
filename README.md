@@ -61,6 +61,8 @@ _(se completa durante las semanas 2 a 4)_
 | 22 | 2026-09-27 | e567c0d | Funcion de eliminar con confirmacion en detalle de Iniciativa |
 | 23 | 2026-09-27 | 91a0fbb | Actualizar tabla de commits en el README |
 | 24 | 2026-09-27 | 9a65d6e | Agregar páginas para editar con funcionalidad de carga y edición de datos |
+| 25 | 2026-09-27 | 3b02684 | Modificar visibilidad en ejemplo de iniciativas, agregar página para nueva iniciativa y validaciones sobre el formulario |
+| 26 | 2026-09-27 | ab61c93 | Agregar entrada a la tabla de commits en el README para la funcionalidad de edición de datos |
 <!-- FIN TABLA COMMITS -->
 
 Para activar la actualización automática de la tabla de commits antes de cada commit, ejecuta:

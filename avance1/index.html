@@ -1,69 +1,223 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Innovation Hub - Inicio</title>
-
-  <!-- CSS de Bootstrap CDN -->
+  
+  <!-- CSS Bootstrap & FontAwesome -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <!-- CSS propio compilado desde Sass -->
-  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- CSS propio -->
+  <link rel="stylesheet" href="./css/estilos.css">
 </head>
+<body class="d-flex flex-column min-vh-100 bg-light">
 
-<body>
-
+  <!-- Navegación -->
   <header>
-    <nav class="navbar navbar-expand-lg navbar-dark encabezado-principal">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
       <div class="container">
-        <a class="navbar-brand fs-3" href="/innovation-hub/avance1/index.html"><i
-            class="fa-regular fa-lightbulb fa-xl logo-icon"></i> Innovation Hub</a>
-
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Navegación de palanca">
+        <a class="navbar-brand fw-bold fs-4" href="index.html">
+          <i class="fa-solid fa-lightbulb me-2"></i>Innovation Hub
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link active" aria-current="page"
-                href="/innovation-hub/avance1/index.html">Inicio</a></li>
-            <li class="nav-item"><a class="nav-link"
-                href="/innovation-hub/avance1/paginas/catalogo.html">Iniciativas</a></li>
-            <li class="nav-item"><a class="nav-link" href="/innovation-hub/avance1/paginas/">Publicar</a></li>
+            <li class="nav-item"><a class="nav-link active fw-semibold" href="index.html">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link" href="paginas/catalogo.html">Iniciativas</a></li>
+            <li class="nav-item"><a class="nav-link" href="paginas/nueva-iniciativa.html">Publicar</a></li>
             <li class="nav-item position-relative btn-user">
-              <a class="d-lg-none nav-link" href="/innovation-hub/avance1/paginas/perfil.html">Mi Perfil</a>
-              <a href="/innovation-hub/avance1/paginas/perfil.html"><button type="button" class="btn btn-outline-primary btn-user  d-none d-lg-inline"
-                aria-label="Opciones de usuario" data-bs-toggle="collapse" data-bs-target="#login-opciones"><i
-                  class="fa-solid fa-circle-user fa-2xl" aria-hidden="true"></i></button></a>
-            </li>
+                            <a class="d-lg-none nav-link" href="/innovation-hub/avance1/paginas/perfil.html">Mi
+                                Perfil</a>
+                            <a href="paginas/perfil.html"><button type="button"
+                                    class="btn btn-user d-none d-lg-inline text-white"
+                                    aria-label="Opciones de usuario" data-bs-toggle="collapse"
+                                    data-bs-target="#login-opciones"><i class="fa-solid fa-circle-user fa-2xl"
+                                        aria-hidden="true"></i></button></a>
+                        </li>
           </ul>
         </div>
       </div>
     </nav>
   </header>
 
-  <!-- Contenido Principal -->
-  <main class="container my-4">
-    <div class="text-center py-5">
-      <h1 class="display-5 fw-bold text-primary">Bienvenido a Innovation Hub</h1>
-      <p class="lead">Conectando ideas, necesidades y retos en la comunidad universitaria.</p>
-    </div>
+  <main class="flex-grow-1">
+    
+    <!-- Hero Section -->
+    <section class="bg-primary text-white py-5 text-center position-relative overflow-hidden">
+      <div class="container py-4">
+        <div class="row justify-content-center">
+          <div class="col-lg-9">
+            <h1 class="display-4 fw-bold mb-3">Conecta, Innova y Transforma</h1>
+            <p class="lead mb-4">
+              La plataforma institucional diseñada para transformar ideas en proyectos reales, resolver retos académicos y facilitar la colaboración entre toda la comunidad universitaria.
+            </p>
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+              <a href="paginas/catalogo.html" class="btn btn-light btn-lg fw-semibold px-4 shadow-sm">
+                <i class="fa-solid fa-compass me-2"></i>Explorar Iniciativas
+              </a>
+              <a href="paginas/nueva-iniciativa.html" class="btn btn-outline-light btn-lg fw-semibold px-4">
+                <i class="fa-solid fa-plus me-2"></i>Proponer Idea
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección de Estadísticas / Métricas -->
+    <section class="py-4 bg-white border-bottom">
+      <div class="container">
+        <div class="row text-center g-4">
+          <div class="col-md-4">
+            <div class="p-3">
+              <i class="fa-solid fa-rocket text-primary fa-2x mb-2"></i>
+              <h3 class="fw-bold mb-0" id="statIniciativas">0</h3>
+              <p class="text-muted mb-0">Iniciativas Registradas</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="p-3 border-start border-end border-md-0">
+              <i class="fa-solid fa-users text-primary fa-2x mb-2"></i>
+              <h3 class="fw-bold mb-0">150+</h3>
+              <p class="text-muted mb-0">Colaboradores Activos</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="p-3">
+              <i class="fa-solid fa-diagram-project text-primary fa-2x mb-2"></i>
+              <h3 class="fw-bold mb-0">5</h3>
+              <p class="text-muted mb-0">Categorías de Impacto</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ¿Qué es Innovation Hub? -->
+    <section class="py-5">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-12">
+            <h2 class="fw-bold text-primary mb-3">¿Qué es Innovation Hub?</h2>
+            <p class="text-secondary lead fs-6">
+              Es un punto de encuentro digital para estudiantes, docentes y personal institucional donde cualquier persona puede proponer soluciones, expresar necesidades de mejora o plantear desafíos innovadores.
+            </p>
+            <p class="text-secondary">
+              El objetivo principal es eliminar las barreras de comunicación e impulsar el trabajo colaborativo, permitiendo que las propuestas encuentren a las personas con las competencias adecuadas para hacerlas realidad.
+            </p>
+            <div class="d-flex gap-3 mt-4">
+              <div class="d-flex align-items-center gap-2">
+                <i class="fa-solid fa-circle-check text-success fs-5"></i>
+                <span class="fw-semibold text-dark">Acceso Transparente</span>
+              </div>
+              <div class="d-flex align-items-center gap-2">
+                <i class="fa-solid fa-circle-check text-success fs-5"></i>
+                <span class="fw-semibold text-dark">Impacto Real</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Guía Paso a Paso: ¿Cómo Funciona? -->
+    <section class="py-5 bg-white border-top border-bottom">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="fw-bold text-primary">¿Cómo funciona la plataforma?</h2>
+          <p class="text-muted">Aprende paso a paso cómo publicar una idea o participar en un proyecto existente.</p>
+        </div>
+
+        <div class="row g-4">
+          <!-- Paso 1: Publicar -->
+          <div class="col-md-6 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm text-center p-3">
+              <div class="card-body">
+                <span class="badge bg-primary text-white rounded-circle p-3 mb-3 fs-5 fw-bold" style="width: 50px; height: 50px; line-height: 24px;">1</span>
+                <h5 class="fw-bold mb-2">Publica tu Propuesta</h5>
+                <p class="small text-secondary mb-0">
+                  Completa el formulario definiendo el título, la visibilidad, los objetivos y agregando las competencias clave que necesitas.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Paso 2: Explorar -->
+          <div class="col-md-6 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm text-center p-3">
+              <div class="card-body">
+                <span class="badge bg-primary text-white rounded-circle p-3 mb-3 fs-5 fw-bold" style="width: 50px; height: 50px; line-height: 24px;">2</span>
+                <h5 class="fw-bold mb-2">Explora el Catálogo</h5>
+                <p class="small text-secondary mb-0">
+                  Usa los filtros por categoría, tipo o palabras clave para descubrir iniciativas de tu interés en tiempo real.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Paso 3: Unirse / Participar -->
+          <div class="col-md-6 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm text-center p-3">
+              <div class="card-body">
+                <span class="badge bg-primary text-white rounded-circle p-3 mb-3 fs-5 fw-bold" style="width: 50px; height: 50px; line-height: 24px;">3</span>
+                <h5 class="fw-bold mb-2">Súmate a un Equipo</h5>
+                <p class="small text-secondary mb-0">
+                  Ingresa al detalle de una propuesta con el estado *Requiere colaboradores* y presiona Unirme a la iniciativa.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Paso 4: Gestionar -->
+          <div class="col-md-6 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm text-center p-3">
+              <div class="card-body">
+                <span class="badge bg-primary text-white rounded-circle p-3 mb-3 fs-5 fw-bold" style="width: 50px; height: 50px; line-height: 24px;">4</span>
+                <h5 class="fw-bold mb-2">Edita y Administra</h5>
+                <p class="small text-secondary mb-0">
+                  Actualiza la información de tus propuestas creadas o elimínalas fácilmente desde el menú contextual.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Últimas Iniciativas Registradas -->
+    <section class="py-5">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+          <div>
+            <h3 class="fw-bold text-primary mb-1">Últimas Iniciativas Publicadas</h3>
+            <p class="text-muted mb-0">Iniciativas abiertas recientemente a las que puedes unirte hoy.</p>
+          </div>
+          <a href="paginas/catalogo.html" class="btn btn-outline-primary fw-semibold">
+            Ver todas <i class="fa-solid fa-arrow-right ms-1"></i>
+          </a>
+        </div>
+
+        <div id="contenedorRecientes" class="row row-cols-1 row-cols-md-3 g-4">
+          <!-- Carga dinámicamente las últimas 3 iniciativas con JS -->
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <!-- Pie de Página -->
-  <footer class="bg-dark text-white text-center py-3 mt-auto">
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-4 mt-auto">
     <div class="container">
-      <p class="mb-0">&copy; 2026 Universidad CENFOTEC - Innovation Hub</p>
+      <p class="mb-1">&copy; 2026 Universidad CENFOTEC - Innovation Hub</p>
+      <small class="text-muted">Plataforma abierta de gestión e innovación colaborativa</small>
     </div>
   </footer>
 
-  <!-- Bootstrap JS CDN -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-  <script src="./js/login.js"></script>
+  <script src="./js/inicio.js"></script>
 </body>
-
 </html>

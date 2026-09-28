@@ -6,6 +6,12 @@
   padding: 0;
 }
 
+:root {
+  /* Cambia el color primario global de Bootstrap 5 */
+  --bs-primary: #00479b;          /* Tu nuevo color principal (ejemplo: Azul) */
+  --bs-primary-rgb: 0, 71, 155; /* Mismo color en formato RGB separado por comas */
+}
+
 html {
   font-size: 100%;
 }
@@ -29,7 +35,7 @@ main {
 }
 
 .encabezado-principal {
-  background-color: #004b87;
+  background-color: #00479b;
 }
 .encabezado-principal .logo-icon {
   color: #00a896;

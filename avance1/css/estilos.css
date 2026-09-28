@@ -28,6 +28,24 @@ main {
   flex: 1;
 }
 
+.encabezado-principal {
+  background-color: #004b87;
+}
+.encabezado-principal .logo-icon {
+  color: #00a896;
+}
+.encabezado-principal .btn-user {
+  --bs-btn-color: #00a896;
+  --bs-btn-border-color: none;
+  --bs-btn-hover-color: #f8fafc;
+  --bs-btn-hover-bg: none;
+  --bs-btn-active-bg: none;
+  --bs-btn-active-color: #032057;
+}
+.encabezado-principal .opcion-usuario {
+  width: 10vw;
+}
+
 .filtros button {
   background-color: #f8fafc;
   color: #004b87;
@@ -84,6 +102,11 @@ main {
   border: none;
 }
 
+@media (min-width: 768px) {
+  .detalle-iniciativa section, .detalle-iniciativa aside {
+    min-height: 50vh;
+  }
+}
 .detalle-iniciativa h2 {
   color: #004b87;
   font-size: 1.5rem;

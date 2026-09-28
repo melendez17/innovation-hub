@@ -43,7 +43,7 @@
 
     <main class="container-fluid d-flex flex-column detalle-iniciativa">
 
-        <div class="row">
+        <div class="row cuerpo-iniciativa">
             <header class="col-12 encabezado-iniciativa position-relative">
                 <div class="pe-4">
                     <h2 class="titulo-iniciativa m-0" id="titulo"></h2>
@@ -51,14 +51,15 @@
                 </div>
                 <div class="position-absolute top-0 end-0">
                     <button class="btn btn-outline-primary position-relative px-2 m-1" type="button"
-                        aria-label="Opciones" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#opciones">
+                        aria-label="Opciones" type="button" data-bs-toggle="collapse" data-bs-target="#opciones">
                         <i class="fa-solid fa-ellipsis-vertical fa-xl" aria-hidden="true"></i>
                     </button>
                     <div id="opciones" class="collapse list-group position-absolute top-100 end-0">
-                    <button class="list-group-item d-flex gap-3 align-items-center btn-editar"><i class="fa-solid fa-pen-to-square" aria-hidden="true"></i><span>Editar</span></button>
-                    <button class="list-group-item d-flex gap-3 align-items-center btn-eliminar"><i class="fa-regular fa-trash-can" aria-hidden="true"></i><span>Eliminar</span></button>
-                </div>
+                        <button class="list-group-item d-flex gap-3 align-items-center btn-editar" id="editar"><i
+                                class="fa-solid fa-pen-to-square" aria-hidden="true"></i><span>Editar</span></button>
+                        <button class="list-group-item d-flex gap-3 align-items-center btn-eliminar" id="eliminar"><i
+                                class="fa-regular fa-trash-can" aria-hidden="true"></i><span>Eliminar</span></button>
+                    </div>
                 </div>
             </header>
             <section
@@ -96,6 +97,25 @@
         </div>
     </main>
 
+    <!-- Modal de confirmación -->
+    <div class="modal fade" id="modalConfirmarEliminar" tabindex="-1" aria-labelledby="modalConfirmarEliminarLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalConfirmarEliminarLabel">Confirmar eliminación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro de que deseas eliminar esta iniciativa? Esta acción no se puede deshacer.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="btnConfirmarEliminar">Sí, eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Pie de Página -->
     <footer class="bg-dark text-white text-center py-3 mt-3">

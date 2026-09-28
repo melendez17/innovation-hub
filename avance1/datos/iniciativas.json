@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id": 0,
     "titulo": "Sistema web para la gestión de inventario tecnológico",
     "tipo": "Idea",
     "resumen": "Desarrollo de una aplicación web para administrar el inventario tecnológico de una organización, incluyendo equipos, responsables, ubicaciones y estados.",
@@ -25,7 +25,7 @@
     ]
   },
   {
-    "id": 2,
+    "id": 1,
     "titulo": "Plataforma de reservas para laboratorios tecnológicos",
     "tipo": "Necesidad",
     "resumen": "Desarrollo de una aplicación web para gestionar la reserva y disponibilidad de laboratorios, salas y equipos tecnológicos.",
@@ -54,7 +54,7 @@
     ]
   },
   {
-    "id": 3,
+    "id": 2,
     "titulo": "Sistema de monitoreo del consumo energético",
     "tipo": "Reto",
     "resumen": "Creación de una solución tecnológica para registrar, analizar y reducir el consumo de energía eléctrica en una organización.",
@@ -83,7 +83,7 @@
     ]
   },
   {
-    "id": 4,
+    "id": 3,
     "titulo": "Aplicación de seguimiento para solicitudes de soporte técnico",
     "tipo": "Necesidad",
     "resumen": "Implementación de una plataforma para registrar, asignar y dar seguimiento a las solicitudes de soporte tecnológico.",
@@ -112,7 +112,7 @@
     ]
   },
   {
-    "id": 5,
+    "id": 4,
     "titulo": "Red comunitaria para el intercambio de productos y servicios",
     "tipo": "Idea",
     "resumen": "Desarrollo de una plataforma digital para conectar personas interesadas en intercambiar productos, conocimientos o servicios.",
@@ -141,7 +141,7 @@
     ]
   },
   {
-    "id": 6,
+    "id": 5,
     "titulo": "Agenda digital para el seguimiento de hábitos saludables",
     "tipo": "Idea",
     "resumen": "Creación de una aplicación para ayudar a las personas a registrar y dar seguimiento a sus hábitos de salud y bienestar.",
@@ -170,7 +170,7 @@
     ]
   },
   {
-    "id": 7,
+    "id": 6,
     "titulo": "Catálogo digital para emprendimientos locales",
     "tipo": "Necesidad",
     "resumen": "Diseño de una plataforma para que pequeños emprendimientos puedan publicar y promocionar sus productos y servicios.",
@@ -199,7 +199,7 @@
     ]
   },
   {
-    "id": 8,
+    "id": 7,
     "titulo": "Archivo digital para preservar actividades culturales",
     "tipo": "Reto",
     "resumen": "Desarrollo de un repositorio digital para almacenar y difundir fotografías, videos, documentos y testimonios relacionados con la cultura local.",
@@ -228,7 +228,7 @@
     ]
   },
   {
-    "id": 9,
+    "id": 8,
     "titulo": "Asistente virtual para orientación académica",
     "tipo": "Reto",
     "resumen": "Construcción de un asistente virtual que facilite el acceso a información académica y administrativa para estudiantes.",

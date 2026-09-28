@@ -40,19 +40,27 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 
 //funciones
 async function cargarTarjetas() {
-    try {
-        const response = await fetch("../datos/iniciativas.json");
-        if (!response.ok) {
-            throw new Error("Error al obtener las iniciativas");
-        }
+    const iniciativasLocalStorage = localStorage.getItem("iniciativas");
+    console.log(iniciativasLocalStorage);
 
-        iniciativas = await response.json();
-        console.log(iniciativas);
-        mostrarTarjetas(iniciativas);
-    } catch (error) {
-        console.log(error);
+    if (iniciativasLocalStorage) {
+        iniciativas = JSON.parse(iniciativasLocalStorage);
+    } else {
+        try {
+            const response = await fetch("../datos/iniciativas.json");
+            if (!response.ok) {
+                throw new Error("Error al obtener las iniciativas");
+            }
+
+            iniciativas = await response.json();
+            
+            localStorage.setItem("iniciativas", JSON.stringify(iniciativas));
+        } catch (error) {
+            console.log(error);
+        }
     }
 
+    mostrarTarjetas(iniciativas);
 }
 
 function mostrarTarjetas(iniciativas) {
@@ -141,7 +149,7 @@ categorias.forEach(categoria => {
             filtroActivo.className = "alert alert-primary alert-dismissible fade show col-5 col-sm-3 col-md-2 p-1 m-1 d-flex gap-1 justify-content-between justify-content-md-evenly align-items-center categoriaActiva"
             filtroActivo.innerHTML = `
                 <p class="lh-1 m-0 pe-3">${categoria.textContent}</p>
-                <button type="button" class="btn-close p-0 top-50 translate-middle" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button type="button" class="btn-close p-0 top-50 translate-middle" data-bs-dismiss="alert" aria-label="Cancelar filtro"></button>
             `
             contenedorFiltrosActivos.appendChild(filtroActivo);
 
@@ -170,7 +178,7 @@ tipos.forEach(tipo => {
             filtroActivo.className = "alert alert-warning alert-dismissible fade show col-5 col-sm-3 col-md-2 p-1 m-1 d-flex gap-1 justify-content-between justify-content-md-evenly align-items-center categoriaActiva"
             filtroActivo.innerHTML = `
                 <p class="lh-1 m-0 pe-3">${tipo.textContent}</p>
-                <button type="button" class="btn-close p-0 top-50 translate-middle" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button type="button" class="btn-close p-0 top-50 translate-middle" data-bs-dismiss="alert" aria-label="Cancelar filtro"></button>
             `
             contenedorFiltrosActivos.appendChild(filtroActivo);
 
@@ -199,7 +207,7 @@ competencias.forEach(competencia => {
             filtroActivo.className = "alert alert-success alert-dismissible fade show col-5 col-sm-3 col-md-2 p-1 m-1 d-flex gap-1 justify-content-between justify-content-md-evenly align-items-center categoriaActiva"
             filtroActivo.innerHTML = `
                 <p class="lh-1 m-0 pe-3">${competencia.textContent}</p>
-                <button type="button" class="btn-close p-0 top-50 translate-middle" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button type="button" class="btn-close p-0 top-50 translate-middle" data-bs-dismiss="alert" aria-label="Cancelar filtro"></button>
             `
             contenedorFiltrosActivos.appendChild(filtroActivo);
 
@@ -231,13 +239,13 @@ document.addEventListener('click', function (event) {
     const triggerCategorias = document.querySelector('[data-bs-target="#categorias"]');
     const triggerTipos = document.querySelector('[data-bs-target="#tipos"]');
     const triggerCompetencias = document.querySelector('[data-bs-target="#competencias"]');
-    
+
     // Check if the collapse is currently open
     const estaFiltrosAbierto = listaFiltros.classList.contains('show');
     const estaCategoriasAbierto = listaCategorias.classList.contains('show');
     const estaTiposAbierto = listaTipos.classList.contains('show');
     const estaCompetenciasAbierto = listaCompetencias.classList.contains('show');
-    
+
     // If open, and the click was outside both the menu and the toggle button, close it
     if (estaFiltrosAbierto && !listaFiltros.contains(event.target) && !triggerFiltros.contains(event.target)) {
         const bsCollapse = bootstrap.Collapse.getOrCreateInstance(listaFiltros);

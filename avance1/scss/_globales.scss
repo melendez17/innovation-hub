@@ -2,19 +2,19 @@
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
-    font-size: 100%;
+  font-size: 100%;
 }
 
 img {
-    max-width: 100%;
-    height: auto;
-    display: block;
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 body {
@@ -27,4 +27,25 @@ body {
 
 main {
   flex: 1;
+}
+
+.encabezado-principal {
+  background-color: $primary;
+
+  .logo-icon {
+    color: $secondary-light;
+  }
+
+  .btn-user {
+    --bs-btn-color: #{$secondary-light};
+    --bs-btn-border-color: none;
+    --bs-btn-hover-color: #{$light};
+    --bs-btn-hover-bg: none;
+    --bs-btn-active-bg: none;
+    --bs-btn-active-color: #{$secondary-dark};
+  }
+
+  .opcion-usuario{
+    width: 10vw;
+  }
 }

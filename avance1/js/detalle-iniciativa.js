@@ -8,22 +8,28 @@ const categoria = document.getElementById("categoria");
 const estado = document.getElementById("estado");
 const visibilidad = document.getElementById("visibilidad");
 const competencias = document.getElementById("competencias");
+const btnEliminar = document.getElementById("eliminar");
 
 //iniciativa
+let iniciativas;
 let iniciativa;
 
 //Bootstrap tooltip
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
+//modal
+const modalEliminar = new bootstrap.Modal(document.getElementById("modalConfirmarEliminar"));
+const btnConfirmarEliminar = document.getElementById("btnConfirmarEliminar");
+
 async function cargarIniciativa(id) {
     try {
-        const response = await fetch("../datos/iniciativas.json");
-        if (!response.ok) {
-            throw new Error("Error al obtener las iniciativas");
-        }
+        // const response = await fetch("../datos/iniciativas.json");
+        // if (!response.ok) {
+        //     throw new Error("Error al obtener las iniciativas");
+        // }
 
-        const iniciativas = await response.json();
+        iniciativas = JSON.parse(localStorage.getItem("iniciativas"));
         console.log("iniciativas " + iniciativas);
         console.log("id local storage: " + localStorage.getItem("idIniciativa"))
         iniciativa = iniciativas.find(iniciativa => iniciativa.id == id);
@@ -99,4 +105,37 @@ function mostrarRestringida(iniciativa) {
 function mostrarPrivada(iniciativa){
 
 }
+
+document.addEventListener('click', function (event) {
+    const opciones = document.getElementById('opciones');
+    const triggerOpciones = document.querySelector('[data-bs-target="#opciones"]');
+
+    
+    // Check if the collapse is currently open
+    const estaOpcionesAbierto = opciones.classList.contains('show');
+
+    
+    // If open, and the click was outside both the menu and the toggle button, close it
+    if (estaOpcionesAbierto && !opciones.contains(event.target) && !triggerOpciones.contains(event.target)) {
+        const bsCollapse = bootstrap.Collapse.getOrCreateInstance(opciones);
+        bsCollapse.hide();
+    }
+});
+
+function borrarIniciativa(id) {
+    iniciativas.splice(id, 1);
+    console.log(iniciativas);
+    localStorage.setItem("iniciativas", JSON.stringify(iniciativas))
+    window.location.href = "./catalogo.html";
+}
+
+btnConfirmarEliminar.addEventListener("click", () => {
+    borrarIniciativa(localStorage.getItem("idIniciativa"));
+    modalEliminar.hide();
+});
+
+btnEliminar.addEventListener("click", () => {
+    modalEliminar.show()
+})
+
 cargarIniciativa(localStorage.getItem("idIniciativa"));

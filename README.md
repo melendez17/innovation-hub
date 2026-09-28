@@ -54,6 +54,7 @@ _(se completa durante las semanas 2 a 4)_
 | 16 | 2026-09-26 | 9b0ed36 | Agregar Iniciativas al iniciativas.json |
 | 17 | 2026-09-26 | daa6924 | Funcionalidad de cargar informacion en la pagina de detalles de Iniciativa |
 | 18 | 2026-09-26 | 772fda5 | Agregar estilos a la pagina de detalle de iniciativa |
+| 19 | 2026-09-27 | 2358036 | Agregar friltros de tipo y competencia al Catalogo |
 <!-- FIN TABLA COMMITS -->
 
 Para activar la actualización automática de la tabla de commits antes de cada commit, ejecuta:

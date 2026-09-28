@@ -60,6 +60,7 @@ _(se completa durante las semanas 2 a 4)_
 | 21 | 2026-09-27 | f7716ff | Diseño y responsividad del perfil de usuario |
 | 22 | 2026-09-27 | e567c0d | Funcion de eliminar con confirmacion en detalle de Iniciativa |
 | 23 | 2026-09-27 | 91a0fbb | Actualizar tabla de commits en el README |
+| 24 | 2026-09-27 | 9a65d6e | Agregar páginas para editar con funcionalidad de carga y edición de datos |
 <!-- FIN TABLA COMMITS -->
 
 Para activar la actualización automática de la tabla de commits antes de cada commit, ejecuta:

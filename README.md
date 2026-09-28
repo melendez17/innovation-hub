@@ -27,10 +27,13 @@ equipos interdisciplinarios dentro de la comunidad universitaria.
 ## Cómo ejecutar
  
 Abrir `avance1/index.html` en el navegador. No requiere instalación.
+Se recomienda utilizar ventana de incognito para evitar problemas con el Local Storage.
  
 ## Decisiones de diseño
  
-_(se completa durante las semanas 2 a 4)_
+Se escogio una paleta de azules para el diseño de la página.
+Se aplico el diseño mobile first para asegurar la responsividada.
+Se utilizaron iconos de FontAwesome para darle un poco de personalidad a la página.
  
 ## Resumen de commits|| # |
 

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Innovation Hub - Editar Iniciativa</title>
+  
+  <!-- CSS Bootstrap & FontAwesome -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- CSS propio -->
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="d-flex flex-column min-vh-100 bg-light">
+
+  <!-- Navegación -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="../index.html">Innovation Hub</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="../index.html">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link" href="catalogo.html">Iniciativas</a></li>
+            <li class="nav-item"><a class="nav-link" href="nueva-iniciativa.html">Publicar</a></li>
+            <li class="nav-item"><a class="nav-link" href="perfil.html">Mi Perfil</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Formulario de Edición -->
+  <main class="container my-5 flex-grow-1">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        
+        <div class="card shadow-sm border-0">
+          <div class="card-body p-4 p-md-5">
+            <div class="d-flex align-items-center gap-2 mb-3">
+              <i class="fa-solid fa-pen-to-square fs-3 text-primary"></i>
+              <h2 class="fw-bold text-primary mb-0">Editar Iniciativa</h2>
+            </div>
+            <p class="text-muted mb-4">Modifica los campos necesarios para actualizar tu propuesta.</p>
+            
+            <form id="formEditarIniciativa" class="needs-validation" novalidate>
+              
+              <!-- Título -->
+              <div class="mb-3">
+                <label for="titulo" class="form-label fw-semibold">Título de la Iniciativa *</label>
+                <input type="text" class="form-control" id="titulo" required minlength="5">
+                <div class="invalid-feedback">Ingresa un título válido (mínimo 5 caracteres).</div>
+              </div>
+
+              <!-- Tipo y Categoría -->
+              <div class="row mb-3">
+                <div class="col-md-6 mb-3 mb-md-0">
+                  <label for="tipo" class="form-label fw-semibold">Tipo *</label>
+                  <select class="form-select" id="tipo" required>
+                    <option value="" disabled>Seleccionar...</option>
+                    <option value="Idea">Idea</option>
+                    <option value="Necesidad">Necesidad</option>
+                    <option value="Reto">Reto</option>
+                  </select>
+                  <div class="invalid-feedback">Selecciona el tipo de iniciativa.</div>
+                </div>
+                <div class="col-md-6">
+                  <label for="categoria" class="form-label fw-semibold">Categoría *</label>
+                  <select class="form-select" id="categoria" required>
+                    <option value="" disabled>Seleccionar...</option>
+                    <option value="Educación">Educación</option>
+                    <option value="Tecnología">Tecnología</option>
+                    <option value="Infraestructura">Infraestructura</option>
+                    <option value="Sostenibilidad">Sostenibilidad</option>
+                    <option value="Seguridad">Seguridad</option>
+                  </select>
+                  <div class="invalid-feedback">Selecciona una categoría.</div>
+                </div>
+              </div>
+
+              <!-- Visibilidad -->
+              <div class="mb-3">
+                <label for="visibilidad" class="form-label fw-semibold">Nivel de Visibilidad *</label>
+                <select class="form-select" id="visibilidad" required>
+                  <option value="" disabled>Seleccionar...</option>
+                  <option value="Pública">Pública (Visible para todos)</option>
+                  <option value="Institucional">Institucional / Comunidad interna</option>
+                  <option value="Restringida">Restringida (Ver solo resumen)</option>
+                  <option value="Privada">Privada (Solo el creador)</option>
+                </select>
+                <div class="invalid-feedback">Selecciona un nivel de visibilidad.</div>
+              </div>
+
+              <!-- Resumen Ejecutivo -->
+              <div class="mb-3">
+                <label for="resumen" class="form-label fw-semibold">Resumen Ejecutivo *</label>
+                <textarea class="form-control" id="resumen" rows="2" maxlength="150" required></textarea>
+                <div class="d-flex justify-content-between form-text">
+                  <span>Máximo 150 caracteres.</span>
+                  <span id="contadorResumen">0 / 150</span>
+                </div>
+                <div class="invalid-feedback">El resumen es obligatorio.</div>
+              </div>
+
+              <!-- Descripción Detallada -->
+              <div class="mb-3">
+                <label for="descripcion" class="form-label fw-semibold">Descripción Detallada *</label>
+                <textarea class="form-control" id="descripcion" rows="4" required></textarea>
+                <div class="invalid-feedback">La descripción es obligatoria.</div>
+              </div>
+
+              <!-- Objetivos -->
+              <div class="mb-3">
+                <label for="objetivos" class="form-label fw-semibold">Objetivos de la Propuesta *</label>
+                <textarea class="form-control" id="objetivos" rows="2" required></textarea>
+                <div class="invalid-feedback">Indica al menos un objetivo.</div>
+              </div>
+
+              <!-- Checkbox Participantes -->
+              <div class="form-check form-switch mb-4">
+                <input class="form-check-input" type="checkbox" id="requiereParticipantes">
+                <label class="form-check-label fw-semibold" for="requiereParticipantes">
+                  ¿Requiere colaboradores o participantes adicionales?
+                </label>
+              </div>
+
+              <!-- Competencias Dinámicas -->
+              <div class="mb-4">
+                <label class="form-label fw-semibold">Competencias Requeridas</label>
+                <div class="input-group">
+                  <input type="text" id="nuevaCompetenciaInput" class="form-control" placeholder="Ej. Liderazgo, JavaScript...">
+                  <button class="btn btn-outline-primary" type="button" id="btnAgregarCompetencia">
+                    <i class="fa-solid fa-plus me-1"></i> Agregar
+                  </button>
+                </div>
+                <div id="listaCompetenciasBadge" class="d-flex flex-wrap gap-2 mt-3"></div>
+              </div>
+
+              <!-- Botones de Acción -->
+              <div class="d-flex gap-2 pt-3">
+                <button type="submit" class="btn btn-primary flex-grow-1 py-2 fw-semibold">
+                  <i class="fa-solid fa-floppy-disk me-1"></i> Guardar Cambios
+                </button>
+                <a href="catalogo.html" class="btn btn-outline-secondary py-2">Cancelar</a>
+              </div>
+
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-dark text-white text-center py-3 mt-auto">
+    <div class="container">
+      <p class="mb-0">&copy; 2026 Universidad CENFOTEC - Innovation Hub</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/editar-iniciativa.js"></script>
+</body>
+</html>

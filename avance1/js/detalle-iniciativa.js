@@ -9,6 +9,7 @@ const estado = document.getElementById("estado");
 const visibilidad = document.getElementById("visibilidad");
 const competencias = document.getElementById("competencias");
 const btnEliminar = document.getElementById("eliminar");
+const btnEditar = document.getElementById("editar");
 
 //iniciativa
 let iniciativas;
@@ -137,5 +138,15 @@ btnConfirmarEliminar.addEventListener("click", () => {
 btnEliminar.addEventListener("click", () => {
     modalEliminar.show()
 })
+
+// Evento para redirigir a editar-iniciativa.html
+if (btnEditar) {
+    btnEditar.addEventListener("click", () => {
+        // Asegúrate de que idIniciativa o la variable del ID actual esté disponible
+        const idActual = localStorage.getItem("idIniciativa");
+        localStorage.setItem("idIniciativa", idActual); 
+        window.location.href = "./editar-iniciativa.html";
+    });
+}
 
 cargarIniciativa(localStorage.getItem("idIniciativa"));

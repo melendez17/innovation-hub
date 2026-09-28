@@ -108,7 +108,7 @@ function mostrarTarjetas(iniciativas) {
                     <p class="etiqueta">Competencias Requeridas: </p>
                     ${competenciasHTML}
                 </div>
-                <a role="button" class="btn btn-primary btn-detalles-iniciativa" href="./detalles-iniciativa.html">Detalles</a>
+                <a role="button" class="btn btn-primary btn-detalles-iniciativa" href="./detalle-iniciativa.html">Detalle</a>
         `
         contenedorTarjetas.appendChild(tarjeta);
         tarjeta.querySelector(".btn-detalles-iniciativa").addEventListener("click", () => {

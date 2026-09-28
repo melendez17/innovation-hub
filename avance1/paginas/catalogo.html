@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Innovation Hub - Catálogo</title>
+
+    <!-- CSS de Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- CSS propio compilado desde Sass -->
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+
+<body>
+
+    <!-- Barra de Navegación -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="/innovation-hub/avance1/index.html">Innovation Hub</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Navegación de palanca">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page"
+                                href="/innovation-hub/avance1/index.html">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link"
+                                href="/innovation-hub/avance1/paginas/catalogo.html">Iniciativas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/innovation-hub/avance1/paginas/">Publicar</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="/innovation-hub/avance1/paginas/perfil.html">Mi
+                                Perfil</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container-fluid">
+        <section class="my-3 row p-0 d-flex flex-column align-items-center">
+            <div class="row p-0 d-flex flex-column align-items-center gap-2 pb-1 position-relative">
+                <h2 class="col-11 text-center">Iniciativas</h2>
+                <form class="col-11 d-flex filtros-iniciativas p-0 gap-1" role="search">
+                    <input id="buscar" class="form-control me-2" type="search" placeholder="Buscar..."
+                        aria-label="Buscar">
+                    <div data-bs-custom-class="tooltip-personalizado" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" data-bs-title="Filtrar" data-bs-trigger="hover">
+                        <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#filtros">
+                            <i class="fa-solid fa-filter" aria-hidden="true" aria-label="Filtrar"></i>
+                        </button>
+                    </div>
+                    <a href="#" data-bs-custom-class="tooltip-personalizado" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" data-bs-title="Crear nueva iniciativa" data-bs-trigger="hover">
+                        <button class="btn btn-outline-primary position-relative" type="button">
+                            <i class="fa-regular fa-lightbulb fa-xl" aria-hidden="true"
+                                aria-label="Crear nueva iniciativa"></i>
+                            <i class="fa-solid fa-plus fa-md position-absolute top-50 end-0" aria-hidden="true"></i>
+                        </button>
+                    </a>
+
+                </form>
+
+
+                <div class="col-11 p-0 position-absolute top-100">
+                    <div id="filtros" class=" collapse list-group filtros z-3 position-absolute top-100 end-0">
+                        <button class="list-group-item encabezado-lista" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#filtros, #categorias">Filtrar por categoría</button>
+                        <button class="list-group-item encabezado-lista" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#filtros, #tipos">Filtrar tipo</button>
+                        <button class="list-group-item encabezado-lista" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#filtros, #competencias">Filtrar por competencia</button>
+                    </div>
+
+                    <div id="categorias"
+                        class="collapse multi-collapse list-group filtro-lista z-3 position-absolute top-100 end-0">
+                        <button class="list-group-item categoria" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#categorias" id="tecnologia">Tecnología</button>
+                        <button class="list-group-item categoria" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#categorias" id="educacion">Educación</button>
+                        <button class="list-group-item categoria" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#categorias" id="sostenibilidad">Sostenibilidad</button>
+                        <button class="list-group-item categoria" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#categorias" id="social">Impacto Social</button>
+                        <button class="list-group-item categoria" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#categorias" id="negocios">Negocios y Emprendimiento</button>
+                        <button class="list-group-item categoria" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#categorias" id="salud">Salud y Bienestar</button>
+                        <button class="list-group-item categoria" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#categorias" id="cultura">Cultura y Creatividad</button>
+                        <button class="list-group-item categoria" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#categorias" id="otros">Otros</button>
+                    </div>
+
+                    <div id="tipos"
+                        class="collapse multi-collapse list-group filtro-lista z-3 position-absolute top-100 end-0">
+                        <button class="list-group-item tipo" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#tipos" id="idea">Idea</button>
+                        <button class="list-group-item tipo" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#tipos" id="reto">Reto</button>
+                        <button class="list-group-item tipo" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#tipos" id="necesidad">Necesidad</button>
+                    </div>
+
+                    <div id="competencias"
+                        class="collapse multi-collapse list-group filtro-lista z-3 position-absolute top-100 end-0">
+                        <button class="list-group-item competencia" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#competencias" id="web">Programación web</button>
+                        <button class="list-group-item competencia" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#competencias" id="base-datos">Diseño de base de datos</button>
+                        <button class="list-group-item competencia" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#competencias" id="api">Desarrollo de APIs</button>
+                        <button class="list-group-item competencia" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#competencias" id="requisitos">Análisis de requisitos</button>
+                        <button class="list-group-item competencia" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#competencias" id="ui">Diseño de UI</button>
+                        <button class="list-group-item competencia" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#competencias" id="versiones">Control de versiones</button>
+                        <button class="list-group-item competencia" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#competencias" id="pruebas">Pruebas de software</button>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div id="contenedor-filtros-activos"
+                class="row col-12 col-md-11 p-0 d-flex justify-content-evenly justify-content-md-start contenedor-filtros-activos">
+                <!-- <div class="alert alert-primary alert-dismissible fade show col-5 fs-6 p-0 m-0 d-flex justify-content-between align-items-center">
+                    <p class="m-0">Negocios y Emprendimiento</p>
+                    <button type="button" class="btn-close p-1" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div> -->
+            </div>
+        </section>
+        <!-- Tarjetas Generadas -->
+        <section class="contenedor-tarjetas row d-flex justify-content-around gap-3"></section>
+    </main>
+
+    <!-- Pie de Página -->
+    <footer class="bg-dark text-white text-center py-3 mt-3">
+        <div class="container">
+            <p class="mb-0">&copy; 2026 Universidad CENFOTEC - Innovation Hub</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script src="../js/tarjetas-iniciativas.js"></script>
+</body>
+
+</html>

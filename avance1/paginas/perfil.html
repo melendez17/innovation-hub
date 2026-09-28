@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Innovation Hub - Perfil</title>
+
+    <!-- CSS de Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- CSS propio compilado desde Sass -->
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+
+<body>
+
+    <!-- Barra de Navegación -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="/innovation-hub/avance1/index.html">Innovation Hub</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Navegación de palanca">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page"
+                                href="/innovation-hub/avance1/index.html">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link"
+                                href="/innovation-hub/avance1/paginas/catalogo.html">Iniciativas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/innovation-hub/avance1/paginas/">Publicar</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="/innovation-hub/avance1/paginas/perfil.html">Mi
+                                Perfil</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container-fluid my-3">
+        <section class="row d-flex justify-content-start align-items-top perfil-usuario">
+            <img src="https://picsum.photos/id/433/400/500" alt="foto-perfil" class="col-6 col-sm-4 col-md-3 col-lg-2">
+            <div class="col-6 col-lg-10">
+                <h2 class="nombre" id="nombre"></h2>
+                <div class="d-flex flex-column justify-content-around">
+                    <h3 class="etiqueta">Edad</h3>
+                    <p id="edad"></p></div>
+                <div>
+                    <h3 class="etiqueta">Nacionalidad</h3>
+                    <p id="nacionalidad"></p></div>
+            </div>
+            <div class="col-12 col-md-6">
+                <h3 class="etiqueta">Competencias</h3>
+                <div id="competencias"></div>
+            </div>
+            <div class="col-12 col-md-6">
+                <h3 class="etiqueta">Intereses</h3>
+                <div id="intereses"></div>
+            </div>
+            <div class="col-12">
+                <h3 class="etiqueta">Proyectos</h3>
+                <div id="proyectos"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Pie de Página -->
+    <footer class="bg-dark text-white text-center py-3 mt-3">
+        <div class="container">
+            <p class="mb-0">&copy; 2026 Universidad CENFOTEC - Innovation Hub</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="../js/perfil.js"></script>
+</body>
+
+</html>

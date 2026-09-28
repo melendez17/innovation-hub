@@ -1,0 +1,87 @@
+.detalle-iniciativa {
+
+    section, aside {
+        
+        @media (min-width: 768px) {
+            min-height: 50vh;
+        }
+    }
+
+    h2 {
+        color: $primary;
+        font-size: 1.5rem;
+
+        @media (min-width: 576px) {
+            font-size: 2.2rem;
+        }
+    }
+
+    p,
+    h3 {
+        margin: 0;
+    }
+
+    .encabezado-iniciativa {
+        border-bottom: $secondary-light 1px solid;
+        max-height: max-content;
+
+        .btn-outline-primary {
+            --bs-btn-color: #{$secondary-light};
+            --bs-btn-border-color: #{$light};
+            --bs-btn-hover-color: #{$secondary-light};
+            --bs-btn-hover-bg: #{$light};
+            --bs-btn-hover-border-color: #{$secondary-light};
+        }
+
+        .btn-editar {
+            i {
+                color: $secondary-light;
+            }
+        }
+
+        .btn-eliminar {
+            i {
+                color: $alerta;
+            }
+        }
+    }
+
+    .propietario-iniciativa {
+        font-weight: 500;
+    }
+
+    .descripcion-iniciativa {
+        font-size: 1.2rem;
+
+        @media (min-width: 576px) {
+            font-size: 1.4rem;
+        }
+    }
+
+    .etiqueta {
+        font-size: 1rem;
+        font-weight: bold;
+        color: $secondary-dark;
+    }
+
+    .tarjeta-competencia {
+        font-size: 0.8rem;
+        background-color: $light;
+        color: $secondary-dark;
+        border-color: $secondary-dark;
+
+        i {
+            color: $secondary-light;
+        }
+    }
+
+    .tarjeta-miembro {
+        background-color: $light;
+        color: $secondary-dark;
+        border-color: $secondary-dark;
+
+        i {
+            color: $secondary-light;
+        }
+    }
+}

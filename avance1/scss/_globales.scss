@@ -1,6 +1,24 @@
 // Variables globales para el proyecto, pero tambien esta sujeto a cambios conforme vayamos avanzando en el proyecto
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 100%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 body {
-  background-color: #f1f5f9;
+  background-color: $light;
   color: $dark;
   display: flex;
   flex-direction: column;
@@ -9,4 +27,25 @@ body {
 
 main {
   flex: 1;
+}
+
+.encabezado-principal {
+  background-color: $primary;
+
+  .logo-icon {
+    color: $secondary-light;
+  }
+
+  .btn-user {
+    --bs-btn-color: #{$secondary-light};
+    --bs-btn-border-color: none;
+    --bs-btn-hover-color: #{$light};
+    --bs-btn-hover-bg: none;
+    --bs-btn-active-bg: none;
+    --bs-btn-active-color: #{$secondary-dark};
+  }
+
+  .opcion-usuario{
+    width: 10vw;
+  }
 }

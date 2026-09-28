@@ -1,0 +1,59 @@
+[
+    {
+        "correo": "rgonzalezca@ucenfotec.ac.cr",
+        "password": "12345",
+        "nombre": "Roberto González Castillo",
+        "edad": 27,
+        "nacionalidad": "Costa Rica",
+        "competencias": [
+            "Programación web",
+            "Diseño de UI",
+            "Diseño de base de datos"
+        ],
+        "intereses": [
+            "Tennis",
+            "Literatura",
+            "Naturaleza"
+        ],
+        "proyectos": [
+            "Sistema web para la gestión de inventario tecnológico",
+            "Red comunitaria para el intercambio de productos y servicios"
+        ]
+    }, 
+    {
+        "correo": "fdetal@ucenfotec.ac.cr",
+        "password": "12345",
+        "nombre": "Fulano de Tal",
+        "edad": 33,
+        "nacionalidad": "Nicaragua",
+        "competencias": [
+            "Control de versiones",
+            "Análisis de requisitos",
+            "Pruebas de software"
+        ],
+        "intereses": [
+
+        ],
+        "proyectos": [
+            
+        ]
+    }, 
+    {
+        "correo": "jdoe@ucenfotec.ac.cr",
+        "password": "12345",
+        "nombre": "Jane Doe",
+        "edad": 23,
+        "nacionalidad": "Panamá",
+        "competencias": [
+            "Diseño de base de datos",
+            "Desarrollo de APIs",
+            "Control de versiones"
+        ],
+        "intereses": [
+
+        ],
+        "proyectos": [
+            
+        ]
+    }
+]

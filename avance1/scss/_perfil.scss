@@ -1,0 +1,26 @@
+.perfil-usuario{
+    max-width: 1000px;
+    margin: 0 auto;
+
+    .nombre {
+        color: $primary;
+    }
+
+    p{
+        margin: 0;
+        padding: 0 0.3rem;
+    }
+    .etiqueta {
+        margin: 0;
+        padding: 0.3rem 0.3rem 0 0.3rem;
+        font-size: 1rem;
+        color: $secondary-dark;
+    }
+
+    .tarjeta-perfil {
+
+    i {
+        color: $secondary-light;
+    }
+}
+}

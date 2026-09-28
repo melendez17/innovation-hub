@@ -1,0 +1,69 @@
+// .filtros-iniciativas {
+//     padding: 0;
+// }
+
+
+.filtros {
+    button {
+        background-color: $light;
+        color: $primary;
+        border-color: $secondary-dark;
+    }
+}
+.filtro-lista {
+    button {
+        background-color: $light;
+        color: $primary;
+        border-color: $secondary-light;
+    }
+}
+
+.tooltip-personalizado {
+    --bs-tooltip-bg: #{$secondary-light};
+}
+
+.contenedor-filtros-activos .alert {
+    height: 2rem;
+    font-size: 0.8rem;
+
+    @media (min-width: 992px){
+        font-size: 0.9rem;
+    }
+}
+
+.mensaje-sin-resultados {
+    color: $gray;
+}
+
+.tarjeta-iniciativa {
+    border: $dark 1px solid;
+    border-radius: 5px;
+
+    h3 {
+        font-family: $font-family-sans-serif;
+        font-size: 1.1rem;
+        color: $primary;
+    }
+
+
+    .encabezado-tarjeta {
+        border-bottom: $dark 1px solid;
+
+        p {
+            color: $secondary-light;
+        }
+    }
+
+    .etiqueta {
+        font-weight: 500;
+        color: $secondary-dark;
+    }
+
+    .resumen {
+        font-size: 0.9rem;
+    }
+
+    .estado {
+        border: none;
+    }
+}

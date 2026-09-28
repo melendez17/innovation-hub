@@ -1,6 +1,24 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 100%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 body {
-  background-color: #f1f5f9;
-  color: #1e293b;
+  background-color: #f8fafc;
+  color: #080b0f;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -8,4 +26,169 @@ body {
 
 main {
   flex: 1;
+}
+
+.encabezado-principal {
+  background-color: #004b87;
+}
+.encabezado-principal .logo-icon {
+  color: #00a896;
+}
+.encabezado-principal .btn-user {
+  --bs-btn-color: #00a896;
+  --bs-btn-border-color: none;
+  --bs-btn-hover-color: #f8fafc;
+  --bs-btn-hover-bg: none;
+  --bs-btn-active-bg: none;
+  --bs-btn-active-color: #032057;
+}
+.encabezado-principal .opcion-usuario {
+  width: 10vw;
+}
+
+.filtros button {
+  background-color: #f8fafc;
+  color: #004b87;
+  border-color: #032057;
+}
+
+.filtro-lista button {
+  background-color: #f8fafc;
+  color: #004b87;
+  border-color: #00a896;
+}
+
+.tooltip-personalizado {
+  --bs-tooltip-bg: #00a896;
+}
+
+.contenedor-filtros-activos .alert {
+  height: 2rem;
+  font-size: 0.8rem;
+}
+@media (min-width: 992px) {
+  .contenedor-filtros-activos .alert {
+    font-size: 0.9rem;
+  }
+}
+
+.mensaje-sin-resultados {
+  color: #ddd9d9;
+}
+
+.tarjeta-iniciativa {
+  border: #080b0f 1px solid;
+  border-radius: 5px;
+}
+.tarjeta-iniciativa h3 {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 1.1rem;
+  color: #004b87;
+}
+.tarjeta-iniciativa .encabezado-tarjeta {
+  border-bottom: #080b0f 1px solid;
+}
+.tarjeta-iniciativa .encabezado-tarjeta p {
+  color: #00a896;
+}
+.tarjeta-iniciativa .etiqueta {
+  font-weight: 500;
+  color: #032057;
+}
+.tarjeta-iniciativa .resumen {
+  font-size: 0.9rem;
+}
+.tarjeta-iniciativa .estado {
+  border: none;
+}
+
+@media (min-width: 768px) {
+  .detalle-iniciativa section, .detalle-iniciativa aside {
+    min-height: 50vh;
+  }
+}
+.detalle-iniciativa h2 {
+  color: #004b87;
+  font-size: 1.5rem;
+}
+@media (min-width: 576px) {
+  .detalle-iniciativa h2 {
+    font-size: 2.2rem;
+  }
+}
+.detalle-iniciativa p,
+.detalle-iniciativa h3 {
+  margin: 0;
+}
+.detalle-iniciativa .encabezado-iniciativa {
+  border-bottom: #00a896 1px solid;
+  max-height: -moz-max-content;
+  max-height: max-content;
+}
+.detalle-iniciativa .encabezado-iniciativa .btn-outline-primary {
+  --bs-btn-color: #00a896;
+  --bs-btn-border-color: #f8fafc;
+  --bs-btn-hover-color: #00a896;
+  --bs-btn-hover-bg: #f8fafc;
+  --bs-btn-hover-border-color: #00a896;
+}
+.detalle-iniciativa .encabezado-iniciativa .btn-editar i {
+  color: #00a896;
+}
+.detalle-iniciativa .encabezado-iniciativa .btn-eliminar i {
+  color: #ce0000;
+}
+.detalle-iniciativa .propietario-iniciativa {
+  font-weight: 500;
+}
+.detalle-iniciativa .descripcion-iniciativa {
+  font-size: 1.2rem;
+}
+@media (min-width: 576px) {
+  .detalle-iniciativa .descripcion-iniciativa {
+    font-size: 1.4rem;
+  }
+}
+.detalle-iniciativa .etiqueta {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #032057;
+}
+.detalle-iniciativa .tarjeta-competencia {
+  font-size: 0.8rem;
+  background-color: #f8fafc;
+  color: #032057;
+  border-color: #032057;
+}
+.detalle-iniciativa .tarjeta-competencia i {
+  color: #00a896;
+}
+.detalle-iniciativa .tarjeta-miembro {
+  background-color: #f8fafc;
+  color: #032057;
+  border-color: #032057;
+}
+.detalle-iniciativa .tarjeta-miembro i {
+  color: #00a896;
+}
+
+.perfil-usuario {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.perfil-usuario .nombre {
+  color: #004b87;
+}
+.perfil-usuario p {
+  margin: 0;
+  padding: 0 0.3rem;
+}
+.perfil-usuario .etiqueta {
+  margin: 0;
+  padding: 0.3rem 0.3rem 0 0.3rem;
+  font-size: 1rem;
+  color: #032057;
+}
+.perfil-usuario .tarjeta-perfil i {
+  color: #00a896;
 }/*# sourceMappingURL=estilos.css.map */

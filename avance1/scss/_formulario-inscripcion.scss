@@ -1,0 +1,43 @@
+.formulario-inscripcion {
+    max-width: 600px;
+    margin: 0 auto;
+
+    h2 {
+        color: $primary;
+    }
+
+    h3 {
+        color: $secondary-light;
+    }
+
+    label {
+        color: $secondary-dark;
+        font-size: 1.1rem;
+    }
+
+    textarea {
+        color: $secondary-dark;
+        border: $secondary-dark 1px solid;
+        border-radius: 5px;
+    }
+
+    input {
+        color: $secondary-dark;
+        border: $secondary-dark 1px solid;
+        border-radius: 5px;
+    }
+
+    button {
+        background-color: $light;
+        color: $secondary-light;
+        border: $secondary-light 1px solid;
+        border-radius: 5px;
+    }
+
+    button:hover {
+
+        background-color: $secondary-light;
+        color: $light;
+
+    }
+}

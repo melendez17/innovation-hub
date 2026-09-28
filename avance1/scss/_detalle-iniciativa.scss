@@ -1,9 +1,8 @@
 .detalle-iniciativa {
-
     section, aside {
         
         @media (min-width: 768px) {
-            min-height: 50vh;
+            min-height: 75vh;
         }
     }
 
@@ -83,5 +82,16 @@
         i {
             color: $secondary-light;
         }
+    }
+
+    .btn-inscribirse {
+        max-width: 10rem;
+        font-size: 1.2rem;
+        font-weight: 500;
+        --bs-btn-color: #{$secondary-light};
+        --bs-btn-bg: #{$light};
+        --bs-btn-border-color: #{$secondary-light};
+        --bs-btn-hover-bg: #{$secondary-light};
+        --bs-btn-hover-border-color: #{$secondary-light};       
     }
 }

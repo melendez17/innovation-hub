@@ -57,6 +57,7 @@ _(se completa durante las semanas 2 a 4)_
 | 19 | 2026-09-27 | 2358036 | Agregar friltros de tipo y competencia al Catalogo |
 | 20 | 2026-09-27 | f7716ff | Diseño y responsividad del perfil de usuario |
 | 21 | 2026-09-27 | e567c0d | Funcion de eliminar con confirmacion en detalle de Iniciativa |
+| 22 | 2026-09-27 | 0d381ab | Crear el formulario de Solicitud de inscripcion |
 <!-- FIN TABLA COMMITS -->
 
 Para activar la actualización automática de la tabla de commits antes de cada commit, ejecuta:

@@ -76,6 +76,10 @@ function mostrarTarjetas(iniciativas) {
     }
 
     iniciativas.forEach(iniciativa => {
+        if (iniciativa.visibilidad == "Privada"){
+            return;
+        }
+
         const tarjeta = document.createElement("article");
         const competenciasHTML = (iniciativa.competencias || [])
             .slice(0, 3)

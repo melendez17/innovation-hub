@@ -17,11 +17,11 @@
     "visibilidad": "Pública",
     "etiquetas": [],
     "estado": "Pendiente",
-    "propietario": "User 01",
+    "propietario": "Roberto González",
     "miembros": [
-      "User 01",
-      "User 02",
-      "User 03"
+      "Roberto González",
+      "Fulano de Tal",
+      "Jane Doe"
     ]
   },
   {
@@ -46,11 +46,10 @@
       "calendario"
     ],
     "estado": "Pendiente",
-    "propietario": "User 02",
+    "propietario": "Fulano de Tal",
     "miembros": [
-      "User 01",
-      "User 02",
-      "User 03"
+      "Roberto González",
+      "Fulano de Tal"
     ]
   },
   {
@@ -75,11 +74,9 @@
       "eficiencia"
     ],
     "estado": "Aceptada",
-    "propietario": "User 03",
+    "propietario": "Jane Doe",
     "miembros": [
-      "User 01",
-      "User 02",
-      "User 03"
+      "Jane Doe"
     ]
   },
   {
@@ -104,11 +101,8 @@
       "incidencias"
     ],
     "estado": "Pendiente",
-    "propietario": "User 04",
+    "propietario": "Fulano de Tal",
     "miembros": [
-      "User 01",
-      "User 02",
-      "User 03"
     ]
   },
   {
@@ -133,11 +127,11 @@
       "colaboración"
     ],
     "estado": "Pendiente",
-    "propietario": "User 05",
+    "propietario": "Jane Doe",
     "miembros": [
-      "User 01",
-      "User 02",
-      "User 03"
+      "Jane Doe",
+      "Roberto González",
+      "Fulano de Tal"
     ]
   },
   {
@@ -155,18 +149,16 @@
       "Análisis de requisitos"
     ],
     "cantidad_integrantes": 3,
-    "visibilidad": "Pública",
+    "visibilidad": "Restringida",
     "etiquetas": [
       "salud",
       "hábitos",
       "bienestar"
     ],
     "estado": "Pendiente",
-    "propietario": "User 06",
+    "propietario": "Roberto González",
     "miembros": [
-      "User 01",
-      "User 02",
-      "User 03"
+      "Roberto González"
     ]
   },
   {
@@ -191,11 +183,10 @@
       "catálogo"
     ],
     "estado": "Aceptada",
-    "propietario": "User 07",
+    "propietario": "Jane Doe",
     "miembros": [
-      "User 01",
-      "User 02",
-      "User 03"
+      "Jane Doe",
+      "Fulano de Tal"
     ]
   },
   {
@@ -220,11 +211,10 @@
       "archivo digital"
     ],
     "estado": "Pendiente",
-    "propietario": "User 08",
+    "propietario": "Fulano de Tal",
     "miembros": [
-      "User 01",
-      "User 02",
-      "User 03"
+      "Fulano de Tal",
+      "Roberto González"
     ]
   },
   {
@@ -249,11 +239,11 @@
       "educación"
     ],
     "estado": "Rechazada",
-    "propietario": "User 09",
+    "propietario": "Jane Doe",
     "miembros": [
-      "User 01",
-      "User 02",
-      "User 03"
+      "Jane Doe",
+      "Fulano de Tal",
+      "Roberto González"
     ]
   }
 ]

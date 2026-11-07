@@ -1,0 +1,16 @@
+# requests.http
+# Peticiones de prueba para la extensión REST Client de VS Code.
+ 
+@api = http://localhost:3000/api
+ 
+### 1. Una ruta que todavía no existe  →  404
+GET {{api}}/iniciativas
+ 
+### 2. La raíz del API  →  404
+GET {{api}}
+ 
+### 3. Un cuerpo con JSON mal escrito  →  400
+POST {{api}}/iniciativas
+Content-Type: application/json
+ 
+{ "titulo":

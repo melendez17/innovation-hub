@@ -2,7 +2,7 @@ export const CATEGORIAS = ['Tecnologia', 'Educación', 'Sostenibilidad', 'Impact
 export const TIPOS = ['Idea', 'Reto', 'Necesidad']
 export const COMPETENCIAS = ['Programación web', 'Diseño de base de datos', 'Desarrollo de APIs', 'Análisis de requisitos', 'Diseño de UI', 'Control de versiones', 'Pruebas de software']
 export const USUARIO = {
-  nombre: "Roberto González Castillo",
+  nombre: "Roberto González",
   email: "rgonzalezca@ucenfotec.ac.cr"
 }
 

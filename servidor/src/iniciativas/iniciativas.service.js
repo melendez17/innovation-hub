@@ -3,6 +3,7 @@ import * as repositorio from './iniciativas.repository.js'
 import * as usuarios from '../usuarios/usuarios.service.js'
 import { validarIniciativa } from './iniciativas.validacion.js'
 import { HttpError } from '../utils/HttpError.js'
+import { revisarId } from "../utils/revisarId.js"
 
  
 export async function listar() {
@@ -41,4 +42,23 @@ export async function crear(datos){
   })
 
   return repositorio.buscarPorID(id)
+}
+
+export async function agregarMiembro(id, datos){
+  revisarId(id)
+  revisarId(datos.id)
+  const existe = await repositorio.agregarMiembro(id, datos.id)
+  if(!existe) {
+    throw new HttpError(404, 'NO_ENCONTRADA', 'La iniciativa no existe.')
+  }
+  return repositorio.buscarPorID(id)
+}
+
+export async function eliminar(id){
+  revisarId(id)
+  const existia = await repositorio.eliminar(id)
+
+  if(!existia) {
+    throw new HttpError(404, 'NO_ENCONTRADA', 'La iniciativa no existe')
+  }
 }

@@ -16,6 +16,6 @@ app.use(express.json())  // convierte el cuerpo JSON en req.body
 // Aquí se montarán las rutas de cada módulo
 app.use('/api/iniciativas', iniciativasRouter)
 app.use('/api/usuarios', usuariosRouter)
- 
+
 app.use(rutaNoEncontrada)  // si ninguna ruta respondió
 app.use(manejarErrores)  // siempre el último

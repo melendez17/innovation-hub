@@ -84,3 +84,30 @@ export async function crear(iniciativa) {
   const resultado = await coleccion().insertOne(iniciativa)
   return resultado.insertedId
 }
+
+export async function agregarMiembro(id, nuevoMiembroId){
+  const resultado = await coleccion().updateOne(
+    {_id: new ObjectId(id)},
+    {
+      $push: { miembros: new ObjectId(nuevoMiembroId)},
+      $set: {fechaUltimaModificacion: new Date()}
+    }
+  )
+  return resultado.matchedCount === 1
+}
+
+export async function eliminarMiembro(id, miembroId){
+  const resultado = await coleccion().updateOne(
+    {_id: new ObjectId(id)},
+    {
+      $pull: { miembros: new ObjectId(miembroId)},
+      $set: {fechaUltimaModificacion: new Date()}
+    }
+  )
+  return resultado.matchedCount === 1
+}
+
+export async function eliminar(id){
+  const resultado =  await coleccion().deleteOne({ _id: new ObjectId(id)})
+  return resultado.deletedCount === 1
+}

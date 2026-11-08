@@ -1,16 +1,10 @@
 function TarjetaIniciativa({ iniciativa, usuarioActivo }) {
     if (!iniciativa) return null
 
-    if (iniciativa.visibilidad === "Privada" && usuarioActivo.nombre != iniciativa.propietario) return null
-
-    console.log("Tarjeta " + iniciativa.visibilidad + " " + iniciativa.propietario)
-    console.log(iniciativa.visibilidad === "Restringida" && usuarioActivo.nombre != iniciativa.propietario)
-
-    console.log(usuarioActivo.nombre + " " + iniciativa.propietario)
-    console.log(usuarioActivo.nombre != iniciativa.propietario)
+    if (iniciativa.visibilidad === "Privada" && usuarioActivo.email != iniciativa.propietario.email) return null
 
 
-    if (iniciativa.visibilidad === "Restringida" && usuarioActivo.nombre != iniciativa.propietario) {
+    if (iniciativa.visibilidad === "Restringida" && usuarioActivo.email != iniciativa.propietario.email) {
         return (
             <article className="col-11 col-sm-5 col-lg-3 p-2 tarjeta-iniciativa d-flex flex-column gap-1 justify-content-between">
                 <div className="d-flex justify-content-between gap-3 encabezado-tarjeta">
@@ -35,7 +29,7 @@ function TarjetaIniciativa({ iniciativa, usuarioActivo }) {
     }
 
 
-    if (iniciativa.visibilidad === "Institucional" && usuarioActivo.email.endsWith("@ucenfotec.ac.cr") || iniciativa.visibilidad === "Pública" || usuarioActivo.nombre === iniciativa.propietario) {
+    if (iniciativa.visibilidad === "Institucional" && usuarioActivo.email.endsWith("@ucenfotec.ac.cr") || iniciativa.visibilidad === "Pública" || usuarioActivo.email === iniciativa.propietario.email) {
         return (
             <article className="col-11 col-sm-5 col-lg-3 p-2 tarjeta-iniciativa d-flex flex-column gap-1 justify-content-between">
                 <div className="d-flex justify-content-between gap-3 encabezado-tarjeta">
@@ -51,7 +45,7 @@ function TarjetaIniciativa({ iniciativa, usuarioActivo }) {
                 </div>
                 <div className="propietario d-flex justify-content-between">
                     <p className="etiqueta">Propietario: </p>
-                    <p>{iniciativa.propietario}</p>
+                    <p>{iniciativa.propietario.nombre +" "+iniciativa.propietario.apellido1}</p>
                 </div>
                 <div className="estado d-flex justify-content-between">
                     <p className="etiqueta">Estado:</p>

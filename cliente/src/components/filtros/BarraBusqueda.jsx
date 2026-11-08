@@ -1,6 +1,6 @@
 import Filtro from './Filtro.jsx'
 
-function BarraBusqueda({ categorias, tipos, competencias, onCambiar }) {
+function BarraBusqueda({children }) {
     return (
 
         <div className="card-body">
@@ -10,9 +10,7 @@ function BarraBusqueda({ categorias, tipos, competencias, onCambiar }) {
                         aria-label="Buscar" />
                 </form>
                 <div className='col-12 d-flex justify-content-between p-0'>
-                    <Filtro nombre='Categorías' opciones={categorias} onCambiar={onCambiar} />
-                    <Filtro nombre='Tipos' opciones={tipos} />
-                    <Filtro nombre='Competencias' opciones={competencias} onCambiar={onCambiar}/>
+                    {children}
                 </div>
                 
             </div>

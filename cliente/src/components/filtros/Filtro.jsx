@@ -1,11 +1,11 @@
-function Filtro({nombre, opciones, onCambiar}) {
+function Filtro({nombre, opciones, valor, onCambiar}) {
     return (
         <div className="col-sm-3 p-0 d-flex">
             <label htmlFor="filtro-estado" className="form-label mb-0 me-1 align-self-center">{nombre}</label>
             <select
                 id="filtro-estado"
                 className="form-select"
-                value={nombre}
+                value={valor}
                 onChange={(event) => onCambiar(event.target.value)}
             >
                 <option value="Todos">Todos</option>

@@ -4,3 +4,4 @@ import * as controlador from './usuarios.controller.js'
 export const usuariosRouter = Router()
 
 usuariosRouter.get('/', controlador.listar)
+usuariosRouter.post('/', controlador.crear)

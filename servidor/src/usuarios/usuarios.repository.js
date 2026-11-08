@@ -13,6 +13,11 @@ export async function listar() {
 export async function buscarPorId(id) {
   return coleccion().findOne(
     {_id: new ObjectId(id)}, 
-    { projection: { nombre:1, corre:1, competencias:1}}
+    { projection: { nombre:1, correo:1, competencias:1}}
   )
+}
+
+export async function crear(usuario){
+  const resultado = await coleccion().insertOne(usuario)
+  return resultado.insertedId
 }

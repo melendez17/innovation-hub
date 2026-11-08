@@ -4,3 +4,4 @@ import * as controlador from './iniciativas.controller.js'
 export const iniciativasRouter = Router()
 
 iniciativasRouter.get('/', controlador.listar)
+iniciativasRouter.post('/', controlador.crear)

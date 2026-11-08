@@ -30,7 +30,7 @@ export async function crear(datos){
     problema: datos.problema.trim(),
     beneficiados: datos.beneficiados.trim(),
     categoria: datos.categoria,
-    competencias:  datos.competencias,
+    competencias:  datos.competencias.map(id => new ObjectId(id)),
     cantidadIntegrantes: datos.cantidadIntegrantes,
     visibilidad: datos.visibilidad, 
     etiquetas: datos.etiquetas,
@@ -40,6 +40,16 @@ export async function crear(datos){
     fechaCreacion: hoy,
     fechaUltimaModificacion: hoy
   })
+
+  return repositorio.buscarPorID(id)
+}
+
+export async function buscar(id){
+  revisarId(id)
+  const existe = await repositorio.buscarPorID(id)
+  if(!existe) {
+    throw new HttpError(404, 'NO_ENCONTRADA', 'La iniciativa no existe.')
+  }
 
   return repositorio.buscarPorID(id)
 }

@@ -3,7 +3,7 @@ import { obtenerDb } from '../config/db.js'
 
 const coleccion = () => obtenerDb().collection('iniciativas')
 
-const CON_NOMBRE_EMAIL = [
+const CON_DETALLES = [
   // 1. Relación con el propietario
   {
     $lookup: {
@@ -25,7 +25,17 @@ const CON_NOMBRE_EMAIL = [
     }
   },
 
-  // 3. Proyección directa y limpia de campos
+  // 3. Relación con las competencias (NUEVO)
+  {
+    $lookup: {
+      from: 'competencias', // Asegúrate de que este sea el nombre exacto de la colección de competencias
+      localField: 'competencias',
+      foreignField: '_id',
+      as: 'competenciasDetalle'
+    }
+  },
+
+  // 4. Proyección directa y limpia de campos
   {
     $project: {
       titulo: 1,
@@ -35,7 +45,6 @@ const CON_NOMBRE_EMAIL = [
       problema: 1,
       beneficiados: 1,
       categoria: 1,
-      competencias: 1,
       cantidadIntegrantes: 1,
       visibilidad: 1,
       etiquetas: 1,
@@ -47,6 +56,7 @@ const CON_NOMBRE_EMAIL = [
       propietario: {
         nombre: '$propietario.nombre',
         apellido1: '$propietario.apellido1',
+        apellido2: { $ifNull: ['$propietario.apellido2', null] },
         email: '$propietario.email'
       },
       // Formatear la lista de miembros desde el lookup temporal
@@ -56,17 +66,30 @@ const CON_NOMBRE_EMAIL = [
           as: 'miembro',
           in: {
             nombre: '$$miembro.nombre',
+            apellido1: '$propietario.apellido1',
+            apellido2: { $ifNull: ['$propietario.apellido2', null] },
             email: '$$miembro.email'
+          }
+        }
+      },
+      // Formatear la lista de competencias con _id y nombre (NUEVO)
+      competencias: {
+        $map: {
+          input: '$competenciasDetalle',
+          as: 'competencia',
+          in: {
+            _id: '$$competencia._id',
+            nombre: '$$competencia.nombre'
           }
         }
       }
     }
   }
-]
+];
 
 export async function listar() {
   return coleccion()
-    .aggregate(CON_NOMBRE_EMAIL)
+    .aggregate(CON_DETALLES)
     .sort({ titulo: 1 })
     .toArray()
 }
@@ -74,7 +97,7 @@ export async function listar() {
 export async function buscarPorID(id) {
   const objectId = typeof id === 'string' ? new ObjectId(id) : id
   const [iniciativa] = await coleccion()
-    .aggregate([{ $match: { _id: objectId } }, ...CON_NOMBRE_EMAIL])
+    .aggregate([{ $match: { _id: objectId } }, ...CON_DETALLES])
     .toArray()
 
   return iniciativa ?? null

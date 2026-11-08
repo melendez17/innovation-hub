@@ -5,7 +5,7 @@ function Pagina({ titulo, children }) {
         <>
             <Encabezado />
             <main className="container-fluid pb-5">
-                <h2 className="text-center">{titulo}</h2>
+                <h1 className="text-center">{titulo}</h1>
                 {children}
             </main>
         </>

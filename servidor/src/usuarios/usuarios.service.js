@@ -8,7 +8,7 @@ export async function listar() {
 }
 
 export async function existe(id) {
-  const usuario = await repositorio.buscarPorId(id)
+  const usuario = await repositorio.buscarPorId(id, true)
   return usuario !== null
 }
 
@@ -33,5 +33,5 @@ export async function crear(datos) {
     competencias: []
   })
 
-  return repositorio.buscarPorId(id)
+  return repositorio.buscarPorId(id, false)
 }

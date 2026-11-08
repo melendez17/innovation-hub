@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router"
 
 import Inicio from './paginas/Inicio.jsx'
 import Catalogo from './paginas/Catalogo.jsx'
+import Iniciativa from './paginas/Iniciativa.jsx'
 import NoEncontrado from "./paginas/NoEncontrado.jsx"
 
 const router = createBrowserRouter([
@@ -12,8 +13,11 @@ const router = createBrowserRouter([
   }, 
   {
     path: "/catalogo",
-    element: <Catalogo />,
-    errorElement: <NoEncontrado />
+    element: <Catalogo />
+  },
+  {
+    path:"/iniciativa/:id",
+    element: <Iniciativa />
   }
 ])
 

@@ -19,3 +19,8 @@ export async function eliminar(req, res) {
   await servicio.eliminar(req.params.id)
   res.status(204).end()
 }
+
+export async function buscar(req, res) {
+  const iniciativa = await servicio.buscar(req.params.id)
+  res.json(iniciativa)
+}

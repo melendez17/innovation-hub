@@ -1,4 +1,4 @@
-import * as servicio from './iniciativas.repository.js'
+import * as servicio from './iniciativas.service.js'
  
 export async function listar(req, res) {
   const iniciativas = await servicio.listar()
@@ -7,5 +7,5 @@ export async function listar(req, res) {
 
 export async function crear(req, res) {
   const iniciativa = await servicio.crear(req.body ?? {})
-  res.status(201).jason(iniciativa)
+  res.status(201).json(iniciativa)
 }

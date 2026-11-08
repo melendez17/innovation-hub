@@ -4,29 +4,52 @@ import { obtenerDb } from '../config/db.js'
 const coleccion = () => obtenerDb().collection('iniciativas')
 
 const CON_NOMBRE_EMAIL = [
+  // 1. Relación con el propietario
   {
     $lookup: {
       from: 'usuarios',
       localField: 'propietarioId',
       foreignField: '_id',
-      as: 'propietario',
+      as: 'propietario'
     }
   },
   { $unwind: '$propietario' },
+
+  // 2. Relación con los miembros
   {
     $lookup: {
       from: 'usuarios',
-      localField: 'miembrosIds',
+      localField: 'miembros',
       foreignField: '_id',
       as: 'miembrosDetalle'
     }
   },
+
+  // 3. Proyección directa y limpia de campos
   {
-    $set: {
+    $project: {
+      titulo: 1,
+      tipo: 1,
+      resumen: 1,
+      descripcion: 1,
+      problema: 1,
+      beneficiados: 1,
+      categoria: 1,
+      competencias: 1,
+      cantidadIntegrantes: 1,
+      visibilidad: 1,
+      etiquetas: 1,
+      estado: 1,
+      propietarioId: 1,
+      fechaCreacion: 1,
+      fechaUltimaModificacion: 1,
+      // Formatear propietario
       propietario: {
         nombre: '$propietario.nombre',
+        apellido1: '$propietario.apellido1',
         email: '$propietario.email'
       },
+      // Formatear la lista de miembros desde el lookup temporal
       miembros: {
         $map: {
           input: '$miembrosDetalle',
@@ -38,26 +61,26 @@ const CON_NOMBRE_EMAIL = [
         }
       }
     }
-  },
-  {
-    $project: { competencias: 0, carrera: 0 }
   }
-
 ]
 
 export async function listar() {
   return coleccion()
-    .find({}, { projection: { titulo: 1, tipo: 1, resumen: 1, descripcion: 1, problema: 1, beneficiados: 1, categoria: 1, competencias: 1, cantidadIntegrantes: 1, visibilidad: 1, etiquetas: 1, estado: 1, propietario: 1, miembros: 1, fechaCreacion: 1, ultimaFechaModificacion: 1 } })
+    .aggregate(CON_NOMBRE_EMAIL)
     .sort({ titulo: 1 })
     .toArray()
 }
 
 export async function buscarPorID(id) {
-  const [iniciativa] = await coleccion().aggregate([{ $match: { _id: new ObjectId(id) } }, ...CON_NOMBRE_EMAIL]).toArray()
+  const objectId = typeof id === 'string' ? new ObjectId(id) : id
+  const [iniciativa] = await coleccion()
+    .aggregate([{ $match: { _id: objectId } }, ...CON_NOMBRE_EMAIL])
+    .toArray()
+
   return iniciativa ?? null
 }
 
 export async function crear(iniciativa) {
   const resultado = await coleccion().insertOne(iniciativa)
-  return resultado.insertedID
+  return resultado.insertedId
 }

@@ -10,7 +10,7 @@ export async function listar() {
 }
 
 export async function crear(datos){
-  const errores = validarSerie(datos)
+  const errores = validarIniciativa(datos)
   if (Object.keys(errores).length > 0) {
     throw new HttpError(400, 'Datos_INVALIDOS', 'Revise los datos enviados.', errores)
   }
@@ -34,8 +34,8 @@ export async function crear(datos){
     visibilidad: datos.visibilidad, 
     etiquetas: datos.etiquetas,
     estado: "Borrador",
-    propietarioId: datos.propietarioId,
-    miembros: [datos.propietarioId],
+    propietarioId: new ObjectId(datos.propietarioId),
+    miembros: [new ObjectId(datos.propietarioId)],
     fechaCreacion: hoy,
     fechaUltimaModificacion: hoy
   })

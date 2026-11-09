@@ -130,7 +130,10 @@ export async function eliminarMiembro(id, miembroId){
   return resultado.matchedCount === 1
 }
 
-export async function eliminar(id){
-  const resultado =  await coleccion().deleteOne({ _id: new ObjectId(id)})
+export async function eliminar(id, propietarioId){
+  const resultado = await coleccion().deleteOne({
+    _id: new ObjectId(id),
+    propietarioId: new ObjectId(propietarioId),
+  })
   return resultado.deletedCount === 1
 }

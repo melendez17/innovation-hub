@@ -16,7 +16,7 @@ export async function agregarMiembro(req, res){
 }
 
 export async function eliminar(req, res) {
-  await servicio.eliminar(req.params.id)
+  await servicio.eliminar(req.params.id, req.sesion.usuario._id)
   res.status(204).end()
 }
 

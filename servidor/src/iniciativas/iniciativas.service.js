@@ -59,9 +59,19 @@ export async function agregarMiembro(id, datos){
   return repositorio.buscarPorID(id)
 }
 
-export async function eliminar(id){
+export async function eliminar(id, usuarioId){
   revisarId(id)
-  const existia = await repositorio.eliminar(id)
+  const iniciativa = await repositorio.buscarPorID(id)
+
+  if (!iniciativa) {
+    throw new HttpError(404, 'NO_ENCONTRADA', 'La iniciativa no existe')
+  }
+
+  if (iniciativa.propietarioId.toString() !== usuarioId.toString()) {
+    throw new HttpError(403, 'PROHIBIDO', 'Solo el propietario puede eliminar esta iniciativa.', {})
+  }
+
+  const existia = await repositorio.eliminar(id, usuarioId)
 
   if(!existia) {
     throw new HttpError(404, 'NO_ENCONTRADA', 'La iniciativa no existe')

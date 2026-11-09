@@ -7,6 +7,7 @@ const coleccion = () => obtenerDb().collection('usuarios')
 const CAMPOS_PERFIL = {
   nombre: 1, apellido1: 1, apellido2: 1, email: 1, tipo: 1, carrera: 1,
   fechaRegistro: 1, estado: 1, disponibilidad: 1, competencias: 1,
+  descripcionPersonal: 1, intereses: 1, portafolio: 1,
 }
 
 export async function listar() {

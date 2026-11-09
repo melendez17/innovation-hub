@@ -131,6 +131,25 @@ export async function crear(iniciativa) {
   return resultado.insertedId
 }
 
+export async function modificar(id, propietarioId, datos, miembros) {
+  const resultado = await coleccion().updateOne(
+    {
+      _id: new ObjectId(id),
+      propietarioId: new ObjectId(propietarioId),
+      estado: { $ne: 'Archivada' },
+      miembros,
+    },
+    { $set: { ...datos, fechaUltimaModificacion: new Date() } }
+  )
+  return resultado.matchedCount === 1
+}
+
+export async function existenCompetencias(ids) {
+  const identificadores = ids.map(id => new ObjectId(id))
+  const cantidad = await obtenerDb().collection('competencias').countDocuments({ _id: { $in: identificadores } })
+  return cantidad === new Set(identificadores.map(id => id.toString())).size
+}
+
 export async function agregarMiembro(id, nuevoMiembroId){
   const resultado = await coleccion().updateOne(
     {_id: new ObjectId(id)},
@@ -153,7 +172,7 @@ export async function eliminarMiembro(id, miembroId){
   return resultado.matchedCount === 1
 }
 
-export async function buscarParaEliminar(id) {
+export async function buscarDocumento(id) {
   return coleccion().findOne({ _id: new ObjectId(id) })
 }
 

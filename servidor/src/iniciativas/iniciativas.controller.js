@@ -15,6 +15,11 @@ export async function agregarMiembro(req, res){
   res.json(iniciativa)
 }
 
+export async function modificar(req, res) {
+  const iniciativa = await servicio.modificar(req.params.id, req.body ?? {}, req.sesion.usuario._id)
+  res.json(iniciativa)
+}
+
 export async function eliminar(req, res) {
   const archivada = await servicio.eliminar(req.params.id, req.sesion.usuario._id)
   if (archivada) {

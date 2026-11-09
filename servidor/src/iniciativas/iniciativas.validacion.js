@@ -7,6 +7,9 @@ export const VISIBILIDADES = ['Pública', 'Institucional', 'Restringida', 'Priva
 
 export function validarIniciativa(datos) {
     const errores = {}
+    if (datos === null || typeof datos !== 'object' || Array.isArray(datos)) {
+        return { cuerpo: 'Envíe un objeto con los datos de la iniciativa.' }
+    }
 
     if (typeof datos.titulo !== 'string' || datos.titulo.trim().length < 2) {
         errores.titulo = 'Escriba un título de al menos 2 caracteres.'
@@ -24,27 +27,34 @@ export function validarIniciativa(datos) {
         errores.descripcion = 'Escriba una descripcion detallada de al menos 2 caracteres.'
     }
 
-    if (typeof datos.problema !== 'string' || datos.problema.trim().length < 2) {
-        errores.problema = 'Describa el problema que resulve la iniciativa con al menos 2 caracteres.'
+    if (datos.problema != null && typeof datos.problema !== 'string') {
+        errores.problema = 'Escriba el problema como texto.'
     }
 
-    if (typeof datos.beneficiados !== 'string' || datos.beneficiados.trim().length < 2) {
-        errores.beneficiados = 'Escriba los beneficiados de la iniciativa con al menos 2 caracteres.'
+    if (datos.beneficiados != null && typeof datos.beneficiados !== 'string') {
+        errores.beneficiados = 'Escriba los beneficiarios como texto.'
     }
 
     if (!CATEGORIAS.includes(datos.categoria)) {
         errores.categoria = 'Elija una categoría de la lista.'
     }
 
-    datos.competencias.forEach(competencia => {
-        if (typeof competencia !== 'string' || !ObjectId.isValid(competencia)) {
-            errores.competencia = 'Seleccione una competencia válida'
+    if (datos.competencias !== undefined) {
+        if (!Array.isArray(datos.competencias)) {
+            errores.competencias = 'Envíe una lista de competencias.'
+        } else if (datos.competencias.some(competencia => typeof competencia !== 'string' || !ObjectId.isValid(competencia))) {
+            errores.competencias = 'Seleccione competencias válidas.'
         }
-    });
+    }
+
+    if (datos.etiquetas !== undefined &&
+        (!Array.isArray(datos.etiquetas) || datos.etiquetas.some(etiqueta => typeof etiqueta !== 'string' || !etiqueta.trim()))) {
+        errores.etiquetas = 'Envíe una lista de etiquetas de texto no vacías.'
+    }
 
     const cantidadIntegrantes = datos.cantidadIntegrantes
-    if (!Number.isInteger(cantidadIntegrantes) || cantidadIntegrantes < 2 || cantidadIntegrantes > 30) {
-        errores.temporadas = 'Indique un número entero entre 2 y 30.'
+    if (!Number.isInteger(cantidadIntegrantes) || cantidadIntegrantes < 1) {
+        errores.cantidadIntegrantes = 'Indique un número entero mayor que cero.'
     }
 
     if (!VISIBILIDADES.includes(datos.visibilidad)) {

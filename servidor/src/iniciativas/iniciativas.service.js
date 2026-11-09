@@ -31,26 +31,42 @@ export async function listar(usuarioId) {
   return iniciativas.map(iniciativa => aplicarVisibilidad(iniciativa, usuarioId))
 }
 
-export async function crear(datos, propietarioId){
-  const errores = validarIniciativa(datos)
-  if (Object.keys(errores).length > 0) {
-    throw new HttpError(400, 'Datos_INVALIDOS', 'Revise los datos enviados.', errores)
-  }
-
-  const hoy = new Date()
-
-  const id = await repositorio.crear({
+function datosEditables(datos) {
+  // Solo estos campos pueden escribirse; no copiar directamente todo el cuerpo.
+  return {
     titulo: datos.titulo.trim(),
     tipo: datos.tipo,
     resumen: datos.resumen.trim(),
     descripcion: datos.descripcion.trim(),
-    problema: datos.problema.trim(),
-    beneficiados: datos.beneficiados.trim(),
+    problema: datos.problema?.trim() || null,
+    beneficiados: datos.beneficiados?.trim() || null,
     categoria: datos.categoria,
-    competencias:  datos.competencias.map(id => new ObjectId(id)),
+    competencias: (datos.competencias ?? []).map(id => new ObjectId(id)),
     cantidadIntegrantes: datos.cantidadIntegrantes,
-    visibilidad: datos.visibilidad, 
-    etiquetas: datos.etiquetas,
+    visibilidad: datos.visibilidad,
+    etiquetas: (datos.etiquetas ?? []).map(etiqueta => etiqueta.trim()),
+  }
+}
+
+async function validarDatos(datos) {
+  const errores = validarIniciativa(datos)
+  if (Object.keys(errores).length > 0) {
+    throw new HttpError(400, 'DATOS_INVALIDOS', 'Revise los datos enviados.', errores)
+  }
+  if (!(await repositorio.existenCompetencias(datos.competencias ?? []))) {
+    throw new HttpError(400, 'DATOS_INVALIDOS', 'Revise los datos enviados.', {
+      competencias: 'Una o más competencias no existen.',
+    })
+  }
+}
+
+export async function crear(datos, propietarioId){
+  await validarDatos(datos)
+
+  const hoy = new Date()
+
+  const id = await repositorio.crear({
+    ...datosEditables(datos),
     estado: "Borrador",
     propietarioId: new ObjectId(propietarioId),
     miembros: [new ObjectId(propietarioId)],
@@ -71,6 +87,30 @@ export async function buscar(id, usuarioId){
   return aplicarVisibilidad(iniciativa, usuarioId)
 }
 
+export async function modificar(id, datos, usuarioId) {
+  revisarId(id)
+  const iniciativa = await repositorio.buscarDocumento(id)
+  if (!iniciativa) {
+    throw new HttpError(404, 'NO_ENCONTRADA', 'La iniciativa no existe.', {})
+  }
+  if (iniciativa.propietarioId.toString() !== usuarioId.toString()) {
+    throw new HttpError(403, 'PROHIBIDO', 'Solo el propietario puede modificar esta iniciativa.', {})
+  }
+  if (iniciativa.estado === 'Archivada') {
+    throw new HttpError(409, 'CONFLICTO', 'No se puede modificar una iniciativa archivada.', {})
+  }
+
+  await validarDatos(datos)
+  if (datos.cantidadIntegrantes < (iniciativa.miembros ?? []).length) {
+    throw new HttpError(409, 'CONFLICTO', 'La cantidad de integrantes no puede ser menor que el equipo actual.', {})
+  }
+  const modificada = await repositorio.modificar(id, usuarioId, datosEditables(datos), iniciativa.miembros)
+  if (!modificada) {
+    throw new HttpError(409, 'CONFLICTO', 'La iniciativa cambió. Consulte su estado e intente otra vez.', {})
+  }
+  return repositorio.buscarPorID(id)
+}
+
 export async function agregarMiembro(id, datos){
   revisarId(id)
   revisarId(datos.id)
@@ -83,7 +123,7 @@ export async function agregarMiembro(id, datos){
 
 export async function eliminar(id, usuarioId){
   revisarId(id)
-  const iniciativa = await repositorio.buscarParaEliminar(id)
+  const iniciativa = await repositorio.buscarDocumento(id)
 
   if (!iniciativa) {
     throw new HttpError(404, 'NO_ENCONTRADA', 'La iniciativa no existe')

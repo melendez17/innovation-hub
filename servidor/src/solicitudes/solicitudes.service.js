@@ -104,6 +104,25 @@ export async function modificar(id, datos, usuarioId) {
   return buscar(id, usuarioId)
 }
 
+export async function cancelar(id, usuarioId) {
+  revisarId(id)
+  const solicitud = await repositorio.buscarPorId(id)
+  if (!solicitud) {
+    throw new HttpError(404, 'NO_ENCONTRADA', 'La solicitud no existe.', {})
+  }
+  if (solicitud.solicitanteId.toString() !== usuarioId.toString()) {
+    throw new HttpError(403, 'PROHIBIDO', 'Solo el solicitante puede cancelar esta solicitud.', {})
+  }
+  if (solicitud.estado !== 'Pendiente') {
+    throw new HttpError(409, 'CONFLICTO', 'Solo puede cancelar solicitudes pendientes.', {})
+  }
+  const cancelada = await repositorio.cancelar(id, usuarioId)
+  if (!cancelada) {
+    throw new HttpError(409, 'CONFLICTO', 'La solicitud cambió. Consulte su estado e intente otra vez.', {})
+  }
+  return buscar(id, usuarioId)
+}
+
 export async function crear(iniciativaId, datos, solicitanteId) {
   revisarId(iniciativaId)
   const iniciativa = await iniciativas.consultarPorID(iniciativaId, solicitanteId)

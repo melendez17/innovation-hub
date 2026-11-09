@@ -36,6 +36,14 @@ export async function modificar(id, solicitanteId, datos) {
   return resultado.matchedCount === 1
 }
 
+export async function cancelar(id, solicitanteId) {
+  const resultado = await coleccion().updateOne(
+    { _id: new ObjectId(id), solicitanteId: new ObjectId(solicitanteId), estado: 'Pendiente' },
+    { $set: { estado: 'Cancelada' } }
+  )
+  return resultado.matchedCount === 1
+}
+
 export async function buscarCompetencia(id) {
   return obtenerDb().collection('competencias')
     .findOne({ _id: new ObjectId(id) }, { projection: { nombre: 1 } })

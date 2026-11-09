@@ -24,6 +24,7 @@ export async function conectar() {
     { iniciativaId: 1, solicitanteId: 1 },
     { unique: true, name: 'solicitud_pendiente_unica', partialFilterExpression: { estado: 'Pendiente' } }
   )
+  await db.collection('miembros').createIndex({ iniciativaId: 1, usuarioId: 1 }, { unique: true })
   console.log(`Conectado a MongoDB: ${config.nombreBd}`)
 }
 
@@ -35,4 +36,9 @@ export async function desconectar() {
 export function obtenerDb() {
   if (!db) throw new Error('La base de datos todavía no está conectada')
   return db
+}
+
+// Guarda todos los cambios o ninguno. Requiere Atlas o un replica set local.
+export async function conTransaccion(operacion) {
+  return cliente.withSession(session => session.withTransaction(() => operacion(session)))
 }

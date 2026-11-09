@@ -29,3 +29,8 @@ export async function cancelar(req, res) {
   const solicitud = await servicio.cancelar(req.params.id, req.sesion.usuario._id)
   res.set('Cache-Control', 'no-store').json(solicitud)
 }
+
+export async function resolver(req, res) {
+  const solicitud = await servicio.resolver(req.params.id, req.body ?? {}, req.sesion.usuario._id)
+  res.set('Cache-Control', 'no-store').json(solicitud)
+}

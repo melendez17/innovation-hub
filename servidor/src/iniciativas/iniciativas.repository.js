@@ -184,8 +184,24 @@ export async function eliminarMiembro(id, miembroId){
   return resultado.matchedCount === 1
 }
 
-export async function buscarDocumento(id) {
-  return coleccion().findOne({ _id: new ObjectId(id) })
+export async function buscarDocumento(id, session) {
+  return coleccion().findOne({ _id: new ObjectId(id) }, { session })
+}
+
+export async function incorporarMiembro(id, usuarioId, fecha, session) {
+  const resultado = await coleccion().updateOne(
+    {
+      _id: new ObjectId(id),
+      estado: { $in: ['Publicada', 'En formación de equipo'] },
+      miembros: { $ne: new ObjectId(usuarioId) },
+    },
+    {
+      $addToSet: { miembros: new ObjectId(usuarioId) },
+      $set: { estado: 'En formación de equipo', fechaUltimaModificacion: fecha },
+    },
+    { session }
+  )
+  return resultado.matchedCount === 1
 }
 
 export async function tieneSolicitudesOProyecto(id) {

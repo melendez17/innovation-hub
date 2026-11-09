@@ -2,7 +2,8 @@ import { ObjectId } from 'mongodb'
 import * as repositorio from './solicitudes.repository.js'
 import * as iniciativas from '../iniciativas/iniciativas.repository.js'
 import * as usuarios from '../usuarios/usuarios.repository.js'
-import { validarSolicitud } from './solicitudes.validacion.js'
+import { validarSolicitud, validarResolucion } from './solicitudes.validacion.js'
+import { conTransaccion } from '../config/db.js'
 import { revisarId } from '../utils/revisarId.js'
 import { HttpError } from '../utils/HttpError.js'
 
@@ -120,6 +121,62 @@ export async function cancelar(id, usuarioId) {
   if (!cancelada) {
     throw new HttpError(409, 'CONFLICTO', 'La solicitud cambió. Consulte su estado e intente otra vez.', {})
   }
+  return buscar(id, usuarioId)
+}
+
+export async function resolver(id, datos, usuarioId) {
+  revisarId(id)
+  const errores = validarResolucion(datos)
+  if (Object.keys(errores).length > 0) {
+    throw new HttpError(400, 'DATOS_INVALIDOS', 'Revise los datos enviados.', errores)
+  }
+
+  await conTransaccion(async session => {
+    const solicitud = await repositorio.buscarPorId(id, session)
+    if (!solicitud) {
+      throw new HttpError(404, 'NO_ENCONTRADA', 'La solicitud no existe.', {})
+    }
+    const iniciativa = await iniciativas.buscarDocumento(solicitud.iniciativaId, session)
+    if (!iniciativa) {
+      throw new HttpError(404, 'NO_ENCONTRADA', 'La iniciativa no existe.', {})
+    }
+    if (iniciativa.propietarioId.toString() !== usuarioId.toString()) {
+      throw new HttpError(403, 'PROHIBIDO', 'Solo el propietario puede resolver esta solicitud.', {})
+    }
+    if (solicitud.estado !== 'Pendiente') {
+      throw new HttpError(409, 'CONFLICTO', 'Solo puede resolver solicitudes pendientes.', {})
+    }
+
+    const fecha = new Date()
+    if (datos.decision === 'Aceptada') {
+      if (!['Publicada', 'En formación de equipo'].includes(iniciativa.estado)) {
+        throw new HttpError(409, 'CONFLICTO', 'La iniciativa ya no admite incorporaciones.', {})
+      }
+      if (iniciativa.miembros.some(idMiembro => idMiembro.toString() === solicitud.solicitanteId.toString())) {
+        throw new HttpError(409, 'CONFLICTO', 'El solicitante ya forma parte del equipo.', {})
+      }
+      if (iniciativa.miembros.length >= iniciativa.cantidadIntegrantes) {
+        throw new HttpError(409, 'CONFLICTO', 'No hay espacios disponibles en el equipo.', {})
+      }
+      if (!(await repositorio.solicitanteActivo(solicitud.solicitanteId, session))) {
+        throw new HttpError(409, 'CONFLICTO', 'La cuenta del solicitante no está activa.', {})
+      }
+      const incorporado = await iniciativas.incorporarMiembro(iniciativa._id, solicitud.solicitanteId, fecha, session)
+      if (!incorporado) {
+        throw new HttpError(409, 'CONFLICTO', 'La iniciativa cambió. Consulte su estado e intente otra vez.', {})
+      }
+      await repositorio.registrarMiembro(solicitud, fecha, session)
+    }
+
+    const resuelta = await repositorio.resolver(id, {
+      decision: datos.decision,
+      comentario: datos.comentario?.trim() || null,
+      fechaDecision: fecha,
+    }, session)
+    if (!resuelta) {
+      throw new HttpError(409, 'CONFLICTO', 'La solicitud cambió. Consulte su estado e intente otra vez.', {})
+    }
+  })
   return buscar(id, usuarioId)
 }
 

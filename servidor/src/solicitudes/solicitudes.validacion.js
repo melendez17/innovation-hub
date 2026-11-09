@@ -19,3 +19,17 @@ export function validarSolicitud(datos) {
   }
   return errores
 }
+
+export function validarResolucion(datos) {
+  const errores = {}
+  if (datos === null || typeof datos !== 'object' || Array.isArray(datos)) {
+    return { cuerpo: 'Envíe un objeto con la decisión.' }
+  }
+  if (!['Aceptada', 'Rechazada'].includes(datos.decision)) {
+    errores.decision = 'Indique Aceptada o Rechazada.'
+  }
+  if (datos.comentario != null && typeof datos.comentario !== 'string') {
+    errores.comentario = 'Escriba el comentario como texto.'
+  }
+  return errores
+}

@@ -173,13 +173,19 @@ export async function agregarMiembro(id, nuevoMiembroId){
   return resultado.matchedCount === 1
 }
 
-export async function eliminarMiembro(id, miembroId){
+export async function retirarMiembro(id, propietarioId, miembroId, fecha, session){
   const resultado = await coleccion().updateOne(
-    {_id: new ObjectId(id)},
+    {
+      _id: new ObjectId(id),
+      propietarioId: new ObjectId(propietarioId),
+      estado: { $ne: 'Archivada' },
+      miembros: new ObjectId(miembroId),
+    },
     {
       $pull: { miembros: new ObjectId(miembroId)},
-      $set: {fechaUltimaModificacion: new Date()}
-    }
+      $set: {fechaUltimaModificacion: fecha}
+    },
+    { session }
   )
   return resultado.matchedCount === 1
 }
@@ -204,12 +210,15 @@ export async function incorporarMiembro(id, usuarioId, fecha, session) {
   return resultado.matchedCount === 1
 }
 
-export async function tieneSolicitudesOProyecto(id) {
+export async function tieneInformacionRelacionada(id, propietarioId) {
   const iniciativaId = new ObjectId(id)
   const db = obtenerDb()
   const solicitud = await db.collection('solicitudes').findOne({ iniciativaId }, { projection: { _id: 1 } })
   const proyecto = await db.collection('proyectos').findOne({ iniciativaId }, { projection: { _id: 1 } })
-  return solicitud !== null || proyecto !== null
+  const miembro = await db.collection('miembros').findOne(
+    { iniciativaId, usuarioId: { $ne: new ObjectId(propietarioId) } }, { projection: { _id: 1 } }
+  )
+  return solicitud !== null || proyecto !== null || miembro !== null
 }
 
 export async function archivar(id, propietarioId) {

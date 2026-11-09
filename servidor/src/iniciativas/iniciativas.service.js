@@ -165,7 +165,7 @@ export async function eliminar(id, usuarioId){
     miembroId => miembroId.toString() !== iniciativa.propietarioId.toString()
   )
   const tieneRelaciones = tieneOtrosMiembros || Boolean(iniciativa.proyectoId) ||
-    await repositorio.tieneSolicitudesOProyecto(id)
+    await repositorio.tieneInformacionRelacionada(id, iniciativa.propietarioId)
 
   if (tieneRelaciones) {
     const archivada = await repositorio.archivar(id, usuarioId)

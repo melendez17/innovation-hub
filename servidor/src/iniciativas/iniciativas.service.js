@@ -61,7 +61,7 @@ export async function agregarMiembro(id, datos){
 
 export async function eliminar(id, usuarioId){
   revisarId(id)
-  const iniciativa = await repositorio.buscarPorID(id)
+  const iniciativa = await repositorio.buscarParaEliminar(id)
 
   if (!iniciativa) {
     throw new HttpError(404, 'NO_ENCONTRADA', 'La iniciativa no existe')
@@ -71,9 +71,28 @@ export async function eliminar(id, usuarioId){
     throw new HttpError(403, 'PROHIBIDO', 'Solo el propietario puede eliminar esta iniciativa.', {})
   }
 
-  const existia = await repositorio.eliminar(id, usuarioId)
+  if (iniciativa.estado === 'Archivada') {
+    throw new HttpError(409, 'CONFLICTO', 'La iniciativa ya está archivada.', {})
+  }
+
+  const tieneOtrosMiembros = (iniciativa.miembros ?? []).some(
+    miembroId => miembroId.toString() !== iniciativa.propietarioId.toString()
+  )
+  const tieneRelaciones = tieneOtrosMiembros || Boolean(iniciativa.proyectoId) ||
+    await repositorio.tieneSolicitudesOProyecto(id)
+
+  if (tieneRelaciones) {
+    const archivada = await repositorio.archivar(id, usuarioId)
+    if (!archivada) {
+      throw new HttpError(409, 'CONFLICTO', 'La iniciativa cambió. Consulte su estado e intente otra vez.', {})
+    }
+    return repositorio.buscarPorID(id)
+  }
+
+  const existia = await repositorio.eliminar(id, usuarioId, iniciativa.miembros)
 
   if(!existia) {
-    throw new HttpError(404, 'NO_ENCONTRADA', 'La iniciativa no existe')
+    throw new HttpError(409, 'CONFLICTO', 'La iniciativa cambió. Consulte su estado e intente otra vez.', {})
   }
+  return null
 }

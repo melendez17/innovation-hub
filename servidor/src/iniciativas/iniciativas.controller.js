@@ -16,7 +16,10 @@ export async function agregarMiembro(req, res){
 }
 
 export async function eliminar(req, res) {
-  await servicio.eliminar(req.params.id, req.sesion.usuario._id)
+  const archivada = await servicio.eliminar(req.params.id, req.sesion.usuario._id)
+  if (archivada) {
+    return res.json(archivada)
+  }
   res.status(204).end()
 }
 

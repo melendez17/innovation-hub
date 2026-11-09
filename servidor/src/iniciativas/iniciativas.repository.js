@@ -89,7 +89,7 @@ const CON_DETALLES = [
 
 export async function listar() {
   return coleccion()
-    .aggregate(CON_DETALLES)
+    .aggregate([{ $match: { estado: { $ne: 'Archivada' } } }, ...CON_DETALLES])
     .sort({ titulo: 1 })
     .toArray()
 }
@@ -130,10 +130,34 @@ export async function eliminarMiembro(id, miembroId){
   return resultado.matchedCount === 1
 }
 
-export async function eliminar(id, propietarioId){
+export async function buscarParaEliminar(id) {
+  return coleccion().findOne({ _id: new ObjectId(id) })
+}
+
+export async function tieneSolicitudesOProyecto(id) {
+  const iniciativaId = new ObjectId(id)
+  const db = obtenerDb()
+  const solicitud = await db.collection('solicitudes').findOne({ iniciativaId }, { projection: { _id: 1 } })
+  const proyecto = await db.collection('proyectos').findOne({ iniciativaId }, { projection: { _id: 1 } })
+  return solicitud !== null || proyecto !== null
+}
+
+export async function archivar(id, propietarioId) {
+  const resultado = await coleccion().updateOne(
+    { _id: new ObjectId(id), propietarioId: new ObjectId(propietarioId), estado: { $ne: 'Archivada' } },
+    { $set: { estado: 'Archivada', fechaUltimaModificacion: new Date() } }
+  )
+  return resultado.modifiedCount === 1
+}
+
+export async function eliminar(id, propietarioId, miembros){
   const resultado = await coleccion().deleteOne({
     _id: new ObjectId(id),
     propietarioId: new ObjectId(propietarioId),
+    // Si cambió el equipo mientras se comprobaban las relaciones, no borrar.
+    miembros,
+    proyectoId: null,
+    estado: { $ne: 'Archivada' },
   })
   return resultado.deletedCount === 1
 }

@@ -65,6 +65,7 @@ const CON_DETALLES = [
           input: '$miembrosDetalle',
           as: 'miembro',
           in: {
+            _id: '$$miembro._id',
             nombre: '$$miembro.nombre',
             apellido1: '$propietario.apellido1',
             apellido2: { $ifNull: ['$propietario.apellido2', null] },
@@ -87,11 +88,33 @@ const CON_DETALLES = [
   }
 ];
 
-export async function listar() {
+export async function listar(usuarioId) {
+  // Las privadas no aparecen en el catálogo general, tampoco para su propietario.
+  const visibilidades = usuarioId ? ['Pública', 'Institucional', 'Restringida'] : ['Pública']
   return coleccion()
-    .aggregate([{ $match: { estado: { $ne: 'Archivada' } } }, ...CON_DETALLES])
+    .aggregate([
+      { $match: { estado: { $ne: 'Archivada' }, visibilidad: { $in: visibilidades } } },
+      ...CON_DETALLES,
+    ])
     .sort({ titulo: 1 })
     .toArray()
+}
+
+export async function consultarPorID(id, usuarioId) {
+  const visibilidades = usuarioId ? ['Pública', 'Institucional', 'Restringida'] : ['Pública']
+  const permisos = [{ visibilidad: { $in: visibilidades } }]
+  if (usuarioId) {
+    const usuarioObjectId = new ObjectId(usuarioId)
+    permisos.push({
+      visibilidad: 'Privada',
+      $or: [{ propietarioId: usuarioObjectId }, { miembros: usuarioObjectId }],
+    })
+  }
+  const [iniciativa] = await coleccion().aggregate([
+    { $match: { _id: new ObjectId(id), $or: permisos } },
+    ...CON_DETALLES,
+  ]).toArray()
+  return iniciativa ?? null
 }
 
 export async function buscarPorID(id) {

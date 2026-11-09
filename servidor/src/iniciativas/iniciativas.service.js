@@ -5,8 +5,30 @@ import { HttpError } from '../utils/HttpError.js'
 import { revisarId } from "../utils/revisarId.js"
 
  
-export async function listar() {
-  return repositorio.listar()
+function aplicarVisibilidad(iniciativa, usuarioId) {
+  const esPropietario = usuarioId && iniciativa.propietarioId.toString() === usuarioId.toString()
+  const esMiembro = usuarioId && iniciativa.miembros.some(
+    miembro => miembro._id.toString() === usuarioId.toString()
+  )
+  if (iniciativa.visibilidad === 'Restringida' && !esPropietario && !esMiembro) {
+    // Lista explícita: no enviar descripción, problema ni datos del equipo.
+    return {
+      _id: iniciativa._id,
+      titulo: iniciativa.titulo,
+      tipo: iniciativa.tipo,
+      resumen: iniciativa.resumen,
+      categoria: iniciativa.categoria,
+      competencias: iniciativa.competencias,
+      visibilidad: iniciativa.visibilidad,
+      accesoCompleto: false,
+    }
+  }
+  return { ...iniciativa, accesoCompleto: true }
+}
+
+export async function listar(usuarioId) {
+  const iniciativas = await repositorio.listar(usuarioId)
+  return iniciativas.map(iniciativa => aplicarVisibilidad(iniciativa, usuarioId))
 }
 
 export async function crear(datos, propietarioId){
@@ -39,14 +61,14 @@ export async function crear(datos, propietarioId){
   return repositorio.buscarPorID(id)
 }
 
-export async function buscar(id){
+export async function buscar(id, usuarioId){
   revisarId(id)
-  const existe = await repositorio.buscarPorID(id)
-  if(!existe) {
-    throw new HttpError(404, 'NO_ENCONTRADA', 'La iniciativa no existe.')
+  const iniciativa = await repositorio.consultarPorID(id, usuarioId)
+  if(!iniciativa) {
+    throw new HttpError(404, 'NO_ENCONTRADA', 'La iniciativa no existe o no tiene acceso.')
   }
 
-  return repositorio.buscarPorID(id)
+  return aplicarVisibilidad(iniciativa, usuarioId)
 }
 
 export async function agregarMiembro(id, datos){

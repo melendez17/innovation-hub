@@ -1,7 +1,7 @@
 import * as servicio from './iniciativas.service.js'
  
 export async function listar(req, res) {
-  const iniciativas = await servicio.listar()
+  const iniciativas = await servicio.listar(req.sesion?.usuario._id)
   res.json(iniciativas)
 }
 
@@ -24,6 +24,6 @@ export async function eliminar(req, res) {
 }
 
 export async function buscar(req, res) {
-  const iniciativa = await servicio.buscar(req.params.id)
+  const iniciativa = await servicio.buscar(req.params.id, req.sesion?.usuario._id)
   res.json(iniciativa)
 }

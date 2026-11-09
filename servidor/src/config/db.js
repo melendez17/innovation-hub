@@ -16,6 +16,9 @@ export async function conectar() {
     { email: 1 },
     { name: 'usuarios_email_unico', unique: true, collation: { locale: 'en', strength: 2 } }
   )
+  await db.collection('sesiones').createIndex({ tokenHash: 1 }, { unique: true })
+  // TTL limpia documentos vencidos; el middleware comprueba la fecha en cada petición.
+  await db.collection('sesiones').createIndex({ expiresAt: 1 }, { expireAfterSeconds: 0 })
   console.log(`Conectado a MongoDB: ${config.nombreBd}`)
 }
 

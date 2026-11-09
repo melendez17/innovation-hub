@@ -34,3 +34,11 @@ export async function crear(usuario) {
   const resultado = await coleccion().insertOne(usuario)
   return resultado.insertedId
 }
+
+// Uso interno de autenticación. Nunca devolver este documento desde un controlador.
+export async function buscarParaLogin(email) {
+  return coleccion().findOne(
+    { email },
+    { collation: { locale: 'en', strength: 2 }, projection: { passwordHash: 1, estado: 1 } }
+  )
+}

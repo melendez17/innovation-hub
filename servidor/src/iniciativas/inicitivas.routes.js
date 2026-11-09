@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import * as controlador from './iniciativas.controller.js'
 import { requiereSesion, sesionOpcional } from '../middlewares/autenticacion.js'
+import { crear as crearSolicitud } from '../solicitudes/solicitudes.controller.js'
 
 export const iniciativasRouter = Router()
 
@@ -8,5 +9,6 @@ iniciativasRouter.get('/', sesionOpcional, controlador.listar)
 iniciativasRouter.get("/:id", sesionOpcional, controlador.buscar)
 iniciativasRouter.post('/', requiereSesion, controlador.crear)
 iniciativasRouter.post('/:id/publicacion', requiereSesion, controlador.publicar)
+iniciativasRouter.post('/:id/solicitudes', requiereSesion, crearSolicitud)
 iniciativasRouter.put('/:id', requiereSesion, controlador.modificar)
 iniciativasRouter.delete('/:id', requiereSesion, controlador.eliminar)

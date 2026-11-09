@@ -19,6 +19,11 @@ export async function conectar() {
   await db.collection('sesiones').createIndex({ tokenHash: 1 }, { unique: true })
   // TTL limpia documentos vencidos; el middleware comprueba la fecha en cada petición.
   await db.collection('sesiones').createIndex({ expiresAt: 1 }, { expireAfterSeconds: 0 })
+  // Un usuario no puede tener dos solicitudes pendientes para la misma iniciativa.
+  await db.collection('solicitudes').createIndex(
+    { iniciativaId: 1, solicitanteId: 1 },
+    { unique: true, name: 'solicitud_pendiente_unica', partialFilterExpression: { estado: 'Pendiente' } }
+  )
   console.log(`Conectado a MongoDB: ${config.nombreBd}`)
 }
 

@@ -6,4 +6,5 @@ export const usuariosRouter = Router()
 
 usuariosRouter.get('/', controlador.listar)
 usuariosRouter.get('/me', requiereSesion, controlador.consultarPropio)
+usuariosRouter.put('/me', requiereSesion, controlador.modificarPropio)
 usuariosRouter.post('/', controlador.crear)

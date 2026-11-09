@@ -7,7 +7,7 @@ const coleccion = () => obtenerDb().collection('usuarios')
 const CAMPOS_PERFIL = {
   nombre: 1, apellido1: 1, apellido2: 1, email: 1, tipo: 1, carrera: 1,
   fechaRegistro: 1, estado: 1, disponibilidad: 1, competencias: 1,
-  descripcionPersonal: 1, intereses: 1, portafolio: 1,
+  descripcionPersonal: 1, intereses: 1, portafolio: 1, fechaUltimaModificacion: 1,
 }
 
 export async function listar() {
@@ -34,6 +34,21 @@ export async function buscarPorId(id, esCorto) {
 export async function crear(usuario) {
   const resultado = await coleccion().insertOne(usuario)
   return resultado.insertedId
+}
+
+export async function buscarCompetencias(ids) {
+  return obtenerDb().collection('competencias')
+    .find({ _id: { $in: ids.map(id => new ObjectId(id)) } }, { projection: { nombre: 1 } })
+    .sort({ nombre: 1 })
+    .toArray()
+}
+
+export async function modificarPerfil(id, datos) {
+  const resultado = await coleccion().updateOne(
+    { _id: new ObjectId(id), estado: 'Activa' },
+    { $set: { ...datos, fechaUltimaModificacion: new Date() } }
+  )
+  return resultado.matchedCount === 1
 }
 
 // Uso interno de autenticación. Nunca devolver este documento desde un controlador.

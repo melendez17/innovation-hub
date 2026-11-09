@@ -5,16 +5,14 @@ export async function listar(req, res) {
   res.json(usuarios)
 }
 
-export function consultarPropio(req, res) {
-  // El middleware ya consultó al usuario de la sesión sin traer credenciales.
-  const usuario = req.sesion.usuario
-  res.set('Cache-Control', 'no-store').json({
-    ...usuario,
-    descripcionPersonal: usuario.descripcionPersonal ?? null,
-    intereses: usuario.intereses ?? [],
-    portafolio: usuario.portafolio ?? null,
-    competencias: usuario.competencias ?? [],
-  })
+export async function consultarPropio(req, res) {
+  const usuario = await servicio.consultarPerfil(req.sesion.usuario)
+  res.set('Cache-Control', 'no-store').json(usuario)
+}
+
+export async function modificarPropio(req, res) {
+  const usuario = await servicio.modificarPerfil(req.body ?? {}, req.sesion.usuario._id)
+  res.set('Cache-Control', 'no-store').json(usuario)
 }
 
 export async function crear(req, res) {

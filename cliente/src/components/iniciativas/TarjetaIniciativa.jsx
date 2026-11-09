@@ -1,68 +1,40 @@
-import { NavLink } from 'react-router-dom'
-
-function TarjetaIniciativa({ iniciativa, usuarioActivo }) {
-    if (!iniciativa) return null
-
-    if (iniciativa.visibilidad === "Privada" && usuarioActivo.email !== iniciativa.propietario.email) return null
-
-    if (iniciativa.visibilidad === "Restringida" && usuarioActivo.email !== iniciativa.propietario.email) {
-        return (
-            <article className="col-11 col-sm-5 col-lg-3 p-2 tarjeta-iniciativa d-flex flex-column gap-1 justify-content-between">
-                <div className="d-flex justify-content-between gap-3 encabezado-tarjeta">
-                    <h3>{iniciativa.titulo}</h3>
-                    <p>{iniciativa.tipo}</p>
-                </div>
-                <div className="resumen">
-                    <p>{iniciativa.resumen}</p>
-                </div>
-                <div className="categoria d-flex justify-content-between">
-                    <p className="etiqueta">Categoria: </p>
-                    <p>{iniciativa.categoria}</p>
-                </div>
-                <div className="competencias d-flex flex-column">
-                    <p className="etiqueta">Competencias Requeridas: </p>
-                    {iniciativa.competencias?.map((competencia, index) => (
-                        <p key={competencia._id || index}>{competencia.nombre || competencia}</p>
-                    ))}
-                </div>
-            </article>
-        )
-    }
-
-    if ((iniciativa.visibilidad === "Institucional" && usuarioActivo.email.endsWith("@ucenfotec.ac.cr")) || iniciativa.visibilidad === "Pública" || usuarioActivo.email === iniciativa.propietario.email) {
-        return (
-            <article className="col-11 col-sm-5 col-lg-3 p-2 tarjeta-iniciativa d-flex flex-column gap-1 justify-content-between">
-                <div className="d-flex justify-content-between gap-3 encabezado-tarjeta">
-                    <h3>{iniciativa.titulo}</h3>
-                    <p>{iniciativa.tipo}</p>
-                </div>
-                <div className="resumen">
-                    <p>{iniciativa.resumen}</p>
-                </div>
-                <div className="categoria d-flex justify-content-between">
-                    <p className="etiqueta">Categoria: </p>
-                    <p>{iniciativa.categoria}</p>
-                </div>
-                <div className="propietario d-flex justify-content-between">
-                    <p className="etiqueta">Propietario: </p>
-                    <p>{iniciativa.propietario.nombre + " " + iniciativa.propietario.apellido1}</p>
-                </div>
-                <div className="estado d-flex justify-content-between">
-                    <p className="etiqueta">Estado:</p>
-                    <p>{iniciativa.estado}</p>
-                </div>
-                <div className="competencias d-flex flex-column">
-                    <p className="etiqueta">Competencias Requeridas: </p>
-                    {iniciativa.competencias?.map((competencia, index) => (
-                        <p key={competencia._id || index}>{competencia.nombre || competencia}</p>
-                    ))}
-                </div>
-                <NavLink to={`/iniciativa/${iniciativa._id}`} className="btn btn-primary btn-detalles-iniciativa">Detalle</NavLink>
-            </article>
-        )
-    } else {
-        return null
-    }
+import { Link } from 'react-router-dom'
+import Competencias from '../comunes/Competencias'
+import { EtiquetaEstado } from '../comunes/Estados'
+import { nombreCompleto } from '../../utils/formatos'
+export default function TarjetaIniciativa({ iniciativa }) {
+  return (
+    <article className="tarjeta-iniciativa">
+      <div className="d-flex justify-content-between flex-wrap gap-2">
+        <span className="tarjeta-tipo">
+          {iniciativa.tipo} · {iniciativa.categoria}
+        </span>
+        <EtiquetaEstado estado={iniciativa.estado} />
+      </div>
+      <h2>
+        <Link to={`/iniciativa/${iniciativa._id}`}>{iniciativa.titulo}</Link>
+      </h2>
+      <p className="tarjeta-resumen">{iniciativa.resumen}</p>
+      <Competencias valores={iniciativa.competencias} />
+      {iniciativa.propietario && (
+        <p className="small texto-secundario">
+          Por {nombreCompleto(iniciativa.propietario)}
+        </p>
+      )}
+      {iniciativa.espaciosDisponibles !== undefined && (
+        <p className="small">
+          {iniciativa.espaciosDisponibles} espacios disponibles
+        </p>
+      )}
+      <div className="tarjeta-pie">
+        <span className="small texto-secundario">{iniciativa.visibilidad}</span>
+        <Link
+          className="btn btn-outline-primary btn-sm float-end"
+          to={`/iniciativa/${iniciativa._id}`}
+        >
+          {iniciativa.accesoCompleto === false ? 'Ver resumen' : 'Ver detalle'}
+        </Link>
+      </div>
+    </article>
+  )
 }
-
-export default TarjetaIniciativa

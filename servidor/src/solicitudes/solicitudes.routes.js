@@ -6,3 +6,4 @@ export const solicitudesRouter = Router()
 
 solicitudesRouter.get('/', requiereSesion, controlador.listarPropias)
 solicitudesRouter.get('/:id', requiereSesion, controlador.buscar)
+solicitudesRouter.put('/:id', requiereSesion, controlador.modificar)

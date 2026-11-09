@@ -71,6 +71,39 @@ export async function buscar(id, usuarioId) {
   return completarSolicitud(solicitud)
 }
 
+export async function modificar(id, datos, usuarioId) {
+  revisarId(id)
+  const solicitud = await repositorio.buscarPorId(id)
+  if (!solicitud) {
+    throw new HttpError(404, 'NO_ENCONTRADA', 'La solicitud no existe.', {})
+  }
+  if (solicitud.solicitanteId.toString() !== usuarioId.toString()) {
+    throw new HttpError(403, 'PROHIBIDO', 'Solo el solicitante puede modificar esta solicitud.', {})
+  }
+  if (solicitud.estado !== 'Pendiente') {
+    throw new HttpError(409, 'CONFLICTO', 'Solo puede modificar solicitudes pendientes.', {})
+  }
+  const errores = validarSolicitud(datos)
+  if (Object.keys(errores).length > 0) {
+    throw new HttpError(400, 'DATOS_INVALIDOS', 'Revise los datos enviados.', errores)
+  }
+  if (!(await repositorio.existeCompetencia(datos.competenciaId))) {
+    throw new HttpError(400, 'DATOS_INVALIDOS', 'Revise los datos enviados.', {
+      competenciaId: 'Esta competencia no existe.',
+    })
+  }
+  const modificada = await repositorio.modificar(id, usuarioId, {
+    mensaje: datos.mensaje.trim(),
+    competenciaId: new ObjectId(datos.competenciaId),
+    rol: datos.rol.trim(),
+    disponibilidad: datos.disponibilidad.trim(),
+  })
+  if (!modificada) {
+    throw new HttpError(409, 'CONFLICTO', 'La solicitud cambió. Consulte su estado e intente otra vez.', {})
+  }
+  return buscar(id, usuarioId)
+}
+
 export async function crear(iniciativaId, datos, solicitanteId) {
   revisarId(iniciativaId)
   const iniciativa = await iniciativas.consultarPorID(iniciativaId, solicitanteId)

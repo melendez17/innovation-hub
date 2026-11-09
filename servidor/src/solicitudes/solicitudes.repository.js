@@ -28,6 +28,14 @@ export async function buscarPorId(id) {
   return coleccion().findOne({ _id: new ObjectId(id) })
 }
 
+export async function modificar(id, solicitanteId, datos) {
+  const resultado = await coleccion().updateOne(
+    { _id: new ObjectId(id), solicitanteId: new ObjectId(solicitanteId), estado: 'Pendiente' },
+    { $set: datos }
+  )
+  return resultado.matchedCount === 1
+}
+
 export async function buscarCompetencia(id) {
   return obtenerDb().collection('competencias')
     .findOne({ _id: new ObjectId(id) }, { projection: { nombre: 1 } })

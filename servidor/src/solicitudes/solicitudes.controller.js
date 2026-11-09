@@ -19,3 +19,8 @@ export async function buscar(req, res) {
   const solicitud = await servicio.buscar(req.params.id, req.sesion.usuario._id)
   res.set('Cache-Control', 'no-store').json(solicitud)
 }
+
+export async function modificar(req, res) {
+  const solicitud = await servicio.modificar(req.params.id, req.body ?? {}, req.sesion.usuario._id)
+  res.set('Cache-Control', 'no-store').json(solicitud)
+}

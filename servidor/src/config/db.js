@@ -10,7 +10,18 @@ let db = null
 export async function conectar() {
   await cliente.connect()
   db = cliente.db(config.nombreBd)
+  // La base garantiza la unicidad incluso ante registros simultáneos.
+  // Si ya hay correos duplicados, el arranque falla sin borrar ni alterar datos.
+  await db.collection('usuarios').createIndex(
+    { email: 1 },
+    { name: 'usuarios_email_unico', unique: true, collation: { locale: 'en', strength: 2 } }
+  )
   console.log(`Conectado a MongoDB: ${config.nombreBd}`)
+}
+
+export async function desconectar() {
+  await cliente.close()
+  db = null
 }
  
 export function obtenerDb() {

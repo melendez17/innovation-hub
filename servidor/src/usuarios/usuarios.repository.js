@@ -3,9 +3,15 @@ import { obtenerDb } from '../config/db.js'
 
 const coleccion = () => obtenerDb().collection('usuarios')
 
+// Lista explícita de campos públicos: nunca devolver credenciales, ni hashes.
+const CAMPOS_PERFIL = {
+  nombre: 1, apellido1: 1, apellido2: 1, email: 1, tipo: 1, carrera: 1,
+  fechaRegistro: 1, estado: 1, disponibilidad: 1, competencias: 1,
+}
+
 export async function listar() {
   return coleccion()
-    .find({}, { projection: { nombre: 1, correo: 1, competencias: 1 } })
+    .find({}, { projection: { nombre: 1, apellido1: 1, apellido2: 1, competencias: 1 } })
     .sort({ nombre: 1 })
     .toArray()
 }
@@ -15,10 +21,10 @@ export async function buscarPorId(id, esCorto) {
   if (esCorto) {
     usuario = coleccion().findOne(
       { _id: new ObjectId(id) },
-      { projection: { nombre: 1, correo: 1, competencias: 1 } }
+      { projection: { nombre: 1, competencias: 1 } }
     )
   } else {
-    usuario = coleccion().findOne({ _id: new ObjectId(id) })
+    usuario = coleccion().findOne({ _id: new ObjectId(id) }, { projection: CAMPOS_PERFIL })
   }
   
   return usuario

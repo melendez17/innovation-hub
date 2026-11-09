@@ -13,3 +13,22 @@ export async function crear(solicitud) {
   const resultado = await coleccion().insertOne(solicitud)
   return { ...solicitud, _id: resultado.insertedId }
 }
+
+export async function listarPropias(usuarioId) {
+  return coleccion().find({ solicitanteId: new ObjectId(usuarioId) })
+    .sort({ fechaSolicitud: -1, _id: 1 }).toArray()
+}
+
+export async function listarRecibidas(iniciativaId) {
+  return coleccion().find({ iniciativaId: new ObjectId(iniciativaId) })
+    .sort({ fechaSolicitud: -1, _id: 1 }).toArray()
+}
+
+export async function buscarPorId(id) {
+  return coleccion().findOne({ _id: new ObjectId(id) })
+}
+
+export async function buscarCompetencia(id) {
+  return obtenerDb().collection('competencias')
+    .findOne({ _id: new ObjectId(id) }, { projection: { nombre: 1 } })
+}

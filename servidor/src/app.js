@@ -9,6 +9,7 @@ import { usuariosRouter } from './usuarios/usuarios.routes.js'
 import { sesionesRouter } from './sesiones/sesiones.routes.js'
 import { competenciasRouter } from './competencias/competencias.routes.js'
 import { solicitudesRouter } from './solicitudes/solicitudes.routes.js'
+import { proyectosRouter } from './proyectos/proyectos.routes.js'
 import { rutaNoEncontrada, manejarErrores } from './middlewares/errores.js'
  
 export const app = express()
@@ -22,6 +23,7 @@ app.use('/api/usuarios', usuariosRouter)
 app.use('/api/sesiones', sesionesRouter)
 app.use('/api/competencias', competenciasRouter)
 app.use('/api/solicitudes', solicitudesRouter)
+app.use('/api/proyectos', proyectosRouter)
 
 app.use(rutaNoEncontrada)  // si ninguna ruta respondió
 app.use(manejarErrores)  // siempre el último

@@ -159,6 +159,18 @@ export async function publicar(id, propietarioId) {
   return resultado.matchedCount === 1
 }
 
+export async function convertirEnProyecto(id, propietarioId, proyectoId, fecha, session) {
+  const resultado = await coleccion().updateOne(
+    {
+      _id: new ObjectId(id), propietarioId: new ObjectId(propietarioId), proyectoId: null,
+      estado: { $in: ['Publicada', 'En formación de equipo'] },
+    },
+    { $set: { estado: 'Convertida en proyecto', proyectoId, fechaUltimaModificacion: fecha } },
+    { session }
+  )
+  return resultado.matchedCount === 1
+}
+
 export async function existenCompetencias(ids) {
   const identificadores = ids.map(id => new ObjectId(id))
   const cantidad = await obtenerDb().collection('competencias').countDocuments({ _id: { $in: identificadores } })

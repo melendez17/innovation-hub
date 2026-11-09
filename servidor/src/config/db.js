@@ -25,6 +25,7 @@ export async function conectar() {
     { unique: true, name: 'solicitud_pendiente_unica', partialFilterExpression: { estado: 'Pendiente' } }
   )
   await db.collection('miembros').createIndex({ iniciativaId: 1, usuarioId: 1 }, { unique: true })
+  await db.collection('proyectos').createIndex({ iniciativaId: 1 }, { unique: true })
   console.log(`Conectado a MongoDB: ${config.nombreBd}`)
 }
 

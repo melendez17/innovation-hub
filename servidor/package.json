@@ -6,7 +6,9 @@
   "main": "src/index.js",
   "scripts": {
     "dev": "node --env-file=.env --watch src/index.js",
-    "start": "node --env-file=.env src/index.js"
+    "start": "node --env-file=.env src/index.js",
+    "datos:competencias": "node --env-file=.env datos/cargar-demostracion.js --solo-competencias",
+    "datos:demo": "node --env-file=.env datos/cargar-demostracion.js"
   },
   "keywords": [],
   "author": "",

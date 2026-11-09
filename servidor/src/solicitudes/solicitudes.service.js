@@ -6,6 +6,38 @@ import { validarSolicitud, validarResolucion } from './solicitudes.validacion.js
 import { conTransaccion } from '../config/db.js'
 import { revisarId } from '../utils/revisarId.js'
 import { HttpError } from '../utils/HttpError.js'
+import { leerPaginacion, pagina, buscarTexto } from '../utils/paginacion.js'
+
+function filtrarSolicitudes(query) {
+  const filtro = {}
+  if (query.estado !== undefined) {
+    if (!['Pendiente', 'Aceptada', 'Rechazada', 'Cancelada'].includes(query.estado)) {
+      throw new HttpError(400, 'DATOS_INVALIDOS', 'El estado no es válido.', {})
+    }
+    filtro.estado = query.estado
+  }
+  if (query.competenciaId !== undefined) {
+    revisarId(query.competenciaId)
+    filtro.competenciaId = new ObjectId(query.competenciaId)
+  }
+  if (query.rol !== undefined) filtro.rol = buscarTexto(query.rol, true)
+  for (const campo of ['desde', 'hasta']) {
+    if (query[campo] === undefined) continue
+    const texto = query[campo]
+    const soloDia = /^\d{4}-\d{2}-\d{2}$/.test(texto)
+    const fecha = new Date(soloDia ? `${texto}T${campo === 'hasta' ? '23:59:59.999' : '00:00:00.000'}Z` : texto)
+    if ((!soloDia && !/^\d{4}-\d{2}-\d{2}T.*Z$/.test(texto)) ||
+        Number.isNaN(fecha.getTime()) || fecha.toISOString().slice(0, 10) !== texto.slice(0, 10)) {
+      throw new HttpError(400, 'DATOS_INVALIDOS', 'Las fechas deben ser días válidos o fechas ISO en UTC.', {})
+    }
+    filtro.fechaSolicitud ??= {}
+    filtro.fechaSolicitud[campo === 'desde' ? '$gte' : '$lte'] = fecha
+  }
+  if (filtro.fechaSolicitud?.$gte > filtro.fechaSolicitud?.$lte) {
+    throw new HttpError(400, 'DATOS_INVALIDOS', 'desde no puede ser posterior a hasta.', {})
+  }
+  return filtro
+}
 
 async function completarSolicitud(solicitud) {
   const iniciativa = await iniciativas.buscarDocumento(solicitud.iniciativaId)
@@ -39,12 +71,19 @@ async function completarSolicitud(solicitud) {
   }
 }
 
-export async function listarPropias(usuarioId) {
-  const solicitudes = await repositorio.listarPropias(usuarioId)
-  return Promise.all(solicitudes.map(solicitud => completarSolicitud(solicitud)))
+export async function listarPropias(usuarioId, query = {}) {
+  const opciones = leerPaginacion(query, ['estado', 'competenciaId', 'rol', 'desde', 'hasta', 'iniciativaId'], ['fechaSolicitud'], '-fechaSolicitud')
+  const filtro = { ...filtrarSolicitudes(query), solicitanteId: new ObjectId(usuarioId) }
+  if (query.iniciativaId !== undefined) {
+    revisarId(query.iniciativaId)
+    filtro.iniciativaId = new ObjectId(query.iniciativaId)
+  }
+  const resultado = await repositorio.listar(filtro, opciones)
+  const items = await Promise.all(resultado.items.map(solicitud => completarSolicitud(solicitud)))
+  return pagina(items, resultado.total, opciones)
 }
 
-export async function listarRecibidas(iniciativaId, usuarioId) {
+export async function listarRecibidas(iniciativaId, usuarioId, query = {}) {
   revisarId(iniciativaId)
   const iniciativa = await iniciativas.buscarDocumento(iniciativaId)
   if (!iniciativa) {
@@ -53,8 +92,10 @@ export async function listarRecibidas(iniciativaId, usuarioId) {
   if (iniciativa.propietarioId.toString() !== usuarioId.toString()) {
     throw new HttpError(403, 'PROHIBIDO', 'Solo el propietario puede consultar las solicitudes recibidas.', {})
   }
-  const solicitudes = await repositorio.listarRecibidas(iniciativaId)
-  return Promise.all(solicitudes.map(solicitud => completarSolicitud(solicitud)))
+  const opciones = leerPaginacion(query, ['estado', 'competenciaId', 'rol', 'desde', 'hasta'], ['fechaSolicitud'], '-fechaSolicitud')
+  const resultado = await repositorio.listar({ ...filtrarSolicitudes(query), iniciativaId: new ObjectId(iniciativaId) }, opciones)
+  const items = await Promise.all(resultado.items.map(solicitud => completarSolicitud(solicitud)))
+  return pagina(items, resultado.total, opciones)
 }
 
 export async function buscar(id, usuarioId) {

@@ -6,12 +6,12 @@ export async function crear(req, res) {
 }
 
 export async function listarPropias(req, res) {
-  const solicitudes = await servicio.listarPropias(req.sesion.usuario._id)
+  const solicitudes = await servicio.listarPropias(req.sesion.usuario._id, req.query)
   res.set('Cache-Control', 'no-store').json(solicitudes)
 }
 
 export async function listarRecibidas(req, res) {
-  const solicitudes = await servicio.listarRecibidas(req.params.id, req.sesion.usuario._id)
+  const solicitudes = await servicio.listarRecibidas(req.params.id, req.sesion.usuario._id, req.query)
   res.set('Cache-Control', 'no-store').json(solicitudes)
 }
 

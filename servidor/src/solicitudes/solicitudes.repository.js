@@ -14,14 +14,12 @@ export async function crear(solicitud) {
   return { ...solicitud, _id: resultado.insertedId }
 }
 
-export async function listarPropias(usuarioId) {
-  return coleccion().find({ solicitanteId: new ObjectId(usuarioId) })
-    .sort({ fechaSolicitud: -1, _id: 1 }).toArray()
-}
-
-export async function listarRecibidas(iniciativaId) {
-  return coleccion().find({ iniciativaId: new ObjectId(iniciativaId) })
-    .sort({ fechaSolicitud: -1, _id: 1 }).toArray()
+export async function listar(filtro, opciones) {
+  const [items, total] = await Promise.all([
+    coleccion().find(filtro).sort(opciones.orden).skip(opciones.salto).limit(opciones.size).toArray(),
+    coleccion().countDocuments(filtro),
+  ])
+  return { items, total }
 }
 
 export async function buscarPorId(id, session) {

@@ -1,8 +1,9 @@
 import { ObjectId } from 'mongodb'
 import * as repositorio from './iniciativas.repository.js'
-import { validarIniciativa } from './iniciativas.validacion.js'
+import { validarIniciativa, TIPOS, CATEGORIAS, ESTADOS, VISIBILIDADES } from './iniciativas.validacion.js'
 import { HttpError } from '../utils/HttpError.js'
 import { revisarId } from "../utils/revisarId.js"
+import { leerPaginacion, pagina, buscarTexto } from '../utils/paginacion.js'
 
  
 function aplicarVisibilidad(iniciativa, usuarioId) {
@@ -26,9 +27,67 @@ function aplicarVisibilidad(iniciativa, usuarioId) {
   return { ...iniciativa, accesoCompleto: true }
 }
 
-export async function listar(usuarioId) {
-  const iniciativas = await repositorio.listar(usuarioId)
-  return iniciativas.map(iniciativa => aplicarVisibilidad(iniciativa, usuarioId))
+export async function listar(usuarioId, query = {}) {
+  const opciones = leerPaginacion(query,
+    ['ambito', 'tipo', 'categoria', 'competenciaId', 'estado', 'propietarioId', 'visibilidad', 'conEspacios', 'q'],
+    ['titulo', 'fechaCreacion'], '-fechaCreacion')
+  const ambito = query.ambito ?? 'catalogo'
+  if (!['catalogo', 'propias', 'equipo'].includes(ambito)) {
+    throw new HttpError(400, 'DATOS_INVALIDOS', 'El ámbito no es válido.', {})
+  }
+  if (ambito !== 'catalogo' && !usuarioId) {
+    throw new HttpError(401, 'NO_AUTENTICADO', 'Debe iniciar sesión para consultar ese ámbito.', {})
+  }
+  const condiciones = []
+  const usuarioObjectId = usuarioId ? new ObjectId(usuarioId) : null
+  if (ambito === 'catalogo') {
+    condiciones.push({
+      estado: { $nin: ['Borrador', 'Archivada'] },
+      visibilidad: { $in: usuarioId ? ['Pública', 'Institucional', 'Restringida'] : ['Pública'] },
+    })
+  } else if (ambito === 'propias') {
+    condiciones.push({ propietarioId: usuarioObjectId })
+  } else {
+    condiciones.push({ miembros: usuarioObjectId }, { $or: [{ estado: { $ne: 'Borrador' } }, { propietarioId: usuarioObjectId }] })
+  }
+
+  for (const [campo, catalogo] of [['tipo', TIPOS], ['categoria', CATEGORIAS], ['estado', ESTADOS], ['visibilidad', VISIBILIDADES]]) {
+    if (query[campo] === undefined) continue
+    if (!catalogo.includes(query[campo])) {
+      throw new HttpError(400, 'DATOS_INVALIDOS', `El valor de ${campo} no es válido.`, {})
+    }
+    // Permite consultar las mayúsculas antiguas sin modificar los datos existentes.
+    condiciones.push({ [campo]: campo === 'categoria' ?
+      (query[campo] === 'Otro' ? /^Otros?$/i : buscarTexto(query[campo], true)) : query[campo] })
+  }
+  for (const [parametro, campo] of [['competenciaId', 'competencias'], ['propietarioId', 'propietarioId']]) {
+    if (query[parametro] === undefined) continue
+    revisarId(query[parametro])
+    condiciones.push({ [campo]: new ObjectId(query[parametro]) })
+  }
+
+  const accesoCompleto = usuarioObjectId ? { $or: [
+    { visibilidad: { $ne: 'Restringida' } }, { propietarioId: usuarioObjectId }, { miembros: usuarioObjectId },
+  ] } : { visibilidad: { $ne: 'Restringida' } }
+  // No permitir deducir campos ocultos de una restringida mediante filtros.
+  if (query.estado !== undefined || query.propietarioId !== undefined || query.conEspacios !== undefined) {
+    condiciones.push(accesoCompleto)
+  }
+  if (query.conEspacios !== undefined) {
+    if (!['true', 'false'].includes(query.conEspacios)) {
+      throw new HttpError(400, 'DATOS_INVALIDOS', 'conEspacios debe ser true o false.', {})
+    }
+    const expresion = { $gt: ['$cantidadIntegrantes', { $size: { $ifNull: ['$miembros', []] } }] }
+    condiciones.push({ $expr: query.conEspacios === 'true' ? expresion : { $not: [expresion] } })
+  }
+  if (query.q !== undefined) {
+    const texto = buscarTexto(query.q)
+    condiciones.push({ $or: [
+      { titulo: texto }, { resumen: texto }, { $and: [accesoCompleto, { etiquetas: texto }] },
+    ] })
+  }
+  const resultado = await repositorio.listar({ $and: condiciones }, opciones)
+  return pagina(resultado.items.map(iniciativa => aplicarVisibilidad(iniciativa, usuarioId)), resultado.total, opciones)
 }
 
 function datosEditables(datos) {

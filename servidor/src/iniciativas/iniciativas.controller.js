@@ -1,7 +1,7 @@
 import * as servicio from './iniciativas.service.js'
  
 export async function listar(req, res) {
-  const iniciativas = await servicio.listar(req.sesion?.usuario._id)
+  const iniciativas = await servicio.listar(req.sesion?.usuario._id, req.query)
   res.json(iniciativas)
 }
 

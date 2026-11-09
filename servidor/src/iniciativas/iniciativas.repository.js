@@ -53,8 +53,12 @@ const CON_DETALLES = [
       fechaCreacion: 1,
       fechaPublicacion: 1,
       fechaUltimaModificacion: 1,
+      proyectoId: 1,
+      integrantesActuales: { $size: { $ifNull: ['$miembros', []] } },
+      espaciosDisponibles: { $max: [0, { $subtract: ['$cantidadIntegrantes', { $size: { $ifNull: ['$miembros', []] } }] }] },
       // Formatear propietario
       propietario: {
+        _id: '$propietario._id',
         nombre: '$propietario.nombre',
         apellido1: '$propietario.apellido1',
         apellido2: { $ifNull: ['$propietario.apellido2', null] },
@@ -68,8 +72,8 @@ const CON_DETALLES = [
           in: {
             _id: '$$miembro._id',
             nombre: '$$miembro.nombre',
-            apellido1: '$propietario.apellido1',
-            apellido2: { $ifNull: ['$propietario.apellido2', null] },
+            apellido1: '$$miembro.apellido1',
+            apellido2: { $ifNull: ['$$miembro.apellido2', null] },
             email: '$$miembro.email'
           }
         }
@@ -89,16 +93,15 @@ const CON_DETALLES = [
   }
 ];
 
-export async function listar(usuarioId) {
-  // Las privadas no aparecen en el catálogo general, tampoco para su propietario.
-  const visibilidades = usuarioId ? ['Pública', 'Institucional', 'Restringida'] : ['Pública']
-  return coleccion()
-    .aggregate([
-      { $match: { estado: { $nin: ['Borrador', 'Archivada'] }, visibilidad: { $in: visibilidades } } },
+export async function listar(filtro, opciones) {
+  const [items, total] = await Promise.all([
+    coleccion().aggregate([
+      { $match: filtro }, { $sort: opciones.orden }, { $skip: opciones.salto }, { $limit: opciones.size },
       ...CON_DETALLES,
-    ])
-    .sort({ titulo: 1 })
-    .toArray()
+    ]).toArray(),
+    coleccion().countDocuments(filtro),
+  ])
+  return { items, total }
 }
 
 export async function consultarPorID(id, usuarioId) {

@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb'
 
 export const TIPOS = ['Reto', 'Idea', 'Necesidad']
-export const CATEGORIAS = ['Tecnología', 'Educación', 'Sostenibilidad', 'Impacto Social', 'Negocios y Emprendimiento', 'Salud y Bienestar', 'Cultura y Creatividad', 'Otros']
+export const CATEGORIAS = ['Tecnología', 'Educación', 'Sostenibilidad', 'Impacto social', 'Negocios y emprendimiento', 'Salud y bienestar', 'Cultura y creatividad', 'Otro']
 export const ESTADOS = ['Borrador', 'Publicada', 'En formación de equipo', 'Convertida en proyecto', 'Archivada']
 export const VISIBILIDADES = ['Pública', 'Institucional', 'Restringida', 'Privada']
 

@@ -10,11 +10,22 @@ const CAMPOS_PERFIL = {
   descripcionPersonal: 1, intereses: 1, portafolio: 1, fechaUltimaModificacion: 1,
 }
 
-export async function listar() {
-  return coleccion()
-    .find({}, { projection: { nombre: 1, apellido1: 1, apellido2: 1, competencias: 1 } })
-    .sort({ nombre: 1 })
-    .toArray()
+const CAMPOS_PUBLICOS = {
+  nombre: 1, apellido1: 1, apellido2: 1, tipo: 1, carrera: 1,
+  disponibilidad: 1, competencias: 1, descripcionPersonal: 1, intereses: 1, portafolio: 1,
+}
+
+export async function listar(filtro, opciones) {
+  const [items, total] = await Promise.all([
+    coleccion().find(filtro, { projection: CAMPOS_PUBLICOS })
+      .sort(opciones.orden).skip(opciones.salto).limit(opciones.size).toArray(),
+    coleccion().countDocuments(filtro),
+  ])
+  return { items, total }
+}
+
+export async function buscarPublicoPorId(id) {
+  return coleccion().findOne({ _id: new ObjectId(id), estado: 'Activa' }, { projection: CAMPOS_PUBLICOS })
 }
 
 export async function buscarPorId(id, esCorto) {

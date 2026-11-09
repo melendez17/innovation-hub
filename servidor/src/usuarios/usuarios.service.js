@@ -3,9 +3,32 @@ import { ObjectId } from 'mongodb'
 import { validarUsuario, validarPerfil } from './usuarios.validacion.js'
 import { HttpError } from '../utils/HttpError.js'
 import { crearPasswordHash } from '../utils/password.js'
+import { leerPaginacion, pagina, buscarTexto } from '../utils/paginacion.js'
+import { revisarId } from '../utils/revisarId.js'
  
-export async function listar() {
-  return repositorio.listar()
+export async function listar(query = {}) {
+  const opciones = leerPaginacion(query, ['q', 'competenciaId', 'carrera', 'disponibilidad'], ['nombre', 'apellido1'], 'nombre')
+  const filtro = { estado: 'Activa' }
+  if (query.q !== undefined) {
+    const texto = buscarTexto(query.q)
+    filtro.$or = [{ nombre: texto }, { apellido1: texto }, { apellido2: texto }]
+  }
+  if (query.competenciaId !== undefined) {
+    revisarId(query.competenciaId)
+    filtro.competencias = new ObjectId(query.competenciaId)
+  }
+  if (query.carrera !== undefined) filtro.carrera = buscarTexto(query.carrera, true)
+  if (query.disponibilidad !== undefined) filtro.disponibilidad = buscarTexto(query.disponibilidad)
+  const resultado = await repositorio.listar(filtro, opciones)
+  const items = await Promise.all(resultado.items.map(usuario => consultarPerfil(usuario)))
+  return pagina(items, resultado.total, opciones)
+}
+
+export async function consultarPublico(id) {
+  revisarId(id)
+  const usuario = await repositorio.buscarPublicoPorId(id)
+  if (!usuario) throw new HttpError(404, 'NO_ENCONTRADO', 'El usuario no existe.', {})
+  return consultarPerfil(usuario)
 }
 
 export async function existe(id) {

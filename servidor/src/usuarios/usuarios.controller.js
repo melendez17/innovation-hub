@@ -1,8 +1,13 @@
 import * as servicio from './usuarios.service.js'
  
 export async function listar(req, res) {
-  const usuarios = await servicio.listar()
+  const usuarios = await servicio.listar(req.query)
   res.json(usuarios)
+}
+
+export async function consultarPublico(req, res) {
+  const usuario = await servicio.consultarPublico(req.params.id)
+  res.set('Cache-Control', 'no-store').json(usuario)
 }
 
 export async function consultarPropio(req, res) {

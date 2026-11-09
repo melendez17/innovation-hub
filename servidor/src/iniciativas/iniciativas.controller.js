@@ -6,7 +6,7 @@ export async function listar(req, res) {
 }
 
 export async function crear(req, res) {
-  const iniciativa = await servicio.crear(req.body ?? {})
+  const iniciativa = await servicio.crear(req.body ?? {}, req.sesion.usuario._id)
   res.status(201).json(iniciativa)
 }
 

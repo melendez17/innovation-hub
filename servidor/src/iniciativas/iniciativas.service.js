@@ -1,6 +1,5 @@
 import { ObjectId } from 'mongodb'
 import * as repositorio from './iniciativas.repository.js'
-import * as usuarios from '../usuarios/usuarios.service.js'
 import { validarIniciativa } from './iniciativas.validacion.js'
 import { HttpError } from '../utils/HttpError.js'
 import { revisarId } from "../utils/revisarId.js"
@@ -10,14 +9,10 @@ export async function listar() {
   return repositorio.listar()
 }
 
-export async function crear(datos){
+export async function crear(datos, propietarioId){
   const errores = validarIniciativa(datos)
   if (Object.keys(errores).length > 0) {
     throw new HttpError(400, 'Datos_INVALIDOS', 'Revise los datos enviados.', errores)
-  }
-
-  if (!(await usuarios.existe(datos.propietarioId))) {
-    throw new HttpError(400, 'Datos_INVALIDOS', 'Revise los datos enviados.', {propietarioId: 'Este usuario no existe'})
   }
 
   const hoy = new Date()
@@ -35,8 +30,8 @@ export async function crear(datos){
     visibilidad: datos.visibilidad, 
     etiquetas: datos.etiquetas,
     estado: "Borrador",
-    propietarioId: new ObjectId(datos.propietarioId),
-    miembros: [new ObjectId(datos.propietarioId)],
+    propietarioId: new ObjectId(propietarioId),
+    miembros: [new ObjectId(propietarioId)],
     fechaCreacion: hoy,
     fechaUltimaModificacion: hoy
   })

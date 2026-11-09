@@ -1,4 +1,4 @@
-import * as servicio from './competencias.repository.js'
+import * as servicio from './competencias.service.js'
  
 export async function listar(req, res) {
   const competencias = await servicio.listar()

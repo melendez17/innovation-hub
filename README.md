@@ -2,7 +2,7 @@
  
 Proyecto del curso SOFT-12 — Desarrollo Web Full Stack.
  
-**Estudiante:** Andrés Meléndez y Roberto Gonzalez 
+**Estudiante:** Andrés Meléndez
 **Sección:** SCV2    **Periodo:** III cuatrimestre 2026
 **Docente:** Alvaro Cordero
  

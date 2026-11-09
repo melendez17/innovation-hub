@@ -71,6 +71,7 @@ export async function crear(datos, propietarioId){
     propietarioId: new ObjectId(propietarioId),
     miembros: [new ObjectId(propietarioId)],
     fechaCreacion: hoy,
+    fechaPublicacion: null,
     fechaUltimaModificacion: hoy
   })
 
@@ -106,6 +107,29 @@ export async function modificar(id, datos, usuarioId) {
   }
   const modificada = await repositorio.modificar(id, usuarioId, datosEditables(datos), iniciativa.miembros)
   if (!modificada) {
+    throw new HttpError(409, 'CONFLICTO', 'La iniciativa cambió. Consulte su estado e intente otra vez.', {})
+  }
+  return repositorio.buscarPorID(id)
+}
+
+export async function publicar(id, usuarioId) {
+  revisarId(id)
+  const iniciativa = await repositorio.buscarDocumento(id)
+  if (!iniciativa) {
+    throw new HttpError(404, 'NO_ENCONTRADA', 'La iniciativa no existe.', {})
+  }
+  if (iniciativa.propietarioId.toString() !== usuarioId.toString()) {
+    throw new HttpError(403, 'PROHIBIDO', 'Solo el propietario puede publicar esta iniciativa.', {})
+  }
+  if (iniciativa.estado !== 'Borrador') {
+    throw new HttpError(409, 'CONFLICTO', 'Solo se puede publicar una iniciativa en borrador.', {})
+  }
+  await validarDatos({
+    ...iniciativa,
+    competencias: (iniciativa.competencias ?? []).map(id => id.toString()),
+  })
+  const publicada = await repositorio.publicar(id, usuarioId)
+  if (!publicada) {
     throw new HttpError(409, 'CONFLICTO', 'La iniciativa cambió. Consulte su estado e intente otra vez.', {})
   }
   return repositorio.buscarPorID(id)

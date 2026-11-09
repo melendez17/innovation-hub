@@ -51,6 +51,7 @@ const CON_DETALLES = [
       estado: 1,
       propietarioId: 1,
       fechaCreacion: 1,
+      fechaPublicacion: 1,
       fechaUltimaModificacion: 1,
       // Formatear propietario
       propietario: {
@@ -93,7 +94,7 @@ export async function listar(usuarioId) {
   const visibilidades = usuarioId ? ['Pública', 'Institucional', 'Restringida'] : ['Pública']
   return coleccion()
     .aggregate([
-      { $match: { estado: { $ne: 'Archivada' }, visibilidad: { $in: visibilidades } } },
+      { $match: { estado: { $nin: ['Borrador', 'Archivada'] }, visibilidad: { $in: visibilidades } } },
       ...CON_DETALLES,
     ])
     .sort({ titulo: 1 })
@@ -103,15 +104,17 @@ export async function listar(usuarioId) {
 export async function consultarPorID(id, usuarioId) {
   const visibilidades = usuarioId ? ['Pública', 'Institucional', 'Restringida'] : ['Pública']
   const permisos = [{ visibilidad: { $in: visibilidades } }]
+  const accesoAlEstado = [{ estado: { $ne: 'Borrador' } }]
   if (usuarioId) {
     const usuarioObjectId = new ObjectId(usuarioId)
+    accesoAlEstado.push({ propietarioId: usuarioObjectId })
     permisos.push({
       visibilidad: 'Privada',
       $or: [{ propietarioId: usuarioObjectId }, { miembros: usuarioObjectId }],
     })
   }
   const [iniciativa] = await coleccion().aggregate([
-    { $match: { _id: new ObjectId(id), $or: permisos } },
+    { $match: { _id: new ObjectId(id), $and: [{ $or: permisos }, { $or: accesoAlEstado }] } },
     ...CON_DETALLES,
   ]).toArray()
   return iniciativa ?? null
@@ -140,6 +143,15 @@ export async function modificar(id, propietarioId, datos, miembros) {
       miembros,
     },
     { $set: { ...datos, fechaUltimaModificacion: new Date() } }
+  )
+  return resultado.matchedCount === 1
+}
+
+export async function publicar(id, propietarioId) {
+  const ahora = new Date()
+  const resultado = await coleccion().updateOne(
+    { _id: new ObjectId(id), propietarioId: new ObjectId(propietarioId), estado: 'Borrador' },
+    { $set: { estado: 'Publicada', fechaPublicacion: ahora, fechaUltimaModificacion: ahora } }
   )
   return resultado.matchedCount === 1
 }

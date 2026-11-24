@@ -109,6 +109,132 @@ erDiagram
 
 `PK` indica llave primaria, `FK` foránea y `UQ` restricción de unicidad. La columna **Regla** indica la acción al eliminar el registro referenciado. Las fechas con hora usan UTC y precisión de milisegundos. La posición de los arreglos empieza en 1.
 
+El diagrama UML muestra las columnas de las 12 tablas y sus tipos SQL base. Las tablas de abajo detallan las longitudes, la nulabilidad y las restricciones.
+
+```mermaid
+classDiagram
+    direction LR
+    class Usuarios {
+        INT Id
+        NVARCHAR Nombre
+        NVARCHAR Apellido1
+        NVARCHAR Apellido2
+        NVARCHAR Email
+        VARCHAR PasswordHash
+        NVARCHAR Tipo
+        NVARCHAR Carrera
+        DATETIME2 FechaRegistro
+        NVARCHAR Estado
+        NVARCHAR DescripcionPersonal
+        NVARCHAR Disponibilidad
+        NVARCHAR Portafolio
+    }
+    class Competencias {
+        INT Id
+        NVARCHAR Nombre
+    }
+    class UsuarioCompetencias {
+        INT UsuarioId
+        INT CompetenciaId
+    }
+    class UsuarioIntereses {
+        INT UsuarioId
+        INT Posicion
+        NVARCHAR Texto
+    }
+    class Sesiones {
+        INT Id
+        INT UsuarioId
+        CHAR TokenHash
+        DATETIME2 ExpiresAt
+    }
+    class Iniciativas {
+        INT Id
+        INT PropietarioId
+        NVARCHAR Titulo
+        NVARCHAR Tipo
+        NVARCHAR Resumen
+        NVARCHAR Descripcion
+        NVARCHAR Problema
+        NVARCHAR Beneficiados
+        NVARCHAR Categoria
+        NVARCHAR Visibilidad
+        INT CantidadIntegrantes
+        NVARCHAR Estado
+        DATETIME2 FechaCreacion
+        DATETIME2 FechaPublicacion
+        DATETIME2 FechaUltimaModificacion
+    }
+    class IniciativaCompetencias {
+        INT IniciativaId
+        INT CompetenciaId
+    }
+    class IniciativaEtiquetas {
+        INT IniciativaId
+        INT Posicion
+        NVARCHAR Texto
+    }
+    class Miembros {
+        INT Id
+        INT IniciativaId
+        INT UsuarioId
+        NVARCHAR Rol
+        DATETIME2 FechaIncorporacion
+        NVARCHAR EstadoParticipacion
+        DATETIME2 FechaRetiro
+        NVARCHAR MotivoRetiro
+    }
+    class Solicitudes {
+        INT Id
+        INT IniciativaId
+        INT SolicitanteId
+        INT CompetenciaId
+        NVARCHAR Mensaje
+        NVARCHAR Rol
+        NVARCHAR Disponibilidad
+        DATETIME2 FechaSolicitud
+        NVARCHAR Estado
+        NVARCHAR ComentarioRespuesta
+        DATETIME2 FechaDecision
+    }
+    class Proyectos {
+        INT Id
+        INT IniciativaId
+        INT PropietarioId
+        NVARCHAR Nombre
+        NVARCHAR Descripcion
+        NVARCHAR Objetivo
+        NVARCHAR Estado
+        DATE FechaInicio
+        DATE FechaFinEstimada
+        NVARCHAR RepositorioUrl
+        DATETIME2 FechaCreacion
+        DATETIME2 FechaUltimaModificacion
+    }
+    class ProyectoTecnologias {
+        INT ProyectoId
+        INT Posicion
+        NVARCHAR Texto
+    }
+
+    Usuarios "1" -- "0..*" UsuarioCompetencias : declara
+    Competencias "1" -- "0..*" UsuarioCompetencias : clasifica
+    Usuarios "1" -- "0..*" UsuarioIntereses : indica
+    Usuarios "1" -- "0..*" Sesiones : inicia
+    Usuarios "1" -- "0..*" Iniciativas : posee
+    Iniciativas "1" -- "0..*" IniciativaCompetencias : requiere
+    Competencias "1" -- "0..*" IniciativaCompetencias : clasifica
+    Iniciativas "1" -- "0..*" IniciativaEtiquetas : contiene
+    Iniciativas "1" -- "0..*" Miembros : registra
+    Usuarios "1" -- "0..*" Miembros : participa
+    Iniciativas "1" -- "0..*" Solicitudes : recibe
+    Usuarios "1" -- "0..*" Solicitudes : presenta
+    Competencias "1" -- "0..*" Solicitudes : indica
+    Iniciativas "1" -- "0..1" Proyectos : origina
+    Usuarios "1" -- "0..*" Proyectos : posee
+    Proyectos "1" -- "0..*" ProyectoTecnologias : utiliza
+```
+
 ### Usuarios
 
 | Columna | Tipo | ¿Obligatoria? | Llave | Regla |

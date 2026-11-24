@@ -35,6 +35,13 @@ Se escogio una paleta de azules para el diseño de la página.
 Se aplico el diseño mobile first para asegurar la responsividada.
 Se utilizaron iconos de FontAwesome para darle un poco de personalidad a la página.
  
+## Tarea 3 — Parte B
+
+- [Modelo relacional y plan de migración](docs/modelo-datos.md)
+- [Consultas SQL y resultados esperados](docs/consultas.sql)
+- [Diseño de las rutas públicas](docs/rutas.md)
+- [Investigación sobre Entity Framework Core](docs/investigacion-efcore.md)
+
 ## Resumen de commits|| # |
 
 <!-- INICIO TABLA COMMITS -->
